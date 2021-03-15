@@ -6,24 +6,23 @@ import classes from './NewPost.module.css';
 
 class NewPost extends Component {
     state = {
-        title: '',
-        content: '',
-        author: 'Max',
+        image: '',
+        description: '',
         submitted: false,
         titleError:'',
         contentError:''
     }
     checkValidity(){
-        if(!(this.state.title.length>=2))
+        if(!(this.state.image!=""))
         {
             this.setState({
-                titleError:'Tiitle is more than 2 char and less than 9 '
+                imageError:'Please Select Image'
             });
         }
-        else if(!(this.state.content.length>=5))
+        else if(!(this.state.description.length>=5))
         {
             this.setState({
-                contentError:'Content is more than 5 char and less than 20'
+                descriptionError:'Content is more than 5 char and less than 20'
 
             })
         }
@@ -40,38 +39,37 @@ class NewPost extends Component {
 
     postDataHandler = () => {
         const data = {
-            title: this.state.title,
-            body: this.state.content,
-            author: this.state.author
+            image: this.state.image,
+            description: this.state.description
         };
         if(this.checkValidity())
         {
 
-            axios.post( '/posts', data )
-            .then( response => {
-                console.log( response );
-                this.props.history.replace('/posts');
-                // this.setState( { submitted: true } );
-            } );
+            // axios.post( '/posts', data )
+            // .then( response => {
+            //     console.log( response );
+            //     this.props.history.replace('/posts');
+            //     // this.setState( { submitted: true } );
+            // } );
         }
        
     }
 
     render () {
-        let redirect = null;
-        if (this.state.submitted) {
-            redirect = <Redirect to="/posts" />;
-        }
+        // let redirect = null;
+        // if (this.state.submitted) {
+        //     redirect = <Redirect to="/posts" />;
+        // }
         return (
             <div className={classes.NewPost}>
-                {redirect}
+                {/* {redirect} */}
                 <h1>Add a Post</h1>
                 <label>Image</label>
-                <input type="file" value={this.state.title} onChange={( event ) => this.setState( { title: event.target.value } )} />
-                <span className={classes.error}>{this.state.titleError}</span>
+                <input type="file" value={this.state.image} onChange={( event ) => this.setState( { image: event.target.value } )} />
+                <span className={classes.error}>{this.state.imageError}</span>
                 <label>Description</label>
-                <textarea rows="4" value={this.state.content} onChange={( event ) => this.setState( { content: event.target.value } )} />
-                <span className={classes.error}>{this.state.contentError}</span><br/>
+                <textarea rows="4" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />
+                <span className={classes.error}>{this.state.descriptionError}</span><br/>
                 <button onClick={this.postDataHandler}>Add Post</button>
             </div>
         );
