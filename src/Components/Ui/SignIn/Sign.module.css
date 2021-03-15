@@ -6,8 +6,10 @@
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     text-align: center;
+    background-image: url("C:\xamppp\htdocs\React\#imp\movie-review\src\assets\login.jpg");
+
 }
 .SignIn a{
-    color: salmon;
+    color: black;
     text-decoration: none;
 }

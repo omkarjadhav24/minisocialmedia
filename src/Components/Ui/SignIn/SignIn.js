@@ -122,7 +122,7 @@ class SignIn extends Component{
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
-                    <Button btnType="Success"> <NavLink to="/signup">Sign Up</NavLink></Button>
+                    <Button > <NavLink to="/signup">SIGN UP</NavLink></Button>
                 </form>
                 {/* <Button 
                 clicked={this.switchAuthModeHandler}
