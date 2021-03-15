@@ -1,0 +1,13 @@
+.SignIn {margin: auto;
+    width: 40%;  
+    margin-top: 9%;
+    padding: 10px; text-align: center;
+   
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+}
+.SignIn a{
+    color: salmon;
+    text-decoration: none;
+}

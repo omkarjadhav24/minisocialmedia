@@ -1,0 +1,30 @@
+
+.NavigationItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+   
+background: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    
+}
+.NavigationItems a {
+    text-decoration: none;
+    margin-right: 10px;
+    color:white;
+   
+}
+.NavigationItems a:hover{
+    border: 1px solid  #b6bcc4;
+    border-radius: 5px;
+    background-color:  #e9ecf0;
+    color: #3268b3 ;
+}
+@media (min-width: 500px) {
+    .NavigationItems {
+        flex-flow: row;
+    }
+}
