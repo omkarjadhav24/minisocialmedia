@@ -101,7 +101,6 @@ class SignUp extends Component{
     submitHandler = (event) => {
         event.preventDefault();
         // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value,this.state.isSignUp);
-       
         // let homeRedirect=null;
         // if(this.props.error)
         // {
@@ -133,7 +132,7 @@ class SignUp extends Component{
             <div className={classes.SignUp} >
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType="Success">Register</Button>
+                    <Button >REGISTER</Button>
                 </form>
                 {/* <Button 
                 clicked={this.switchAuthModeHandler}

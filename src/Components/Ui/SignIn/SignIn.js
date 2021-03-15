@@ -87,13 +87,13 @@ class SignIn extends Component{
     }
     submitHandler = (event) => {
         event.preventDefault();
-        // this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value,this.state.isSignUp);
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value,this.state.isSignUp);
        
-        // let homeRedirect=null;
-        // if(this.props.error)
-        // {
-        //     this.history.match.push('/home')
-        // }
+        let homeRedirect=null;
+        if(this.props.error)
+        {
+            this.history.match.push('/home')
+        }
     }
     render(){
         const formElementsArray = [];
@@ -122,7 +122,7 @@ class SignIn extends Component{
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
-                    <Button > <NavLink to="/signup">SIGN UP</NavLink></Button>
+                    <Button> <NavLink to="/signup">SIGN UP</NavLink></Button>
                 </form>
                 {/* <Button 
                 clicked={this.switchAuthModeHandler}

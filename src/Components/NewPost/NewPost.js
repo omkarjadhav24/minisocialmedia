@@ -6,11 +6,12 @@ import classes from './NewPost.module.css';
 
 class NewPost extends Component {
     state = {
-        image: '',
+        image:'',
         description: '',
         submitted: false,
         titleError:'',
         contentError:''
+        
     }
     checkValidity(){
         if(!(this.state.image!=""))
@@ -31,13 +32,15 @@ class NewPost extends Component {
         }
        
     }
-
+   
     componentDidMount () {
         // If unauth => this.props.history.replace('/posts');
         console.log( this.props );
     }
 
     postDataHandler = () => {
+        console.log(this.state.image)
+
         const data = {
             image: this.state.image,
             description: this.state.description
@@ -54,18 +57,25 @@ class NewPost extends Component {
         }
        
     }
+    // upload(e)
+    // {
+    //     // console.log(e.target.files)
+    //     this.setState( { image: e.target.files[0].name } )
+    // }
+
 
     render () {
         // let redirect = null;
         // if (this.state.submitted) {
         //     redirect = <Redirect to="/posts" />;
         // }
+        console.log(this.state.image)
         return (
             <div className={classes.NewPost}>
                 {/* {redirect} */}
                 <h1>Add a Post</h1>
                 <label>Image</label>
-                <input type="file" value={this.state.image} onChange={( event ) => this.setState( { image: event.target.value } )} />
+                <input type="file" value={this.state.image}  onChange={( event ) => this.setState( { image: event.target.value } )} />
                 <span className={classes.error}>{this.state.imageError}</span>
                 <label>Description</label>
                 <textarea rows="4" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />

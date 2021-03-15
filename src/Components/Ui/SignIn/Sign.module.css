@@ -4,9 +4,9 @@
     padding: 10px; text-align: center;
    
     border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 3px 4px rgb(114, 109, 109);
     text-align: center;
-    background-image: url("C:\xamppp\htdocs\React\#imp\movie-review\src\assets\login.jpg");
+    background:linear-gradient(315deg, #5D4954 0%, #FFA69E 74%); 
 
 }
 .SignIn a{
