@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
 import classes from './NewPost.module.css';
 
 class NewPost extends Component {
@@ -47,6 +46,7 @@ class NewPost extends Component {
         };
         if(this.checkValidity())
         {
+            console.log(data)
 
             // axios.post( '/posts', data )
             // .then( response => {
@@ -69,18 +69,23 @@ class NewPost extends Component {
         // if (this.state.submitted) {
         //     redirect = <Redirect to="/posts" />;
         // }
-        console.log(this.state.image)
+       
         return (
             <div className={classes.NewPost}>
                 {/* {redirect} */}
                 <h1>Add a Post</h1>
+                <div className="form-group">
                 <label>Image</label>
-                <input type="file" value={this.state.image}  onChange={( event ) => this.setState( { image: event.target.value } )} />
+                <input className="form-control" type="file" value={this.state.image}  onChange={( event ) => this.setState( { image: event.target.value } )} />
                 <span className={classes.error}>{this.state.imageError}</span>
+                </div>
+                <div className="form-group">
                 <label>Description</label>
-                <textarea rows="4" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />
+                <textarea className="form-control" rows="2" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />
                 <span className={classes.error}>{this.state.descriptionError}</span><br/>
-                <button onClick={this.postDataHandler}>Add Post</button>
+                </div>
+               
+                <button  className="btn btn-outline-warning" onClick={this.postDataHandler}>Add Post</button>
             </div>
         );
     }
