@@ -1,0 +1,14 @@
+.Request{
+    border: 1px solid #eee;
+    box-shadow: 0 3px 4px rgb(114, 109, 109);
+    border-radius: 4px;
+    margin-top: 0px;
+}
+.name{
+    margin-left: 5px;
+}
+.box{
+    border: 1px solid #eee;
+    box-shadow: 0 3px 4px rgb(114, 109, 109);
+    border-radius: 5px;
+}

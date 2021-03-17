@@ -1,6 +1,7 @@
 import * as actions from '../Actions/ActionType'
 const initialState={
-    login:false
+    login:false,
+    signup:false
 }
 const reducer=(state=initialState,action)=>{
     switch(action.type)
@@ -8,6 +9,10 @@ const reducer=(state=initialState,action)=>{
         case actions.SIGN_IN:return{
             ...state,
             login:true
+        }
+        case actions.SIGN_UP:return{
+            ...state,
+            signup:true
         }
         default:return state;
     }

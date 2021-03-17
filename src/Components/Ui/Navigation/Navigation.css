@@ -28,6 +28,6 @@ background: linear-gradient(315deg, #485461 0%, #28313b 74%);
         flex-flow: row;
     }
 } */
-.user{
-    float: right;
+.ml-5{
+    margin-right: auto !important
 }

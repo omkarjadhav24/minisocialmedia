@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
-import {signInPage} from '../../../Actions/SignIn'
+import {signInPage,signUpPage} from '../../../Actions/SignIn'
 import {connect} from 'react-redux'
 
 
@@ -14,7 +14,8 @@ class SignIn extends Component{
         email:'',
         password:'',
         passworError:'',
-        login:false
+        login:false,
+        signUp:false
     }
     checkValidity(){
         if(!(this.state.password.length>=5))
@@ -30,11 +31,14 @@ class SignIn extends Component{
     }
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.signIn()
-        // if(this.checkValidity())
-        // {
-        //     this.setState({login:true})
-        // }
+        
+        if(this.checkValidity())
+        {
+            this.props.signIn()
+        }
+    }
+    signUp=()=>{
+        this.props.signUp()
     }
     
     render(){
@@ -46,7 +50,7 @@ class SignIn extends Component{
                 <form onSubmit={this.submitHandler}>
                      <div className="form-group" >
                      <label for="exampleInputEmail1">Email address</label>
-                     <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                     <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control" id="exampleInputEmail1"  placeholder="Enter email"/>
                      </div>
                      <div className="form-group">
                     <label for="exampleInputPassword1">Password</label>
@@ -54,7 +58,7 @@ class SignIn extends Component{
                     <span className="text-danger">{this.state.passworError}</span>
                     </div>
                     <Button btnType="Success">SUBMIT</Button>
-                    <Button> <NavLink to="/signup">SIGN UP</NavLink></Button>
+                    <Button clicked={this.signUp} > <NavLink to="/signup">SIGN UP</NavLink></Button>
                 </form>
                 {/* <form onSubmit={this.submitHandler}>
                     {form}
@@ -75,7 +79,9 @@ const mapStatetoProps=(state)=>{
    
    const mapDispatchtoProps=(dispatch)=>{
     return{
-       signIn:()=>{dispatch(signInPage())}  
+       signIn:()=>{dispatch(signInPage())} ,
+       signUp:()=>{dispatch(signUpPage())} 
+
     }
 }
 export default connect(mapStatetoProps,mapDispatchtoProps)(SignIn);

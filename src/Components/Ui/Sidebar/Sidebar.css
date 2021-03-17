@@ -1,0 +1,10 @@
+.sidebar li{
+    display: block;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.sidebar li:hover{
+    border-radius: 3px;
+    border: gray;
+    
+}

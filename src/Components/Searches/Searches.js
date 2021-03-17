@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Search from '../Searches/search/Search'
+import SideBar from '../Ui/Sidebar/Sidebar'
 class Searches extends Component{
     state={
         name:[
@@ -31,10 +32,20 @@ class Searches extends Component{
         }
         console.log(search);
         return(
-            <div>
+            <div class="row">
+                <div class="sidebar col-sm bg-secondary">
+                      <SideBar/>
+                </div>
+                <div class="col-sm bg-secondary">
                 <h3 id="people">People</h3>
                 {search}
+                </div>
+                <div class="col-sm bg-secondary"></div>
             </div>
+            // <div>
+            //     <h3 id="people">People</h3>
+            //     {search}
+            // </div>
         );
     };
 }

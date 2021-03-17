@@ -10,6 +10,8 @@ import Search from '../../Searches/search/Search'
 import 'font-awesome/css/font-awesome.min.css';
 import { withRouter } from 'react-router';
 import Profile from '../../Profile/Profile'
+import EditProfile from '../../Profile/EditProfile/EditProfile';
+import Requests from '../../Requests/Requests'
 
 
 class Navigation extends Component{
@@ -35,7 +37,7 @@ class Navigation extends Component{
             
             <div>
             <nav className="navbar navbar-expand-lg navbar-secondary bg-secondary">
-            <form  onSubmit={this.searchUser} class="form-inline">
+            <form  onSubmit={this.searchUser} className="form-inline">
             <input className="form-control mr-sm-2" type="text" value={this.state.search}  onChange={( event ) => this.setState( { search: event.target.value } )} placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -44,11 +46,15 @@ class Navigation extends Component{
             <li title="Home" className="nav-item active ml-5" >
             <NavLink to="/home" ><img  height="29px" src="https://img.icons8.com/ios-filled/50/000000/home.png"/></NavLink>
             </li>
-            <li id="user" title="Profile" className="nav-item ml-5">
+            <li title="Profile" className="nav-item ml-5 ">
             <NavLink to="/profile" >
             <img   height="34px" src="https://img.icons8.com/color/96/000000/circled-user-male-skin-type-3--v2.png"/>
-   
             </NavLink>
+            </li>
+            <li title="Request" className="nav-item ml-5 ">
+                <NavLink to="/requestpage">
+                <img  height="34px" src="https://img.icons8.com/color/48/000000/add-user-group-woman-man-skin-type-7.png"/>
+                </NavLink>
             </li>
             </ul>
             </div>
@@ -59,6 +65,8 @@ class Navigation extends Component{
             <Route path="/home" component={Home} />
             <Route path="/searches" component={Search} />
             <Route path="/profile" component={Profile} />
+            <Route path="/edit-profile" component={EditProfile} />
+            <Route path="/requestpage" component={Requests} />
             <Route path="/search/:name" component={Searches} />
             <Route path="/" component={SignIn} />
             <Route render={() => <h1>Welcome In MovieLand</h1>}/>

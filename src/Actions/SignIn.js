@@ -5,9 +5,20 @@ export const signIn=()=>{
         type:action.SIGN_IN
     }
 }
+export const signUp=()=>{
+    return{
+        type:action.SIGN_UP
+    }
+}
 export const signInPage=()=>{
     return dispatch=>{
         dispatch(signIn());
+    }
+
+}
+export const signUpPage=()=>{
+    return dispatch=>{
+        dispatch(signUp());
     }
 
 }

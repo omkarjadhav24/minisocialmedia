@@ -1,13 +1,9 @@
-import React,{Component} from 'react'
-import Input from '../Input/Input'
-import Button from '../Button/Button'
-import classes from '../SignUp/SignUp.module.css';
-import 'font-awesome/css/font-awesome.min.css';
-import { withRouter } from 'react-router';
-
-
-class SignUp extends Component{
- 
+import React from 'react';
+import { Component } from 'react';
+import classes from './EditProfile.module.css'
+import  Button from '../../Ui/Button/Button'
+class EditProfile extends Component{
+  
     componentDidMount(){
         console.log(this.props);
         const {id} = this.props.match.params
@@ -34,11 +30,11 @@ console.log(id) // "foo"
                 <form onSubmit={this.submitHandler}>
                     <div className="form-group" >
                     <label for="name">Name</label>
-                    <input type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
+                    <input className="form-control-sm" type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
                     </div>
-                    <div className="form-group ">
+                    <div class="form-group ">
                     <label for="date-input">Date</label>
-                    <input className="form-control form-control-sm" value={this.state.date}  onChange={( event ) => this.setState( { date: event.target.value } )} type="date" value="2021-02-24" />
+                    <input class="form-control" value={this.state.date}  onChange={( event ) => this.setState( { date: event.target.value } )} type="date" value="2021-02-24" />
                     </div>
                     <label for="date-input">Gender</label><br/>
                     <div className="form-check form-check-inline">
@@ -51,16 +47,16 @@ console.log(id) // "foo"
                     </div>
                     <div className="form-group" >
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                    <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
                     </div>
                     <div className="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password"/>
-                    <Button btnType="Success">SUBMIT</Button>
+                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                    <Button btnType="Success">SAVE</Button>
                     </div>
                 </form>
             </div>
         );
     };
 }
-export default withRouter(SignUp);
+export default EditProfile;

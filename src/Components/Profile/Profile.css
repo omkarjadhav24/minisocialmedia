@@ -1,0 +1,33 @@
+.col-md-5{
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+}
+.btn a{
+    text-decoration: none;
+}
+.profileimage{
+    margin-right: 50px;
+  
+}
+.profile{
+    border: 1px solid #eee;
+    box-shadow: 0 3px 4px rgb(114, 109, 109);
+    border-radius: 4px;
+    margin-top: 0px;
+}
+.sidebar li{
+    display: block;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.sidebar li:hover{
+    border-radius: 3px;
+    border: gray;
+    background-color:honeydew ;
+}
+.box{
+    border: 1px solid #eee;
+    box-shadow: 0 3px 4px rgb(114, 109, 109);
+    border-radius: 5px;
+}
