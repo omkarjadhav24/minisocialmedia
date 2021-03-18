@@ -6,7 +6,8 @@
     border: 1px solid #eee;
     box-shadow: 0 3px 4px rgb(114, 109, 109);
     text-align: center;
-    background:linear-gradient(315deg, #5D4954 0%, #FFA69E 74%); 
+    /* background:linear-gradient(315deg, #5D4954 0%, #FFA69E 74%);  */
+    border-radius: 20px;
 
 }
 .SignIn a{

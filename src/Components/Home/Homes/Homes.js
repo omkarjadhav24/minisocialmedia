@@ -14,14 +14,7 @@ class Homes extends Component{
     render(){
         return(
             <>
-            <div className="mt-2 box bg-white" >
-                            <div className="home height">
-                                <NavLink to="/newpost"><img className="addImage" height="29" src="https://img.icons8.com/fluent/48/000000/stack-of-photos.png" />
-                                    <p id="addPhoto" >Add Photos</p>
-                                </NavLink>
-                            </div>
-                        </div>
-                        <div className="box mt-3 bg-white">
+                <div className="box mt-3 bg-white">
                             <div className=" home">
                                 <div className="d-flex flex-column comment-section">
                                     <div className="bg-white ">
@@ -33,8 +26,8 @@ class Homes extends Component{
                                             </div>
                                         </div>
                                         <div className="mt-1">
-                                            <img src="https://img.icons8.com/fluent/48/000000/stack-of-photos.png" />
-                                            <p className="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            <img src={this.props.thumbnailUrl} />
+                                            <p className="comment-text">{this.props.title}</p>
                                         </div>
                                     </div>
                                     <div className="bg-white">

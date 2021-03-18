@@ -48,12 +48,12 @@ class NewPost extends Component {
         {
             console.log(data)
 
-            // axios.post( '/posts', data )
-            // .then( response => {
-            //     console.log( response );
-            //     this.props.history.replace('/posts');
-            //     // this.setState( { submitted: true } );
-            // } );
+            axios.post( 'https://jsonplaceholder.typicode.com/photos', data )
+            .then( response => {
+                console.log( response );
+                this.props.history.replace('/profile');
+                // this.setState( { submitted: true } );
+            } );
         }
        
     }

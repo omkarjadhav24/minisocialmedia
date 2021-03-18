@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Navigation from '../src/Components/Ui/Navigation/Navigation'
 import {connect} from 'react-redux';
@@ -12,7 +11,6 @@ function App(props) {
       {props.login  ?<Navigation/>:<div>
         {props.signup ?
        <Route to='/signup' exact  component={SignUp} />
-
         :<Route to='/' exact component={SignIn}/>
       }
       </div>}
@@ -21,8 +19,8 @@ function App(props) {
 }
 const mapStatetoProps=(state)=>{
   return{
-     login:state.login,
-     signup:state.signup
+     login:state.authsignin.login,
+     signup:state.authsignin.signup
      
   }
  }

@@ -1,5 +1,6 @@
 import React ,{Component} from 'react'
 import Request from '../Requests/Request/Request'
+import SideBar from '../Ui/Sidebar/Sidebar'
 class Requests extends Component{
     state={
         name:[
@@ -12,6 +13,9 @@ class Requests extends Component{
             {name:"Omkar" ,age:37 },
 
         ]
+    }
+    logout=()=>{
+       alert("done")
     }
     render()
     {
@@ -33,17 +37,7 @@ class Requests extends Component{
         // </div>
         <div class="row">
         <div class="sidebar col-sm bg-secondary">
-                        <ul>
-                            <li>Home</li>
-                            <li>Covid 19 Info. Center</li>
-                            <li>Friends</li>
-                            <li>Groups</li>
-                            <li>MarketPlace</li>
-                            <li>Watch</li>
-                            <li>Events</li>
-                            <li>Memories</li>
-                            <li>Saved</li>
-                        </ul>
+        <SideBar clicked={this.logout} />
         </div>
         <div class="col-sm bg-secondary ">
         <h3 id="people">People</h3>

@@ -1,12 +1,13 @@
 .SignUp {margin: auto;
     width: 40%;  
-    margin-top: 5%;
+    margin-top: 1%;
     padding: 10px; text-align: center;
     /* background-image: url("C:\xamppp\htdocs\React\#imp\movie-review\src\assets\login.jpg"); */
-    background:linear-gradient(315deg, #5D4954 0%, #FFA69E 74%); ;
+    /* background:linear-gradient(315deg, #5D4954 0%, #FFA69E 74%); ; */
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     text-align: center;
+    border-radius: 20px;
 }
 .SignUp button{
     color: black;

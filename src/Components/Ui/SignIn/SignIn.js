@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
 import {signInPage,signUpPage} from '../../../Actions/SignIn'
 import {connect} from 'react-redux'
-
+import loginImage from '../../../assets/log3.jpg'
 
 class SignIn extends Component{
 
@@ -46,19 +46,21 @@ class SignIn extends Component{
             return <Redirect to="/home" />
         }
         return(
-            <div className={classes.SignIn} >
+            <div className={classes.SignIn} style={{ backgroundImage: `url(${loginImage})` }} >
                 <form onSubmit={this.submitHandler}>
                      <div className="form-group" >
-                     <label for="exampleInputEmail1">Email address</label>
+                     <label className="font-weight-bold" >Email address</label>
                      <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control" id="exampleInputEmail1"  placeholder="Enter email"/>
                      </div>
                      <div className="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label className="font-weight-bold"  >Password</label>
                     <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                    <span className="text-danger">{this.state.passworError}</span>
+                    <span className="font-weight-bold text-danger font-italic">{this.state.passworError}</span>
                     </div>
-                    <Button btnType="Success">SUBMIT</Button>
-                    <Button clicked={this.signUp} > <NavLink to="/signup">SIGN UP</NavLink></Button>
+                    <button className="btn btn-success" >LOGIN</button>
+                    <button onClick={this.signUp} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
+                    {/* <Button btnType="Success">SUBMIT</Button>
+                    <Button clicked={this.signUp} > <NavLink to="/signup">SIGN UP</NavLink></Button> */}
                 </form>
                 {/* <form onSubmit={this.submitHandler}>
                     {form}
@@ -73,7 +75,7 @@ class SignIn extends Component{
 }
 const mapStatetoProps=(state)=>{
     return{
-       login:state.login
+       login:state.authsignin.login
     }
    }
    

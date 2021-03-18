@@ -22,6 +22,7 @@ class Profiles extends Component{
                         <p>Name :  Omkar</p>
                         <p>Date Of Birth : 24/02/1997</p>
                         <p>Gender : Male</p>
+                        <button type="button" class="btn btn-outline-primary">Total Friends : </button>
                         <button className="btn btn-outline-warning"><NavLink to="/edit-profile" > Edit Profile </NavLink>  </button> 
                     </div>
                 </div>

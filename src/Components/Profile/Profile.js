@@ -8,7 +8,8 @@ class Profile extends Component{
     
     render(){
         return(
-            <div class="row">
+            <div 
+            class="row">
             <div class="sidebar col-sm bg-secondary">
                    <SideBar/>    
             </div>
