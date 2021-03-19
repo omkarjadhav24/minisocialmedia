@@ -12,12 +12,16 @@ import {createStore, combineReducers,applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
 import SignInReducer from '../src/Reducers/SignIn';
-// import HomeReducer from '../src/Reducers/HomeData';
-
+import Auth from '../src/Reducers/Auth';
+import RegistrationAuth from '../src/Reducers/Registration'
+import HomeData from '../src/Reducers/HomeData'
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
-  authsignin: SignInReducer
+  authsignin: SignInReducer,
+  loginauth:Auth,
+  registrationauth:RegistrationAuth,
+  homeCompData:HomeData
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -1,17 +1,53 @@
 import React from 'react'
 import { Component } from 'react';
 import {NavLink} from "react-router-dom"
+import CommentDiv from '../../Home/Homes/Comments/Comments';
+import {connect} from 'react-redux'
+import axios from 'axios'
 class Homes extends Component{
     state = {
         comment: false
     }
+    // state = {
+    //     posts: []
+    // }
+    // componentDidMount(){
+    //     axios.get('https://jsonplaceholder.typicode.com/comments/'+2)
+    //     .then(res=>{
+    //         console.log(res.data);
+    //         const posts = res.data.slice( 0, 4 );
+    //         console.log(res.data.id);
+    //         const updatedPosts = posts.map( post => {
+    //                 return {
+    //                     ...post
+    //                 }
+    //             } );
+    //             this.setState( { posts: updatedPosts } );
+    //     }).catch(err=>{
+    //         console.log(err);
+    //     }) 
+    // }
+
     coomentHandler = () => {
+        //  toggling comment button
+        
         let prevComment = this.state.comment;
         this.setState({
             comment: !prevComment
         })
     }
+
     render(){
+        // let allComments = <p style={{ textAlign: 'center' }}>Something went wrong!</p>; 
+        // //  fetching comments and send to Comment as CommentDiv component in props
+        // allComments =this.state.posts.map( comment => {
+        //     return (
+        //         <CommentDiv
+        //             key={comment.id}
+        //             comment={comment.body}
+        //              />
+        //     );
+        // } );
         return(
             <>
                 <div className="box mt-3 bg-white">
@@ -32,23 +68,14 @@ class Homes extends Component{
                                     </div>
                                     <div className="bg-white">
                                         <div className="d-flex flex-row fs-12">
-                                            <div className="like  cursor"><i className="fa fa-thumbs-o-up"></i><span className="ml-1">Like</span></div>
-                                            <div onClick={() => { this.coomentHandler() }} className="like  poiner "><i className="fa fa-commenting-o"></i><span className="ml-1">Comment</span></div>
+                                            <div className="like  cursor"><i className="fa fa-thumbs-o-up"></i><span className="ml-1">Like : T Likes:</span></div>
+                                            <div onClick={() => { this.coomentHandler() }} className="like  poiner "><i className="fa fa-commenting-o"></i><span className="ml-1">Comment: T Comments: </span></div>
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="comments">
-                                        <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" className="rounded-image" />
-                                            <div className="d-flex flex-column ml-2"> <span className="comment-text">Daniel Frozer</span> <small className="comment-text">I like this alot! thanks alot</small>
-                                                <div className="d-flex flex-row align-items-center status"> <small>Like</small> <small>Reply</small> <small>Translate</small> <small>18 mins</small> </div>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex flex-row mb-2"> <img src="https://i.imgur.com/1YrCKa1.jpg" width="40" className="rounded-image" />
-                                            <div className="d-flex flex-column ml-2"> <span className="comment-text">Elizabeth goodmen</span> <small className="comment-text">Thanks for sharing!</small>
-                                                <div className="d-flex flex-row align-items-center status"> <small>Like</small> <small>Reply</small> <small>Translate</small> <small>8 mins</small> </div>
-                                            </div>
-                                        </div>
-
+                                    <div className="comments"> 
+                                       {/* {allComments} */}
+                                       <CommentDiv/>
                                     </div>
 
                                     <div className="bg-light ">
@@ -72,4 +99,13 @@ class Homes extends Component{
         );
     };
 }
+
+// for comment comment getting id of post 
+
+// const mapStatetoProps=(state)=>{
+//     return{
+//         // fetch post id 
+//        homedataid:state.homeCompData.homedataid
+//     }
+//    }
 export default Homes;

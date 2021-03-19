@@ -78,7 +78,7 @@ class EditProfile extends Component{
                     <span className=" font-weight-bold text-danger font-italic">{this.state.nameError}</span>
                     </div>
                     <div className="form-group ">
-                    <label className="font-weight-bold">Date</label>
+                    <label className="font-weight-bold">Date of Birth</label>
                     <input className="form-control"   onChange={( event ) => this.setState( { date: event.target.value } )} type="date"  />
                     <span className=" font-weight-bold text-danger font-italic" >{this.state.dateError}</span>
                     </div>

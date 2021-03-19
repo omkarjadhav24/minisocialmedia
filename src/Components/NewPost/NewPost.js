@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
+import log2 from '../../assets/log2.jpg'
 
 class NewPost extends Component {
     state = {
@@ -71,21 +72,21 @@ class NewPost extends Component {
         // }
        
         return (
-            <div className={classes.NewPost}>
+            <div className={classes.NewPost} style={{ backgroundImage: `url(${log2})` }} >
                 {/* {redirect} */}
-                <h1>Add a Post</h1>
+                <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">
-                <label>Image</label>
+                <label className="text-light">Image</label>
                 <input className="form-control" type="file" value={this.state.image}  onChange={( event ) => this.setState( { image: event.target.value } )} />
-                <span className={classes.error}>{this.state.imageError}</span>
+                <span className="font-weight-bold text-danger font-italic">{this.state.imageError}</span>
                 </div>
                 <div className="form-group">
-                <label>Description</label>
+                <label className="text-light" >Description</label>
                 <textarea className="form-control" rows="2" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />
-                <span className={classes.error}>{this.state.descriptionError}</span><br/>
+                <span className="font-weight-bold text-danger font-italic">{this.state.descriptionError}</span><br/>
+                <button  className="btn btn-outline-warning mt-0" onClick={this.postDataHandler}>Add Post</button>
+                
                 </div>
-               
-                <button  className="btn btn-outline-warning" onClick={this.postDataHandler}>Add Post</button>
             </div>
         );
     }

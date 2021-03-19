@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import SideBar from '../Ui/Sidebar/Sidebar'
 import Homes from '../Home/Homes/Homes'
+import {connect} from 'react-redux'
+import {HomeData} from '../../Actions/HomeData'
 // import {connect} from 'react-redux';
 // import {HomeData} from '../../Actions/HomeData'
 // import axios from 'axios'
@@ -13,35 +15,42 @@ class Home extends Component {
         posts: []
     }
     componentDidMount(){
-        // this.props.homeData();
-        axios.get('https://jsonplaceholder.typicode.com/photos')
-        .then(res=>{
-            // console.log(res.data);
-            const posts = res.data.slice( 0, 4 );
-            console.log(posts);
-                const updatedPosts = posts.map( post => {
-                    return {
-                        ...post,
-                        author: 'Max'
-                    }
-                } );
-                this.setState( { posts: updatedPosts } );
-        }).catch(err=>{
-            console.log(err);
-        })
+        this.props.homeCompodata()
     }
+    // componentDidMount(){
+    //     // this.props.homeData(); //fetching all friend  users post
+        
+    //     axios.get('https://jsonplaceholder.typicode.com/photos')
+    //     .then(res=>{
+    //         // console.log(res.data);
+    //         const posts = res.data.slice( 0, 4 );
+    //         console.log(res.data.id);
+    //         // permittedValues = posts.map(value => value.id);
+    //         const updatedPosts = posts.map( post => {
+    //                 return {
+    //                     ...post
+    //                 }
+    //             } );
+    //             this.setState( { posts: updatedPosts } );
+    //     }).catch(err=>{
+    //         console.log(err);
+    //     }) 
+    // }
 
     render() {
+        const dataOfHome =this.props.homePosts.slice( 0, 4 );
         let posts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
-        posts = this.state.posts.map( post => {
+        
+        //  fetching data and send to Home component in props
+        posts =dataOfHome.map( post => {
             return (
-                // <Link to={'/posts/' + post.id} key={post.id}>
                 <Homes
                     key={post.id}
+                    id={post.id}
                     title={post.title}
                     thumbnailUrl={post.thumbnailUrl}
                      />
-                // </Link>
+                //
             );
         } );
         return (
@@ -67,5 +76,18 @@ class Home extends Component {
         );
     };
 }
-
-export default Home;
+const mapStatetoProps=(state)=>{
+    return{
+        // fetch all posts from homedata reducers
+       homePosts:state.homeCompData.home,
+       homedataid:state.homeCompData.homedataid
+    }
+   }
+   
+   const mapDispatchtoProps=(dispatch)=>{
+    return{
+        // call function which is in homedata action for executing axios
+       homeCompodata:()=>{dispatch(HomeData())}
+    }
+}
+export default connect(mapStatetoProps,mapDispatchtoProps)(Home);

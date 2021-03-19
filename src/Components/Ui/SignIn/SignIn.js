@@ -5,6 +5,7 @@ import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
 import {signInPage,signUpPage} from '../../../Actions/SignIn'
+import {auth} from '../../../Actions/Auth'
 import {connect} from 'react-redux'
 import loginImage from '../../../assets/log3.jpg'
 
@@ -35,6 +36,7 @@ class SignIn extends Component{
         if(this.checkValidity())
         {
             this.props.signIn()
+            this.props.loginauth(this.state.email,this.state.password)
         }
     }
     signUp=()=>{
@@ -50,11 +52,11 @@ class SignIn extends Component{
                 <form onSubmit={this.submitHandler}>
                      <div className="form-group" >
                      <label className="font-weight-bold" >Email address</label>
-                     <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control" id="exampleInputEmail1"  placeholder="Enter email"/>
+                     <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control"   placeholder="Enter email"/>
                      </div>
                      <div className="form-group">
                     <label className="font-weight-bold"  >Password</label>
-                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control"  placeholder="Password"/>
                     <span className="font-weight-bold text-danger font-italic">{this.state.passworError}</span>
                     </div>
                     <button className="btn btn-success" >LOGIN</button>
@@ -75,14 +77,16 @@ class SignIn extends Component{
 }
 const mapStatetoProps=(state)=>{
     return{
-       login:state.authsignin.login
+       login:state.loginauth.returnSecureToken,
     }
    }
    
    const mapDispatchtoProps=(dispatch)=>{
     return{
        signIn:()=>{dispatch(signInPage())} ,
-       signUp:()=>{dispatch(signUpPage())} 
+       signUp:()=>{dispatch(signUpPage())} ,
+       loginauth:(email,password)=>{dispatch(auth(email,password))} 
+
 
     }
 }

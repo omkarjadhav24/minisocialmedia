@@ -69,7 +69,7 @@ class Navigation extends Component{
             <Route path="/requestpage" component={Requests} />
             <Route path="/search/:name" component={Searches} />
             <Route path="/" component={SignIn} />
-            <Route render={() => <h1>Welcome In MovieLand</h1>}/>
+            <Route render={() => <h1>Welcome In Mini Social Media</h1>}/>
             </Switch>
             </div>
         );
