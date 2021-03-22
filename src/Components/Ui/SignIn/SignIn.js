@@ -35,7 +35,7 @@ class SignIn extends Component{
         
         if(this.checkValidity())
         {
-            this.props.signIn()
+            // this.props.signIn()
             this.props.loginauth(this.state.email,this.state.password)
         }
     }
@@ -44,7 +44,7 @@ class SignIn extends Component{
     }
     
     render(){
-        if(this.props.login){
+        if(localStorage.getItem('token')){
             return <Redirect to="/home" />
         }
         return(
@@ -69,7 +69,7 @@ class SignIn extends Component{
 }
 const mapStatetoProps=(state)=>{
     return{
-       login:state.loginauth.returnSecureToken,
+       token:state.loginauth.token,
     }
    }
    

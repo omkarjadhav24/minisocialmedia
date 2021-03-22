@@ -8,7 +8,7 @@ import Home from '../../Home/Home'
 import Searches from '../../../Components/Searches/Searches'
 import Search from '../../Searches/search/Search'
 import 'font-awesome/css/font-awesome.min.css';
-import { withRouter } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 import Profile from '../../Profile/Profile'
 import EditProfile from '../../Profile/EditProfile/EditProfile';
 import Requests from '../../Requests/Requests'
@@ -16,8 +16,10 @@ import Requests from '../../Requests/Requests'
 
 class Navigation extends Component{
     state={
-        search:''
+        search:'',
+        redirect:false
     }
+
     searchUser=(event)=>{
         event.preventDefault();
         console.log(this.state)
@@ -32,7 +34,18 @@ class Navigation extends Component{
             alert('Serach Is Empty')
         }
     }
+    logout(){
+        localStorage.clear();
+        // this.setState({redirect:true})
+    }
+   
     render(){
+        // if(this.state.redirect)
+        // {
+        //    return(
+        //     <Redirect to='/'/>
+        //    )
+        // }
         return(
             
             <div>
@@ -55,6 +68,9 @@ class Navigation extends Component{
                 <NavLink to="/requestpage">
                 <img  height="34px" src="https://img.icons8.com/color/48/000000/add-user-group-woman-man-skin-type-7.png"/>
                 </NavLink>
+            </li>
+            <li>
+                <button onClick={this.logout} > Logout </button>
             </li>
             </ul>
             </div>

@@ -21,7 +21,7 @@ const reducer = ( state = initialState, action ) => {
             ...state,
             email:action.email,
             password:action.password,
-            returnSecureToken:true
+            token:action.token
 
         }
         case actionTypes.AUTH_FAIL: return{

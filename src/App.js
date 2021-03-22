@@ -8,7 +8,7 @@ import {Route} from 'react-router'
 function App(props) {
   return (
     <div className="App">
-      {props.login||props.registration  ?<Navigation/>:<div>
+      {localStorage.getItem('token')  ?<Navigation/>:<div>
         {props.signup ?
        <Route to='/signup' exact  component={SignUp} />
         :<Route to='/' exact component={SignIn}/>
@@ -19,7 +19,7 @@ function App(props) {
 }
 const mapStatetoProps=(state)=>{
   return{
-     login:state.loginauth.returnSecureToken,
+    token:state.loginauth.token,
      signup:state.authsignin.signup,
      registration:state.registrationauth.token
      

@@ -17,6 +17,10 @@ class Home extends Component {
     componentDidMount(){
         this.props.homeCompodata()
     }
+    logout=()=>{
+        alert("hi")
+        localStorage.removeItem('token');
+    }
     // componentDidMount(){
     //     // this.props.homeData(); //fetching all friend  users post
         
@@ -57,7 +61,7 @@ class Home extends Component {
             <div >
                 <div className="row">
                     <div className="sidebar col-sm bg-secondary">
-                        <SideBar/>
+                        {/* <SideBar logout={this.logout()} /> */}
                     </div>
                     <div className="col-sm bg-secondary">
                     <div className="mt-2 box bg-white" >

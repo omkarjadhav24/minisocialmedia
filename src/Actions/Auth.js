@@ -7,11 +7,12 @@ export const authStart = () => {
     };
 };
 // when sign in success then execute
-export const authSuccess = (email,password) => {
+export const authSuccess = (email,password,token) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         email: email,
-        password: password
+        password: password,
+        token:token
     };
 };
 // wehen sign in fails 
@@ -27,14 +28,15 @@ export const auth = (email, password) => {
         email:email,
         password:password
     }
-    let url='https://jsonplaceholder.typicode.com/users';
+    let url='user/login';
     return dispatch => {
         dispatch(authStart());
         console.log(authData)
         axios.post(url,authData)
         .then(res=>{
-            console.log(res.data.email);
-            dispatch(authSuccess(res.data.email,res.data.password));
+            console.log(res);
+            localStorage.setItem('token',res.data.token )
+            dispatch(authSuccess(res.data.user.email,res.data.user.password,res.data.token));
         }).catch(err=>{
             dispatch(authFail(err.response.data.error));
 

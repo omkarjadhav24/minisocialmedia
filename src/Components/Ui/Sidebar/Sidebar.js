@@ -2,9 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import './Sidebar.css'
 class SideBar extends Component{
-    logout(){
-        console.log("work");
-    }
+   
     render(){
         return(
         <div>
@@ -17,7 +15,7 @@ class SideBar extends Component{
                 <li>Watch</li>
                 <li>Events</li>
                 <li>Memories</li>
-                <li onClick={this.props.clicked} >Logout</li>
+                <li onClick={this.props.logout} >Logout</li>
             </ul>
             </div>
         );
