@@ -58,7 +58,6 @@ class Homes extends Component{
                                             <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" />
                                             <div className="d-flex flex-column justify-content-start ml-2">
                                                 <span className="d-block font-weight-bold name">Marry Andrews</span>
-                                                <span className="date text-black-50">Shared publicly - Jan 2020</span>
                                             </div>
                                         </div>
                                         <div className="mt-1">
