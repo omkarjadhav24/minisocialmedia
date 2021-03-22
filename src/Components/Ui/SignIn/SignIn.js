@@ -61,16 +61,8 @@ class SignIn extends Component{
                     </div>
                     <button className="btn btn-success" >LOGIN</button>
                     <button onClick={this.signUp} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
-                    {/* <Button btnType="Success">SUBMIT</Button>
-                    <Button clicked={this.signUp} > <NavLink to="/signup">SIGN UP</NavLink></Button> */}
                 </form>
-                {/* <form onSubmit={this.submitHandler}>
-                    {form}
-                   
-                </form>
-                {/* <Button 
-                clicked={this.switchAuthModeHandler}
-                btnType="Danger">SWITCH TO {this.state.isSignUp ? 'SIGNIN':'SIGNUP' }</Button>                 */}
+              
             </div>
         );
     };
