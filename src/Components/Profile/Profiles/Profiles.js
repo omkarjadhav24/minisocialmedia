@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Component } from 'react';
 import {NavLink} from 'react-router-dom'
@@ -7,11 +8,26 @@ class Profiles extends Component{
     state={
         comment:false
     }
+    componentDidMount(){
+        axios.get('user/me',{
+            headers: {
+              'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU4MzkxNDk0Y2YyNzAwMTVkMjdlYTMiLCJpYXQiOjE2MTY0MTY2Nzh9.9fXjlBW5DG9xLebl-uZnVnyFoTcULsif4w-LNMSOU80` 
+            }
+          })
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+    
     coomentHandler=()=>{
        let prevComment=this.state.comment;
-        this.setState({
+    this.setState({
             comment:!prevComment
         })
+       
     }
     render(){
         return(

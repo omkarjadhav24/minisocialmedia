@@ -7,10 +7,10 @@ export const addPostStart = () => {
     };
 };
 // when sign in success then execute
-export const addPostSuccess = (image,description) => {
+export const addPostSuccess = (uploadImage,description) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        image: image,
+        uploadImage: uploadImage,
         description: description
     };
 };
@@ -21,21 +21,27 @@ export const addPostFail = (error) => {
         error: error
     };
 };
-// for calling in sign in page for getting email and password from there
-export const addPost = (image, description) => {
+
+export const addPost = (uploadImage , description) => {
     const postData={
-        image:image,
+        uploadImage :uploadImage ,
         description:description
     }
-    let url='';
+    let url='story/image';
     return dispatch => {
+        let token=localStorage.getItem('token')
         dispatch(addPostStart());
-        console.log(postData)
-        axios.post(url,postData)
+        console.log(token)
+        axios.post(url,postData, {
+            headers: {
+              'Authorization': `Bearer ${token}` 
+            }
+          })
         .then(res=>{
             console.log(res);
             dispatch(addPostSuccess(res.data.image,res.data.description));
         }).catch(err=>{
+            console.log(err)
             dispatch(addPostFail(err.response.data.error));
 
         })

@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
 import log2 from '../../assets/log2.jpg'
-
+import {connect} from 'react-redux'
+import {addPost} from '../../Actions/AddPost'
 class NewPost extends Component {
     state = {
         image:'',
@@ -12,6 +13,10 @@ class NewPost extends Component {
         titleError:'',
         contentError:''
         
+    }
+    imageFileHandler=(e)=>
+    {
+        this.setState({image:e.target.files[0].name})
     }
     checkValidity(){
         if(!(this.state.image!=""))
@@ -49,12 +54,7 @@ class NewPost extends Component {
         {
             console.log(data)
 
-            axios.post( 'https://jsonplaceholder.typicode.com/photos', data )
-            .then( response => {
-                console.log( response );
-                this.props.history.replace('/profile');
-                // this.setState( { submitted: true } );
-            } );
+            this.props.addPost(this.state.image,this.state.description)
         }
        
     }
@@ -77,7 +77,7 @@ class NewPost extends Component {
                 <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">
                 <label className="text-light">Image</label>
-                <input className="form-control" type="file" value={this.state.image}  onChange={( event ) => this.setState( { image: event.target.value } )} />
+                <input className="form-control" type="file"  onChange={this.imageFileHandler} />
                 <span className="font-weight-bold text-danger font-italic">{this.state.imageError}</span>
                 </div>
                 <div className="form-group">
@@ -92,4 +92,9 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+   const mapDispatchtoProps=(dispatch)=>{
+    return{
+       addPost:(uploadImage ,description)=>{dispatch(addPost(uploadImage,description))}
+    }
+}
+export default connect(null,mapDispatchtoProps)(NewPost);

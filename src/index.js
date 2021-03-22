@@ -15,13 +15,15 @@ import SignInReducer from '../src/Reducers/SignIn';
 import Auth from '../src/Reducers/Auth';
 import RegistrationAuth from '../src/Reducers/Registration'
 import HomeData from '../src/Reducers/HomeData'
+import AddPost from '../src/Reducers/AddPost'
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   authsignin: SignInReducer,
   loginauth:Auth,
   registrationauth:RegistrationAuth,
-  homeCompData:HomeData
+  homeCompData:HomeData,
+  addpost:AddPost
 });
 
 const store = createStore(rootReducer, composeEnhancers(
