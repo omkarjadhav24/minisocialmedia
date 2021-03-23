@@ -8,7 +8,8 @@ const initialState = {
     gender:null,
     dob:null,
     profileId:null,
-    email:null
+    email:null,
+    age:null
 };
 
 
@@ -25,7 +26,8 @@ const reducer = ( state = initialState, action ) => {
             gender:action.gender,
             dob:action.dob,
             profileId:action.profileId,
-            email:action.email
+            email:action.email,
+            age:action.age
 
         }
         case actionTypes.SHOW_PROFILE_FAIL: return{

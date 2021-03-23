@@ -52,6 +52,7 @@ class Profiles extends Component{
                         <img  src={profileImage} width="40"/>
                         <p>UserName: {this.props.email}</p>
                         <p>Name :  {this.props.name}</p>
+                        <p>Age : {this.props.age}</p>
                         <p>Date Of Birth : {moment.utc(this.props.dob).format('MM/DD/YYYY')}</p>
                         <p>Gender : {this.props.gender} </p>
                         <button type="button" class="btn btn-outline-primary">Total Friends : </button>
@@ -125,7 +126,8 @@ const mapStatetoProps=(state)=>{
             name:state.showprofile.name,
             gender:state.showprofile.gender,
             dob:state.showprofile.dob, 
-            email:state.showprofile.email
+            email:state.showprofile.email,
+            age:state.showprofile.age
     }
    }
 

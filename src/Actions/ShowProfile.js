@@ -5,14 +5,15 @@ export const showProfileStart = () => {
         type: actionTypes.SHOW_PROFILE_START
     };
 };
-export const showProfileSuccess = (name,gender,dob,profileId,email) => {
+export const showProfileSuccess = (name,gender,dob,profileId,email,age) => {
     return {
         type: actionTypes.SHOW_PROFILE_SUCCESS,
         name:name,
         gender:gender,
         dob:dob,
         profileId:profileId,
-        email:email
+        email:email,
+        age:age
     };
 };
 export const showProfileFail = (error) => {
@@ -35,7 +36,7 @@ export const showProfile = () => {
           })
         .then(res=>{
             console.log(res.data._id)
-        dispatch(showProfileSuccess(res.data.name,res.data.gender,res.data.dob,res.data._id,res.data.email));
+        dispatch(showProfileSuccess(res.data.name,res.data.gender,res.data.dob,res.data._id,res.data.email,res.data.age));
 
         })
         .catch(err=>{

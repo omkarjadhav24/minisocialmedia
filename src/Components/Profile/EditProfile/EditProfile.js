@@ -14,6 +14,7 @@ class EditProfile extends Component{
     state={
         name:'',
         nameError:'',
+        age:'',
         ageError:'',
         date:'',
         date:'',
@@ -76,7 +77,8 @@ class EditProfile extends Component{
             dob:this.state.date,
             gender:this.state.gender,
             email:this.state.email,
-            password:this.state.password
+            password:this.state.password,
+            age:this.state.age
         }
         let token = localStorage.getItem('token')
         console.log(editData)
@@ -107,17 +109,17 @@ class EditProfile extends Component{
                 <form onSubmit={this.submitHandler}>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Name</label>
-                    <input className="form-control-sm" type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
+                    <input className="form-control-sm" type="text" value={this.props.name ?    this.props.name :this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control"  placeholder="Enter your Name"/>
                     <span className=" font-weight-bold text-danger font-italic">{this.state.nameError}</span>
                     </div>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Age</label>
-                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm"   placeholder="Enter your Age"/>
+                    <input type="text" value={this.props.age ?    this.props.age :this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm"   placeholder="Enter your Age"/>
                     <span className="font-weight-bold text-danger font-italic">{this.state.ageError}</span>
                     </div>
                     <div className="form-group ">
                     <label className="font-weight-bold">Date of Birth</label>
-                    <input className="form-control"   onChange={( event ) => this.setState( { date: event.target.value } )} type="date"  />
+                    <input className="form-control" value={this.props.dob ?    this.props.dob :null}  onChange={( event ) => this.setState( { date: event.target.value } )} type="date"  />
                     <span className=" font-weight-bold text-danger font-italic" >{this.state.dateError}</span>
                     </div>
                     <label className="font-weight-bold">Gender</label><br/>
@@ -149,6 +151,10 @@ class EditProfile extends Component{
 const mapStatetoProps=(state)=>{
     return{
        name:state.showprofile.name,
+       gender:state.showprofile.gender,
+       dob:state.showprofile.dob, 
+       email:state.showprofile.email,
+       age:state.showprofile.age
     }
    }
 // const mapDispatchtoProps=(dispatch)=>{
