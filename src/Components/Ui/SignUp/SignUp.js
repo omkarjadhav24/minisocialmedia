@@ -18,6 +18,8 @@ class SignUp extends Component{
     state={
         name:'',
         nameError:'',
+        age:'',
+        ageError:'',
         date:'',
         dateError:'',
         gender:'',
@@ -33,6 +35,12 @@ class SignUp extends Component{
         {
             this.setState({
                 nameError:'Name contains only chars '
+            });
+        }
+        else if(isNaN(this.state.age))
+        {
+            this.setState({
+                ageError:'Age in Number'
             });
         }
         else if(this.state.date=="")
@@ -84,6 +92,11 @@ class SignUp extends Component{
                     <label className="font-weight-bold" >Name</label>
                     <input type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
                     <span className="font-weight-bold text-danger font-italic">{this.state.nameError}</span>
+                    </div>
+                    <div className="form-group" >
+                    <label className="font-weight-bold" >Age</label>
+                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
+                    <span className="font-weight-bold text-danger font-italic">{this.state.ageError}</span>
                     </div>
                     <div className="form-group ">
                     <label className="font-weight-bold">Date of Birth</label>

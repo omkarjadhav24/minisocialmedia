@@ -65,14 +65,14 @@ class EditProfile extends Component{
         event.preventDefault();
         const editData={
             name :this.state.name ,
-            date:this.state.date,
+            dob:this.state.date,
             gender:this.state.gender,
             email:this.state.email,
             password:this.state.password
         }
         let token = localStorage.getItem('token')
-
-        axios.patch(`user/update/${this.props.name}`,editData,{
+        console.log(editData)
+        axios.patch(`user/update`,editData,{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -110,11 +110,11 @@ class EditProfile extends Component{
                     <label className="font-weight-bold">Gender</label><br/>
                     <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" value="Male" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
-                    <label className="form-check-label" for="inlineRadio1">Male</label>
+                    <label className="form-check-label" >Male</label>
                     </div>
                     <div className="form-check form-check-inline">
                     <input className="form-check-input" type="radio" value="FeMale" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
-                    <label className="form-check-label" for="inlineRadio2">FeMale</label><br/><br/>
+                    <label className="form-check-label" >FeMale</label><br/><br/>
                     </div>
                     <p className="font-weight-bold text-danger font-italic"> {this.state.genderError}</p>
                     <div className="form-group" >
@@ -135,7 +135,7 @@ class EditProfile extends Component{
 }
 const mapStatetoProps=(state)=>{
     return{
-       name:state.showprofile.profileId,
+       name:state.showprofile.name,
     }
    }
 // const mapDispatchtoProps=(dispatch)=>{
