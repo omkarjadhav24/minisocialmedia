@@ -78,7 +78,7 @@ class SignUp extends Component{
         {
             // calling the function as a props from Actions/Registration.js-registration()
             // all inputs are from thisa component states
-            this.props.registrationsave(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password)
+            this.props.registrationsave(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password,this.state.age)
         }
     }
     render(){
@@ -95,7 +95,7 @@ class SignUp extends Component{
                     </div>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Age</label>
-                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
+                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm"   placeholder="Enter your Age"/>
                     <span className="font-weight-bold text-danger font-italic">{this.state.ageError}</span>
                     </div>
                     <div className="form-group ">
@@ -138,7 +138,7 @@ const mapStatetoProps=(state)=>{
    // calling the funtion from Actions/Registration.js- registration()
    const mapDispatchtoProps=(dispatch)=>{
     return{
-        registrationsave:(name,dob,gender,email,password)=>{dispatch(registration(name,dob,gender,email,password))} 
+        registrationsave:(name,dob,gender,email,password,age)=>{dispatch(registration(name,dob,gender,email,password,age))} 
     }
 }
 export default connect(mapStatetoProps,mapDispatchtoProps) (SignUp);

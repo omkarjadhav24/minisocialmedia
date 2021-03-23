@@ -6,7 +6,7 @@ export const registrationStart = () => {
         type: actionTypes.REGISTRATION_START
     };
 };
-export const registrationSuccess = (name,dob,gender,email,password,token) => {
+export const registrationSuccess = (name,dob,gender,email,password,age,token) => {
     return {
         type: actionTypes.REGISTRATION_SUCCESS,
         email: email,
@@ -14,7 +14,8 @@ export const registrationSuccess = (name,dob,gender,email,password,token) => {
         name:name,
         dob:dob,
         gender:gender,
-        token:token
+        token:token,
+        age:age
 
     };
 };
@@ -24,13 +25,14 @@ export const registrationFail = (error) => {
         error: error
     };
 };
-export const registration = (name,dob,gender,email, password) => {
+export const registration = (name,dob,gender,email, password,age) => {
     const authData={
         name:name,
         dob:dob,
         gender:gender,
         email:email,
-        password:password
+        password:password,
+        age:age
     }
     let url='user';
     return dispatch => {
@@ -41,7 +43,7 @@ export const registration = (name,dob,gender,email, password) => {
             console.log(res.data.token);
             console.log(res);
             localStorage.setItem('token',res.data.token )
-            dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.token));
+            dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.age,res.data.token));
         }).catch(err=>{
             dispatch(registrationFail(err.response.data.error));
 

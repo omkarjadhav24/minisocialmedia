@@ -10,6 +10,7 @@ const initialState = {
     name:'',
     dob:'',
     gender:'',
+    age:'',
     returnSecureToken:false,
     loading: false,
 };
@@ -32,6 +33,7 @@ const reducer = ( state = initialState, action ) => {
                 name:action.name,
                 dob:action.dob,
                 gender:action.gender,
+                age:action.age,
                 token:action.token,
                 returnSecureToken:true
 
