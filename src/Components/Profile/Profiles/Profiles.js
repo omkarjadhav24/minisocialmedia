@@ -3,23 +3,35 @@ import React from 'react'
 import { Component } from 'react';
 import {NavLink} from 'react-router-dom'
 import profileImage from '../../../assets/profile.png';
+import {connect} from 'react-redux'
+import {showProfile} from '../../../Actions/ShowProfile'
+import moment from 'moment'
+
 
 class Profiles extends Component{
     state={
-        comment:false
+        name:'',
+        dateOfBirth:'',
+        gender:'',
+        username:''
     }
+
     componentDidMount(){
-        axios.get('user/me',{
-            headers: {
-              'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU4MzkxNDk0Y2YyNzAwMTVkMjdlYTMiLCJpYXQiOjE2MTY0MTY2Nzh9.9fXjlBW5DG9xLebl-uZnVnyFoTcULsif4w-LNMSOU80` 
-            }
-          })
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        // let token=localStorage.getItem('token')
+
+        // axios.get('user/me',{
+            
+        //     headers: {
+        //       'Authorization': `Bearer ${token}` 
+        //     }
+        //   })
+        // .then(res=>{
+        //     console.log(res.data)
+        // })
+        // .catch(err=>{
+        //     console.log(err);
+        // })
+        this.props.showProfileInfo();
     }
     
     coomentHandler=()=>{
@@ -29,15 +41,19 @@ class Profiles extends Component{
         })
        
     }
+    
     render(){
+        let dob =null
+        dob=new Date(this.props.dob);
         return(
             <>
             <div className="mt-1 box bg-white" >
                     <div  className="profile">
                         <img  src={profileImage} width="40"/>
-                        <p>Name :  Omkar</p>
-                        <p>Date Of Birth : 24/02/1997</p>
-                        <p>Gender : Male</p>
+                        <p>UserName: {this.props.email}</p>
+                        <p>Name :  {this.props.name}</p>
+                        <p>Date Of Birth : {moment.utc(this.props.dob).format('MM/DD/YYYY')}</p>
+                        <p>Gender : {this.props.gender} </p>
                         <button type="button" class="btn btn-outline-primary">Total Friends : </button>
                         <button className="btn btn-outline-warning"><NavLink to="/edit-profile" > Edit Profile </NavLink>  </button> 
                     </div>
@@ -104,4 +120,18 @@ class Profiles extends Component{
         );
     };
 }
-export default Profiles
+const mapStatetoProps=(state)=>{
+    return{
+            name:state.showprofile.name,
+            gender:state.showprofile.gender,
+            dob:state.showprofile.dob, 
+            email:state.showprofile.email
+    }
+   }
+
+const mapDispatchtoProps=(dispatch)=>{
+    return{
+       showProfileInfo:()=>{dispatch(showProfile())} 
+    }
+}
+export default connect(mapStatetoProps,mapDispatchtoProps)(Profiles)

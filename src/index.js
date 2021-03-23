@@ -16,6 +16,8 @@ import Auth from '../src/Reducers/Auth';
 import RegistrationAuth from '../src/Reducers/Registration'
 import HomeData from '../src/Reducers/HomeData'
 import AddPost from '../src/Reducers/AddPost'
+import ShowProfile from '../src/Reducers/ShowProfile'
+import EditProfile from '../src/Reducers/EditProfile'
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
@@ -23,7 +25,9 @@ const rootReducer = combineReducers({
   loginauth:Auth,
   registrationauth:RegistrationAuth,
   homeCompData:HomeData,
-  addpost:AddPost
+  addpost:AddPost,
+  showprofile:ShowProfile,
+  editprofile:EditProfile
 });
 
 const store = createStore(rootReducer, composeEnhancers(

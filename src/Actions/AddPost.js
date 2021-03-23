@@ -34,7 +34,10 @@ export const addPost = (uploadImage , description) => {
         console.log(token)
         axios.post(url,postData, {
             headers: {
-              'Authorization': `Bearer ${token}` 
+              'Authorization': `Bearer ${token}`,
+               'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*",
+              'Access-Control-Allow-Methods':'OPTIONS, GET, POST, PUT, PATCH, DELETE'
             }
           })
         .then(res=>{

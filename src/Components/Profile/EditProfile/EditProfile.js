@@ -3,6 +3,9 @@ import { Component } from 'react';
 import classes from './EditProfile.module.css'
 import  Button from '../../Ui/Button/Button'
 import background from '../../../assets/log3.jpg'
+import {connect} from 'react-redux'
+import {editProfile} from '../../../Actions/EditProfile'
+import axios from 'axios';
 class EditProfile extends Component{
   
     componentDidMount(){
@@ -60,10 +63,32 @@ class EditProfile extends Component{
 
     submitHandler = (event) => {
         event.preventDefault();
-        if(this.checkValidity())
-        {
-            console.log(this.state)
+        const editData={
+            name :this.state.name ,
+            date:this.state.date,
+            gender:this.state.gender,
+            email:this.state.email,
+            password:this.state.password
         }
+        let token = localStorage.getItem('token')
+
+        axios.patch(`user/update/${this.props.name}`,editData,{
+            headers: {
+              'Authorization': `Bearer ${token}` 
+            }
+          })
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+        // if(this.checkValidity())
+        // {
+        //     this.props.editdataProfile(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password)
+        //     console.log(this.state)
+        // }
       
     }
     
@@ -108,4 +133,16 @@ class EditProfile extends Component{
         );
     };
 }
-export default EditProfile;
+const mapStatetoProps=(state)=>{
+    return{
+       name:state.showprofile.profileId,
+    }
+   }
+// const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//        editdataProfile:(name,date,gender,email,password)=>{dispatch(editProfile(name,date,gender,email,password))} 
+
+
+//     }
+// }
+export default connect(mapStatetoProps,null)(EditProfile);

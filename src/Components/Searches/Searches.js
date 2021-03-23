@@ -3,27 +3,32 @@ import Search from '../Searches/search/Search'
 import SideBar from '../Ui/Sidebar/Sidebar'
 import axios from 'axios'
 class Searches extends Component{
-    // state={
-    //     name:[
-    //         {name:"Omkar" ,age:29 },
-    //         {name:"Rahul" ,age:30 },
-    //         {name:"Pratik" ,age:31 },
-    //         {name:"Akshay" ,age:32 },
-    //         {name:"Avadhut" ,age:33 },
-    //         {name:"Omkar" ,age:36 },
-    //         {name:"Omkar" ,age:37 },
-
-    //     ]
-    // }
     componentDidMount(){
-        // console.log(this.props)
+        console.log(this.props)
         console.log(this.props.match.params.name)
-        axios.get('user/'+this.props.match.params.name)
+        // axios.get('user/'+this.props.match.params.name)
+        // .then(res=>{
+        //     console.log(res)
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        // })
+         let token=localStorage.getItem('token')
+
+        axios.get('https://v-social-media.herokuapp.com/user/'+this.props.match.params.name,{
+            
+            headers: {
+              'Authorization': `Bearer ${token}` ,
+              'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*",
+              'Access-Control-Allow-Methods':'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+            }
+          })
         .then(res=>{
-            console.log(res)
+            console.log(res.data)
         })
         .catch(err=>{
-            console.log(err)
+            console.log(err);
         })
     }
     render(){
