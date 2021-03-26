@@ -14,18 +14,20 @@ class NewPost extends Component {
         contentError:''
         
     }
+    //image file
     imageFileHandler=(e)=>
     {
         this.setState({image:e.target.files[0].name})
     }
-    checkValidity(){
-        if(!(this.state.image!=""))
-        {
-            this.setState({
-                imageError:'Please Select Image'
-            });
-        }
-        else if(!(this.state.description.length>=5))
+    checkValidity(){ 
+        // if(!(this.state.image!=""))
+        // {
+        //     this.setState({
+        //         imageError:'Please Select Image'
+        //     });
+        // }
+        // else 
+        if(!(this.state.description.length>=5))
         {
             this.setState({
                 descriptionError:'Content is more than 5 char and less than 20'

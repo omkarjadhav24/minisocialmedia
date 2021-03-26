@@ -17,7 +17,7 @@ class Search extends Component{
 
         <div className="mt-2 box bg-white">
             <div className="Search" >
-            <img className="rounded-circle image" src="https://i.imgur.com/RpzrMR2.jpg" width="40"/>
+            {/* <img className="rounded-circle image" src="https://i.imgur.com/RpzrMR2.jpg" width="40"/> */}
                <p id="name">{this.props.name}</p>
                <button onClick={this.friendRequestHandler} type="button" class="btn btn-primary">
                    {this.state.addfriend ? 

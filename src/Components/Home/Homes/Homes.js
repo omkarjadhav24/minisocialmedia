@@ -55,7 +55,7 @@ class Homes extends Component{
                                 <div className="d-flex flex-column comment-section">
                                     <div className="bg-white ">
                                         <div className="d-flex flex-row user-info">
-                                            <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" />
+                                            {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
                                             <div className="d-flex flex-column justify-content-start ml-2">
                                                 <span className="d-block font-weight-bold name">Marry Andrews</span>
                                             </div>

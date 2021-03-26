@@ -9,7 +9,7 @@ class Searches extends Component{
     }
     componentDidMount(){
          let token=localStorage.getItem('token')
-        axios.get('http://be113eb45e0a.ngrok.io/user/'+this.props.match.params.name,{    
+        axios.get('http://c0998ec2cdd0.ngrok.io/user/'+this.props.match.params.name,{    
             headers: {
               'Authorization': `Bearer ${token}` ,
               'Content-Type': 'application/json;charset=UTF-8',
@@ -32,7 +32,7 @@ class Searches extends Component{
             id:this.state.addFriendId
         }
         let token = localStorage.getItem('token')
-        axios.post('http://be113eb45e0a.ngrok.io/send-request',friendData,{
+        axios.post('http://c0998ec2cdd0.ngrok.io/send-request',friendData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -50,7 +50,7 @@ class Searches extends Component{
             id:this.state.addFriendId
         }
         let token = localStorage.getItem('token')
-        axios.post('http://be113eb45e0a.ngrok.io/cancel-request',friendData,{
+        axios.post('http://c0998ec2cdd0.ngrok.io/cancel-request',friendData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -68,6 +68,7 @@ class Searches extends Component{
         searchdata=this.state.users.map(data=>{
             return <Search key={data._id } cancelfriend={this.cancelFriendhandler} addfriend={this.addFriendHandler} name={data.name} id={data._id}/>
         })
+       
         return(
             <div class="row">
                 <div class="sidebar col-sm bg-secondary">

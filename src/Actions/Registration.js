@@ -1,11 +1,12 @@
 import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
-
+// registration start
 export const registrationStart = () => {
     return {
         type: actionTypes.REGISTRATION_START
     };
 };
+// if registration success
 export const registrationSuccess = (name,dob,gender,email,password,age,token) => {
     return {
         type: actionTypes.REGISTRATION_SUCCESS,
@@ -19,12 +20,14 @@ export const registrationSuccess = (name,dob,gender,email,password,age,token) =>
 
     };
 };
+// if registartion api fails
 export const registrationFail = (error) => {
     return {
         type: actionTypes.REGISTRATION_FAIL,
         error: error
     };
 };
+//performed the registration api here
 export const registration = (name,dob,gender,email, password,age) => {
     const authData={
         name:name,
@@ -35,7 +38,7 @@ export const registration = (name,dob,gender,email, password,age) => {
         age:age
     }
     // let url='http://ed56ec64fc1f.ngrok.io/user';
-    let url='http://be113eb45e0a.ngrok.io/user';
+    let url='http://c0998ec2cdd0.ngrok.io/user';
     return dispatch => {
         dispatch(registrationStart());
         console.log(authData)
@@ -43,11 +46,11 @@ export const registration = (name,dob,gender,email, password,age) => {
         .then(res=>{
             console.log(res.data.token);
             console.log(res);
-            localStorage.setItem('token',res.data.token )
-            // dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.age,res.data.token));
+            localStorage.setItem('token',res.data.token ) // token stored in localstorage
+            dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.age,res.data.token));
         }).catch(err=>{
             console.log(err);
-            // dispatch(registrationFail(err.response.data.error));
+            dispatch(registrationFail(err.response.data.error));
 
         })
 

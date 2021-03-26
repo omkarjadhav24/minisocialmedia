@@ -85,7 +85,7 @@ class EditProfile extends Component{
         }
         let token = localStorage.getItem('token')
         console.log(editData)
-        axios.patch(`http://be113eb45e0a.ngrok.io/user/update`,editData,{
+        axios.patch(`http://c0998ec2cdd0.ngrok.io/user/update`,editData,{
             headers: {
               'Authorization': `Bearer ${token}` 
             }

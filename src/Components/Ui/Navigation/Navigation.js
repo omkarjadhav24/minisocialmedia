@@ -36,6 +36,10 @@ class Navigation extends Component{
     }
     logout(){
         localStorage.clear();
+      let token = localStorage.clear();
+        if(!token){
+            return <Redirect to="/" />
+        }
         // this.setState({redirect:true})
     }
    

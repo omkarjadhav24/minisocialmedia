@@ -1,10 +1,12 @@
 import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
+// code for when profile starts loading
 export const showProfileStart = () => {
     return {
         type: actionTypes.SHOW_PROFILE_START
     };
 };
+// code for when api loads susscessfully data and storing the data
 export const showProfileSuccess = (name,gender,dob,profileId,email,age) => {
     return {
         type: actionTypes.SHOW_PROFILE_SUCCESS,
@@ -16,19 +18,21 @@ export const showProfileSuccess = (name,gender,dob,profileId,email,age) => {
         age:age
     };
 };
+// code if show profile
 export const showProfileFail = (error) => {
     return {
         type: actionTypes.SHOW_PROFILE_FAIL,
         error: error
     };
 };
+// code for performing api functionality
 export const showProfile = () => {
     
    let token = localStorage.getItem('token')
     return dispatch => {
         dispatch(showProfileStart());
        console.log(token)
-        axios.get('http://be113eb45e0a.ngrok.io/user/me',{
+        axios.get('http://c0998ec2cdd0.ngrok.io/user/me',{
             
             headers: {
               'Authorization': `Bearer ${token}` 

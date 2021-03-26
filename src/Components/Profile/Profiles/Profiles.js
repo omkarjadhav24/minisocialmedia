@@ -13,27 +13,39 @@ class Profiles extends Component{
         name:'',
         dateOfBirth:'',
         gender:'',
-        username:''
+        username:'',
+        tFriends:'',
+        userPosts:[]
     }
 
     componentDidMount(){
-        // let token=localStorage.getItem('token')
-
-        // axios.get('user/me',{
+        let token=localStorage.getItem('token')
+        // for total Friends
+        axios.get('http://c0998ec2cdd0.ngrok.io/my-frinds',{
             
-        //     headers: {
-        //       'Authorization': `Bearer ${token}` 
-        //     }
-        //   })
-        // .then(res=>{
-        //     console.log(res.data)
-        // })
-        // .catch(err=>{
-        //     console.log(err);
-        // })
+            headers: {
+              'Authorization': `Bearer ${token}` 
+            }
+          })
+        .then(res=>{
+            this.setState({
+                tFriends:res.data.length
+            })
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+      
+
+        // showing profie info line name , dob,gender
         this.props.showProfileInfo();
+
+
     }
     
+    // for toggle button comment
     coomentHandler=()=>{
        let prevComment=this.state.comment;
     this.setState({
@@ -55,7 +67,7 @@ class Profiles extends Component{
                         <p>Age : {this.props.age}</p>
                         <p>Date Of Birth : {moment.utc(this.props.dob).format('MM/DD/YYYY')}</p>
                         <p>Gender : {this.props.gender} </p>
-                        <button type="button" class="btn btn-outline-primary">Total Friends : </button>
+                        <button type="button" class="btn btn-outline-primary">Total Friends : {this.state.tFriends}</button>
                         <button className="btn btn-outline-warning"><NavLink to="/edit-profile" > Edit Profile </NavLink>  </button> 
                     </div>
                 </div>
@@ -71,7 +83,7 @@ class Profiles extends Component{
                                 <div className="d-flex flex-column comment-section">
                                     <div className="bg-white ">
                                         <div className="d-flex flex-row user-info">
-                                            <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" />
+                                            {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
                                             <div className="d-flex flex-column justify-content-start ml-2">
                                                 <span className="d-block font-weight-bold name">Marry Andrews</span>
                                             </div>
