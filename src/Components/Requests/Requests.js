@@ -18,19 +18,28 @@ class Requests extends Component{
         .then(res=>{
            
             this.setState({myRequest:[res.data]})
-            console.log(this.state.myRequest)
+            // console.log(this.state.myRequest)
         })
         .catch(err=>{
             console.log(err)
         })
     }
+    acceptFriendHandler=(id)=>{
+      alert(id)
+    }
+    rejectFriendHandler=(id)=>{
+      alert(id)
+    }
     render()
     {
       let requestData=null;
-      requestData=this.state.myRequest.map((data,i)=>{
-        console.log(data)
-      }) 
-      // return <Request key={data._id} name={data.sender_id.name} id={data._id}/>
+        requestData=this.state.myRequest.map((data,i)=>{
+         return data.map((sdata)=>{
+            return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata._id)}} reject={()=>{this.rejectFriendHandler(sdata._id)}} name={sdata.sender_id.name} id={sdata._id}/>
+          })
+        }) 
+      // return <Request key={data[i]._id} name={data[i].sender_id.name} id={data[i]._id}/>
+      // console.log(data[0].sender_id)
 
         return(
        

@@ -27,7 +27,7 @@ class Request extends Component{
                     <span>Reject</span>
                    </div>
                    : 
-                    <div>
+                    <div onClick={this.props.accept} >
                          <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span>Accept Friend</span> 
                     </div>
