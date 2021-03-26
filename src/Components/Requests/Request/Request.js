@@ -19,7 +19,7 @@ class Request extends Component{
 <div className="mt-2 box bg-white">
         <div >
             <img className="rounded-circle image" src="https://i.imgur.com/RpzrMR2.jpg" width="40"/>
-               <p id="name">Omkar</p>
+               <p id="name">{this.props.name}</p>
                <button onClick={this.friendRequestHandler} type="button" class="btn btn-primary">
                    {this.state.addfriend ? 
                    <div>

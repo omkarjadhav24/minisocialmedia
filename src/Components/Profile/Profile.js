@@ -11,7 +11,7 @@ class Profile extends Component{
             <div 
             class="row">
             <div class="sidebar col-sm bg-secondary">
-                   <SideBar/>    
+                   {/* <SideBar/>     */}
             </div>
             <div class="col-sm bg-secondary">
                 <Profiles/>

@@ -85,7 +85,7 @@ class EditProfile extends Component{
         }
         let token = localStorage.getItem('token')
         console.log(editData)
-        axios.patch(`user/update`,editData,{
+        axios.patch(`http://be113eb45e0a.ngrok.io/user/update`,editData,{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -160,7 +160,8 @@ const mapStatetoProps=(state)=>{
        gender:state.showprofile.gender,
        dob:state.showprofile.dob, 
        email:state.showprofile.email,
-       age:state.showprofile.age
+       age:state.showprofile.age,
+       token:state.loginauth.token
     }
    }
 // const mapDispatchtoProps=(dispatch)=>{

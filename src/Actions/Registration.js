@@ -34,7 +34,8 @@ export const registration = (name,dob,gender,email, password,age) => {
         password:password,
         age:age
     }
-    let url='user';
+    // let url='http://ed56ec64fc1f.ngrok.io/user';
+    let url='http://be113eb45e0a.ngrok.io/user';
     return dispatch => {
         dispatch(registrationStart());
         console.log(authData)
@@ -43,9 +44,10 @@ export const registration = (name,dob,gender,email, password,age) => {
             console.log(res.data.token);
             console.log(res);
             localStorage.setItem('token',res.data.token )
-            dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.age,res.data.token));
+            // dispatch(registrationSuccess(res.data.name,res.data.dob,res.data.gender,res.data.email,res.data.password,res.data.age,res.data.token));
         }).catch(err=>{
-            dispatch(registrationFail(err.response.data.error));
+            console.log(err);
+            // dispatch(registrationFail(err.response.data.error));
 
         })
 

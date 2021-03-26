@@ -43,7 +43,8 @@ class NewPost extends Component {
         console.log( this.props );
     }
 
-    postDataHandler = () => {
+    postDataHandler = (event) => {
+        event.preventDefault();
         console.log(this.state.image)
 
         const data = {
@@ -54,17 +55,15 @@ class NewPost extends Component {
         {
             console.log(data)
 
+            var imgData = new FormData();
+            var imagedata = document.querySelector('input[type="file"]').files[0];
+            imgData.append("inputname", imagedata);
+            let poData=imgData.get('inputname')
+
             this.props.addPost(this.state.image,this.state.description)
         }
        
     }
-    // upload(e)
-    // {
-    //     // console.log(e.target.files)
-    //     this.setState( { image: e.target.files[0].name } )
-    // }
-
-
     render () {
         // let redirect = null;
         // if (this.state.submitted) {
@@ -74,6 +73,7 @@ class NewPost extends Component {
         return (
             <div className={classes.NewPost} style={{ backgroundImage: `url(${log2})` }} >
                 {/* {redirect} */}
+                <form encType="multipart/form-data" action="">
                 <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">
                 <label className="text-light">Image</label>
@@ -85,8 +85,8 @@ class NewPost extends Component {
                 <textarea className="form-control" rows="2" value={this.state.description} onChange={( event ) => this.setState( { description: event.target.value } )} />
                 <span className="font-weight-bold text-danger font-italic">{this.state.descriptionError}</span><br/>
                 <button  className="btn btn-outline-warning mt-0" onClick={this.postDataHandler}>Add Post</button>
-                
                 </div>
+                </form>
             </div>
         );
     }

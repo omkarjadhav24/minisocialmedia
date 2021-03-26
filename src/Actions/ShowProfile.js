@@ -28,7 +28,7 @@ export const showProfile = () => {
     return dispatch => {
         dispatch(showProfileStart());
        console.log(token)
-        axios.get('user/me',{
+        axios.get('http://be113eb45e0a.ngrok.io/user/me',{
             
             headers: {
               'Authorization': `Bearer ${token}` 

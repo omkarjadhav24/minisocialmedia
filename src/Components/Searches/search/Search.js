@@ -21,16 +21,19 @@ class Search extends Component{
                <p id="name">{this.props.name}</p>
                <button onClick={this.friendRequestHandler} type="button" class="btn btn-primary">
                    {this.state.addfriend ? 
-                   <div>
+
+                   <div onClick={this.props.cancelfriend}>
                     <i class="fa fa-user-times" aria-hidden="true"></i>
                     <span className="Follow">Cancel Request</span>
                    </div>
+
                    : 
-                    <div>
-                         <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    <span className="Follow">Add Friend</span> 
-                      
+
+                    <div onClick={this.props.addfriend} >
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <span  className="Follow">Add Friend</span>  
                     </div>
+                    
                    }
                 </button>
             </div>

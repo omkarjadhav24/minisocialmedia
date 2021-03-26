@@ -1,12 +1,10 @@
 import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
-// when sign in start
 export const addPostStart = () => {
     return {
         type: actionTypes.ADD_POST_START
     };
 };
-// when sign in success then execute
 export const addPostSuccess = (uploadImage,description) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
@@ -14,7 +12,6 @@ export const addPostSuccess = (uploadImage,description) => {
         description: description
     };
 };
-// wehen sign in fails 
 export const addPostFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -27,17 +24,17 @@ export const addPost = (uploadImage , description) => {
         uploadImage :uploadImage ,
         description:description
     }
-    let url='story/image';
+    let url='http://be113eb45e0a.ngrok.io/story/image';
     return dispatch => {
         let token=localStorage.getItem('token')
         dispatch(addPostStart());
         console.log(token)
+        console.log(postData);
         axios.post(url,postData, {
             headers: {
               'Authorization': `Bearer ${token}`,
-               'Content-Type': 'application/json;charset=UTF-8',
-              "Access-Control-Allow-Origin": "*",
-              'Access-Control-Allow-Methods':'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+              "Accept": "application/json",
+              "type": "formData"
             }
           })
         .then(res=>{

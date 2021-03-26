@@ -82,7 +82,8 @@ class SignUp extends Component{
         }
     }
     render(){
-        if(this.props.token){
+        let token = localStorage.getItem('token')
+        if(token){
             return <Redirect to="/home" />
         }
         return(
