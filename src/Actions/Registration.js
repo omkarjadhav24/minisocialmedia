@@ -38,7 +38,7 @@ export const registration = (name,dob,gender,email, password,age) => {
         age:age
     }
     // let url='http://ed56ec64fc1f.ngrok.io/user';
-    let url='http://6902c639d64e.ngrok.io/user';
+    let url='http://de08e7e9431f.ngrok.io/user';
     return dispatch => {
         dispatch(registrationStart());
         console.log(authData)

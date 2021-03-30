@@ -10,7 +10,8 @@ class Profiles extends Component{
         dateOfBirth:'',
         gender:'',
         username:'',
-        userPosts:[]
+        userPosts:[],
+        like:false
     }
 
     componentDidMount(){
@@ -26,6 +27,15 @@ class Profiles extends Component{
         })
        
     }
+
+    // post like handler
+    likeHandler=()=>{
+
+    }
+    dislikeHandler=()=>{
+        
+    }
+
     
     render(){
         let dob =null
@@ -51,8 +61,8 @@ class Profiles extends Component{
                                     </div>
                                     <div className="bg-white">
                                         <div className="d-flex flex-row fs-12">
-                                            <div className="like  cursor"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like</span></div>
-                                            <div className="like  cursor"><i class="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike</span></div>
+                                            <div className="like  cursor"  onClick={() => {this.likeHandler() }}><i class="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like</span></div>
+                                            <div className="like  cursor"  onClick={() => {this.dislikeHandler() }}><i class="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike</span></div>
 
                                             <div onClick={() => { this.coomentHandler() }} className="like  poiner "><i className="fa fa-commenting-o"></i><span className="ml-1">Comment</span></div>
                                         </div>
