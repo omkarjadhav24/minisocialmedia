@@ -56,7 +56,7 @@ class Profile extends Component{
         let profileData=null;
         profileData=this.state.userPosts.map((data,i)=>{
        return data.map((sdata)=>{
-        return <Profiles key={sdata._id} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
+        return <Profiles key={sdata._id} owner={sdata.owner} likesCount={sdata.likes.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })
         }) 
         return(

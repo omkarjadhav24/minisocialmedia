@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import {connect} from 'react-redux'
 import {showProfile} from '../../../Actions/ShowProfile'
+import axios from 'axios'
 
 
 class Profiles extends Component{
@@ -11,7 +12,9 @@ class Profiles extends Component{
         gender:'',
         username:'',
         userPosts:[],
-        like:false
+        like:true,
+        owner:this.props.owner,
+        story_id:this.props.id
     }
 
     componentDidMount(){
@@ -30,10 +33,47 @@ class Profiles extends Component{
 
     // post like handler
     likeHandler=()=>{
-
+        this.setState({like:false})
+        let   likeData={
+            story_id:this.props.id,
+            like:1
+              }
+          console.log(likeData);
+          let token = localStorage.getItem('token')
+          axios.post('http://de08e7e9431f.ngrok.io/story/like',likeData,{
+              
+              headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+            })
+          .then(res=>{
+          
+              console.log(res)
+          })
+          .catch(err=>{
+              console.log(err)
+          })
     }
     dislikeHandler=()=>{
-        
+        this.setState({like:true})
+        let   likeData={
+            story_id:this.props.id
+              }
+          console.log(likeData);
+          let token = localStorage.getItem('token')
+          axios.post('http://de08e7e9431f.ngrok.io/story/unlike',likeData,{
+              headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+            })
+          .then(res=>{
+          
+              console.log(res)
+          })
+          .catch(err=>{
+              console.log(err)
+          })
+
     }
 
     
@@ -61,15 +101,18 @@ class Profiles extends Component{
                                     </div>
                                     <div className="bg-white">
                                         <div className="d-flex flex-row fs-12">
-                                            <div className="like  cursor"  onClick={() => {this.likeHandler() }}><i class="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like</span></div>
-                                            <div className="like  cursor"  onClick={() => {this.dislikeHandler() }}><i class="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike</span></div>
+                                            {this.state.like   ?
+                                            <div className="like  cursor"  onClick={() => {this.likeHandler() }}><i className="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like | {this.props.likesCount} </span></div>
+                                                :
+                                            <div className="like  cursor"  onClick={() => {this.dislikeHandler() }}><i className="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike</span></div>
+                                            }
 
                                             <div onClick={() => { this.coomentHandler() }} className="like  poiner "><i className="fa fa-commenting-o"></i><span className="ml-1">Comment</span></div>
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="comments">
-                                        <div class="d-flex flex-row mb-2">
+                                    <div className="comments">
+                                        <div className="d-flex flex-row mb-2">
                                             <div className="d-flex flex-column ml-2"><small className="comment-text">I like this alot! thanks alot</small>
                                             </div>
                                         </div>

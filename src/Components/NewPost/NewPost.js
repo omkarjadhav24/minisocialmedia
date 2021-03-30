@@ -17,7 +17,7 @@ class NewPost extends Component {
     //image file
     imageFileHandler=(e)=>
     {
-        this.setState({image:e.target.files[0].name})
+        this.setState({image:e.target.files})
     }
     checkValidity(){ 
         // if(!(this.state.image!=""))
