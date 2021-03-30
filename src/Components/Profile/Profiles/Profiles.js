@@ -41,7 +41,7 @@ class Profiles extends Component{
                                         <div className="d-flex flex-row user-info">
                                             {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
                                             <div className="d-flex flex-column justify-content-start ml-2">
-                                                <span className="d-block font-weight-bold name">Marry Andrews</span>
+                                                <span className="d-block font-weight-bold name">{this.props.name}</span>
                                             </div>
                                         </div>
                                         <div className="mt-1">
@@ -89,11 +89,15 @@ class Profiles extends Component{
         );
     };
 }
-
+const mapStatetoProps=(state)=>{
+    return{
+            name:state.showprofile.name
+    }
+   }
 
 const mapDispatchtoProps=(dispatch)=>{
     return{
        showProfileInfo:()=>{dispatch(showProfile())} 
     }
 }
-export default connect(null,mapDispatchtoProps)(Profiles)
+export default connect(mapStatetoProps,mapDispatchtoProps)(Profiles)
