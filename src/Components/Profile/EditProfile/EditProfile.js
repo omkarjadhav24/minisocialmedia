@@ -30,6 +30,7 @@ class EditProfile extends Component{
         login:false,
         redirect:false
     }
+    // validation on input fileds
     checkValidity(){
         if( !isNaN(this.state.name))
         {
@@ -72,7 +73,7 @@ class EditProfile extends Component{
         }
        
     }
-   
+   // for update user profile
     submitHandler = (event) => {
         event.preventDefault();
         const editData={
@@ -97,12 +98,6 @@ class EditProfile extends Component{
         .catch(err=>{
             console.log(err);
         })
-
-        // if(this.checkValidity())
-        // {
-        //     this.props.editdataProfile(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password)
-        //     console.log(this.state)
-        // }
       
     }
     
@@ -164,11 +159,5 @@ const mapStatetoProps=(state)=>{
        token:state.loginauth.token
     }
    }
-// const mapDispatchtoProps=(dispatch)=>{
-//     return{
-//        editdataProfile:(name,date,gender,email,password)=>{dispatch(editProfile(name,date,gender,email,password))} 
 
-
-//     }
-// }
 export default connect(mapStatetoProps,null)(EditProfile);

@@ -19,21 +19,7 @@ class Profiles extends Component{
     }
 
 
-    componentDidMount(){
-        let token = localStorage.getItem('token')
-
-        // axios.get('http://63393b7cfaf0.ngrok.io/readcomment/'+this.props.id,{
-        //     headers: {
-        //         'Authorization': `Bearer ${token}` 
-        //       }
-        // })
-        // .then(res=>{
-        //     console.log(res)
-        // })
-        // .catch(err=>{
-        //     console.log(err)
-        // })
-    }
+    
     
     // for toggle button comment
     coomentHandler=()=>{
@@ -69,6 +55,7 @@ class Profiles extends Component{
               console.log(err)
           })
     }
+    //dislike handler 
     dislikeHandler=()=>{
         this.setState({like:true})
         let    likeData={
@@ -94,6 +81,7 @@ class Profiles extends Component{
           })
 
     }
+    // for comment
     commentHandler=()=>{
         let data={
             comment:this.state.commentInput,

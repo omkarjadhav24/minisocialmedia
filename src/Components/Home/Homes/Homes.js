@@ -38,6 +38,7 @@ class Homes extends Component{
     }
 
     render(){
+        // for displaying comments
         // let allComments = <p style={{ textAlign: 'center' }}>Something went wrong!</p>; 
         // //  fetching comments and send to Comment as CommentDiv component in props
         // allComments =this.state.posts.map( comment => {

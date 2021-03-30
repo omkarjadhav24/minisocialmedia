@@ -5,13 +5,8 @@ import Homes from '../Home/Homes/Homes'
 import {connect} from 'react-redux'
 import {HomeData} from '../../Actions/HomeData'
 import {showProfile} from '../../Actions/ShowProfile'
-
-// import {connect} from 'react-redux';
-// import {HomeData} from '../../Actions/HomeData'
-// import axios from 'axios'
 import './Home.css'
-import axios from 'axios';
-import { post } from 'jquery';
+
 class Home extends Component {
     state = {
         posts: []
@@ -21,29 +16,12 @@ class Home extends Component {
          // showing profie info like  name , dob,gender
          this.props.showProfileInfo();
     }
+    // clearing token
     logout=()=>{
         alert("hi")
         localStorage.removeItem('token');
     }
-    // componentDidMount(){
-    //     // this.props.homeData(); //fetching all friend  users post
-        
-    //     axios.get('https://jsonplaceholder.typicode.com/photos')
-    //     .then(res=>{
-    //         // console.log(res.data);
-    //         const posts = res.data.slice( 0, 4 );
-    //         console.log(res.data.id);
-    //         // permittedValues = posts.map(value => value.id);
-    //         const updatedPosts = posts.map( post => {
-    //                 return {
-    //                     ...post
-    //                 }
-    //             } );
-    //             this.setState( { posts: updatedPosts } );
-    //     }).catch(err=>{
-    //         console.log(err);
-    //     }) 
-    // }
+    
 
     render() {
         const dataOfHome =this.props.homePosts.slice( 0, 4 );

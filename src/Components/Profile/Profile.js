@@ -43,7 +43,7 @@ class Profile extends Component{
             this.setState({
                 tFriends:res.data.length
             })
-            console.log(res)
+            // console.log(res)
         })
         .catch(err=>{
             console.log(err);
@@ -52,9 +52,9 @@ class Profile extends Component{
     }
 
     render(){
-
+// displaying all user post
         let profileData=null;
-        profileData=this.state.userPosts.map((data,i)=>{
+        profileData=this.state.userPosts.map((data)=>{
        return data.map((sdata)=>{
         return <Profiles key={sdata._id} owner={sdata.owner}  commentsCount={sdata.comments.length} likesCount={sdata.likes.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })

@@ -41,7 +41,6 @@ class NewPost extends Component {
     }
    
     componentDidMount () {
-        // If unauth => this.props.history.replace('/posts');
         console.log( this.props );
     }
 
@@ -57,24 +56,21 @@ class NewPost extends Component {
         {
             console.log(data)
 
-            var imgData = new FormData();
-            var imagedata = document.querySelector('input[type="file"]').files[0];
-            imgData.append("inputname", imagedata);
-            let poData=imgData.get('inputname')
+            // for image 
+
+            // var imgData = new FormData();
+            // var imagedata = document.querySelector('input[type="file"]').files[0];
+            // imgData.append("inputname", imagedata);
+            // let poData=imgData.get('inputname')
 
             this.props.addPost(this.state.image,this.state.description)
         }
        
     }
     render () {
-        // let redirect = null;
-        // if (this.state.submitted) {
-        //     redirect = <Redirect to="/posts" />;
-        // }
        
         return (
             <div className={classes.NewPost} style={{ backgroundImage: `url(${log2})` }} >
-                {/* {redirect} */}
                 <form encType="multipart/form-data" action="">
                 <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">

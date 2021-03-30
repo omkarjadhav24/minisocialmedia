@@ -1,10 +1,12 @@
 import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
+//  edit start
 export const editProfileStart = () => {
     return {
         type: actionTypes.EDIT_PROFILE_START
     };
 };
+// when edit success
 export const editProfileSuccess = (name,dob,gender,email,password) => {
     return {
         type: actionTypes.EDIT_PROFILE_SUCCESS,
@@ -15,12 +17,14 @@ export const editProfileSuccess = (name,dob,gender,email,password) => {
         password:password
     };
 };
+// edit api fail
 export const editProfileFail = (error) => {
     return {
         type: actionTypes.SHOW_PROFILE_FAIL,
         error: error
     };
 };
+// edit profile api call
 export const editProfile = (name,date,gender,email,password) => {
     const editData={
         name :name ,

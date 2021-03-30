@@ -8,6 +8,7 @@ class Requests extends Component{
       senderId:''
   }
     componentDidMount(){
+      // for showing user all request
         let token = localStorage.getItem('token')
         axios.get('http://63393b7cfaf0.ngrok.io/my-request',{
             headers: {
@@ -23,6 +24,7 @@ class Requests extends Component{
             console.log(err)
         })
     }
+    // accept frined
     acceptFriendHandler=(id)=>{
       // alert(id)
       
@@ -47,6 +49,7 @@ class Requests extends Component{
           console.log(err)
       })
     }
+    // reject friend
     rejectFriendHandler=(id)=>{
       // alert(id)
       let   friendData={
@@ -70,26 +73,13 @@ class Requests extends Component{
     }
     render()
     {
+      // for displaying user request
       let requestData=null;
         requestData=this.state.myRequest.map((data,i)=>{
        return data.map((sdata)=>{
         return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata.sender_id)}} reject={()=>{this.rejectFriendHandler(sdata.sender_id)}} name={sdata.sender_id.name} id={sdata._id}/>
       })
         }) 
-
-
-      //   let requestData=null;
-      //   requestData=this.state.myRequest.map((data,i)=>{
-      //  return data.map((sdata)=>{
-      //   return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata.receiver_id)}} reject={()=>{this.rejectFriendHandler(sdata.receiver_id)}} name={sdata.sender_id.name} id={sdata._id}/>
-      // })
-      //   }) 
-
-      // return <Request key={data[i]._id} name={data[i].sender_id.name} id={data[i]._id}/>
-      // console.log(data[0].sender_id)
-      // return data.map((sdata)=>{
-      //   return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata.receiver_id)}} reject={()=>{this.rejectFriendHandler(sdata.receiver_id)}} name={sdata.sender_id.name} id={sdata._id}/>
-      // })
         return(
        
         <div class="row">
