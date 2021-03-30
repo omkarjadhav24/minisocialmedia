@@ -1,7 +1,6 @@
 import React from 'react'
 import { Component } from 'react';
 import {connect} from 'react-redux'
-import {showProfile} from '../../../Actions/ShowProfile'
 import axios from 'axios'
 
 
@@ -14,13 +13,11 @@ class Profiles extends Component{
         userPosts:[],
         like:true,
         owner:this.props.owner,
-        story_id:this.props.id
+        story_id:this.props.id,
+        totalLikes:this.props.likesCount
     }
 
-    componentDidMount(){
-        // showing profie info like  name , dob,gender
-        this.props.showProfileInfo();
-    }
+    
     
     // for toggle button comment
     coomentHandler=()=>{
@@ -40,7 +37,7 @@ class Profiles extends Component{
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://de08e7e9431f.ngrok.io/story/like',likeData,{
+          axios.post('http://2b381dfbd382.ngrok.io/story/like',likeData,{
               
               headers: {
                 'Authorization': `Bearer ${token}` 
@@ -49,6 +46,10 @@ class Profiles extends Component{
           .then(res=>{
           
               console.log(res)
+              this.setState({
+                totalLikes: this.state.totalLikes + 1
+              })
+              
           })
           .catch(err=>{
               console.log(err)
@@ -56,12 +57,13 @@ class Profiles extends Component{
     }
     dislikeHandler=()=>{
         this.setState({like:true})
-        let   likeData={
-            story_id:this.props.id
+        let    likeData={
+            story_id:this.props.id,
+            like:0
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://de08e7e9431f.ngrok.io/story/unlike',likeData,{
+          axios.post('http://2b381dfbd382.ngrok.io/story/unlike',likeData,{
               headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -69,6 +71,9 @@ class Profiles extends Component{
           .then(res=>{
           
               console.log(res)
+              this.setState({
+                totalLikes: this.state.totalLikes - 1
+              })
           })
           .catch(err=>{
               console.log(err)
@@ -102,9 +107,9 @@ class Profiles extends Component{
                                     <div className="bg-white">
                                         <div className="d-flex flex-row fs-12">
                                             {this.state.like   ?
-                                            <div className="like  cursor"  onClick={() => {this.likeHandler() }}><i className="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like | {this.props.likesCount} </span></div>
+                                            <div className="like  cursor"  onClick={() => {this.likeHandler() }}><i className="fa fa-thumbs-up" aria-hidden="true"></i><span className="ml-1">Like | {this.state.totalLikes} </span></div>
                                                 :
-                                            <div className="like  cursor"  onClick={() => {this.dislikeHandler() }}><i className="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike</span></div>
+                                            <div className="like  cursor"  onClick={() => {this.dislikeHandler() }}><i className="fa fa-thumbs-down" aria-hidden="true"></i><span className="ml-1">DisLike | {this.state.totalLikes}</span></div>
                                             }
 
                                             <div onClick={() => { this.coomentHandler() }} className="like  poiner "><i className="fa fa-commenting-o"></i><span className="ml-1">Comment</span></div>
@@ -113,7 +118,7 @@ class Profiles extends Component{
                                     <hr />
                                     <div className="comments">
                                         <div className="d-flex flex-row mb-2">
-                                            <div className="d-flex flex-column ml-2"><small className="comment-text">I like this alot! thanks alot</small>
+                                            <div className="d-flex flex-column ml-2"><small className="comment-text">{this.state.owner , this.props.id}</small>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row mb-2"> 
@@ -150,9 +155,9 @@ const mapStatetoProps=(state)=>{
     }
    }
 
-const mapDispatchtoProps=(dispatch)=>{
-    return{
-       showProfileInfo:()=>{dispatch(showProfile())} 
-    }
-}
-export default connect(mapStatetoProps,mapDispatchtoProps)(Profiles)
+// const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//        showProfileInfo:()=>{dispatch(showProfile())} 
+//     }
+// }
+export default connect(mapStatetoProps,null)(Profiles)

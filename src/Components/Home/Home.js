@@ -4,6 +4,8 @@ import SideBar from '../Ui/Sidebar/Sidebar'
 import Homes from '../Home/Homes/Homes'
 import {connect} from 'react-redux'
 import {HomeData} from '../../Actions/HomeData'
+import {showProfile} from '../../Actions/ShowProfile'
+
 // import {connect} from 'react-redux';
 // import {HomeData} from '../../Actions/HomeData'
 // import axios from 'axios'
@@ -16,6 +18,8 @@ class Home extends Component {
     }
     componentDidMount(){
         this.props.homeCompodata()
+         // showing profie info like  name , dob,gender
+         this.props.showProfileInfo();
     }
     logout=()=>{
         alert("hi")
@@ -91,7 +95,9 @@ const mapStatetoProps=(state)=>{
    const mapDispatchtoProps=(dispatch)=>{
     return{
         // call function which is in homedata action for executing axios
-       homeCompodata:()=>{dispatch(HomeData())}
+       homeCompodata:()=>{dispatch(HomeData())},
+       showProfileInfo:()=>{dispatch(showProfile())} 
+
     }
 }
 export default connect(mapStatetoProps,mapDispatchtoProps)(Home);
