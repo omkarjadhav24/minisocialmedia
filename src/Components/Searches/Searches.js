@@ -9,7 +9,7 @@ class Searches extends Component{
     }
     componentDidMount(){
          let token=localStorage.getItem('token')
-        axios.get('http://c0998ec2cdd0.ngrok.io/user/'+this.props.match.params.name,{    
+        axios.get('http://6902c639d64e.ngrok.io/user/'+this.props.match.params.name,{    
             headers: {
               'Authorization': `Bearer ${token}` ,
               'Content-Type': 'application/json;charset=UTF-8',
@@ -32,7 +32,7 @@ class Searches extends Component{
             id:this.state.addFriendId
         }
         let token = localStorage.getItem('token')
-        axios.post('http://c0998ec2cdd0.ngrok.io/send-request',friendData,{
+        axios.post('http://6902c639d64e.ngrok.io/send-request',friendData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -50,7 +50,7 @@ class Searches extends Component{
             id:this.state.addFriendId
         }
         let token = localStorage.getItem('token')
-        axios.post('http://c0998ec2cdd0.ngrok.io/cancel-request',friendData,{
+        axios.post('http://6902c639d64e.ngrok.io/cancel-request',friendData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
