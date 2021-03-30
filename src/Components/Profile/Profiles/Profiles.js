@@ -14,7 +14,8 @@ class Profiles extends Component{
         like:true,
         owner:this.props.owner,
         story_id:this.props.id,
-        totalLikes:this.props.likesCount
+        totalLikes:this.props.likesCount,
+        commentInput:''
     }
 
     
@@ -28,6 +29,18 @@ class Profiles extends Component{
        
     }
 
+    // for reading coomments
+    readCommenthandler=()=>{
+        let token = localStorage.getItem('token')
+
+        axios.get('')
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
     // post like handler
     likeHandler=()=>{
         this.setState({like:false})
@@ -79,6 +92,25 @@ class Profiles extends Component{
               console.log(err)
           })
 
+    }
+    commentHandler=()=>{
+        let data={
+            comment:this.state.commentInput,
+            story_id:this.props.id
+        }
+        let token = localStorage.getItem('token')
+        axios.post('http://2b381dfbd382.ngrok.io/story/comment',data,{
+            
+            headers: {
+              'Authorization': `Bearer ${token}` 
+            }
+          })
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     
@@ -132,11 +164,11 @@ class Profiles extends Component{
                                         {this.state.comment ?
                                             <div>
                                                 <div className="d-flex flex-row align-items-start">
-                                                    <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" />
-                                                    <textarea className="form-control ml-1 shadow-none textarea"></textarea>
+                                                    {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
+                                                    <textarea onChange={( event ) => this.setState( { commentInput: event.target.value } )} className="form-control ml-1 shadow-none textarea"></textarea>
                                                 </div>
                                                 <div className="mt-2 text-right">
-                                                    <button className="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
+                                                    <button onClick={this.commentHandler} className="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
                                                     <button className="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
                                                 </div>
                                             </div>
