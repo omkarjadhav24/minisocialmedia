@@ -18,7 +18,7 @@ class Profile extends Component{
     componentDidMount(){
         let token=localStorage.getItem('token')
           // for showing all user posts
-          axios.get('http://2b381dfbd382.ngrok.io/my-story',{
+          axios.get('http://63393b7cfaf0.ngrok.io/my-story',{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -33,7 +33,7 @@ class Profile extends Component{
             console.log(err);
         })
 
-        axios.get('http://2b381dfbd382.ngrok.io/my-frinds',{
+        axios.get('http://63393b7cfaf0.ngrok.io/my-frinds',{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -56,7 +56,7 @@ class Profile extends Component{
         let profileData=null;
         profileData=this.state.userPosts.map((data,i)=>{
        return data.map((sdata)=>{
-        return <Profiles key={sdata._id} owner={sdata.owner} likesCount={sdata.likes.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
+        return <Profiles key={sdata._id} owner={sdata.owner}  commentsCount={sdata.comments.length} likesCount={sdata.likes.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })
         }) 
         return(
