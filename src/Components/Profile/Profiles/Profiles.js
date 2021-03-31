@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios'
-
+import {showProfile} from '../../../Actions/ShowProfile'
 
 class Profiles extends Component{
     state={
@@ -18,7 +18,10 @@ class Profiles extends Component{
         commentInput:''
     }
 
-
+    componentDidMount(){
+         // showing profie info like  name , dob,gender
+         this.props.showProfileInfo();
+    }
     
     
     // for toggle button comment
@@ -38,7 +41,7 @@ class Profiles extends Component{
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://63393b7cfaf0.ngrok.io/story/like',likeData,{
+          axios.post('http://bac3ac58be8b.ngrok.io/story/like',likeData,{
               
               headers: {
                 'Authorization': `Bearer ${token}` 
@@ -64,7 +67,7 @@ class Profiles extends Component{
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://63393b7cfaf0.ngrok.io/story/unlike',likeData,{
+          axios.post('http://bac3ac58be8b.ngrok.io/story/unlike',likeData,{
               headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -88,7 +91,7 @@ class Profiles extends Component{
             story_id:this.props.id
         }
         let token = localStorage.getItem('token')
-        axios.post('http://63393b7cfaf0.ngrok.io/story/comment',data,{
+        axios.post('http://bac3ac58be8b.ngrok.io/story/comment',data,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -173,9 +176,9 @@ const mapStatetoProps=(state)=>{
     }
    }
 
-// const mapDispatchtoProps=(dispatch)=>{
-//     return{
-//        showProfileInfo:()=>{dispatch(showProfile())} 
-//     }
-// }
-export default connect(mapStatetoProps,null)(Profiles)
+const mapDispatchtoProps=(dispatch)=>{
+    return{
+       showProfileInfo:()=>{dispatch(showProfile())} 
+    }
+}
+export default connect(mapStatetoProps,mapDispatchtoProps)(Profiles)
