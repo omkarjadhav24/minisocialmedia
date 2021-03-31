@@ -87,7 +87,6 @@ class Homes extends Component{
                                         {this.state.comment ?
                                             <div>
                                                 <div className="d-flex flex-row align-items-start">
-                                                    <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" />
                                                     <textarea className="form-control ml-1 shadow-none textarea"></textarea>
                                                 </div>
                                                 <div className="mt-2 text-right">

@@ -31,7 +31,6 @@ export const showProfile = () => {
    let token = localStorage.getItem('token')
     return dispatch => {
         dispatch(showProfileStart());
-       console.log(token)
         axios.get('http://bac3ac58be8b.ngrok.io/user/me',{
             
             headers: {
