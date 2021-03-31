@@ -28,7 +28,7 @@ export const auth = (email, password) => {
         email:email,
         password:password
     }
-    let url='http://c0c58a590c5a.ngrok.io/user/login';
+    let url='http://357e99202818.ngrok.io/user/login';
     return dispatch => {
         dispatch(authStart());
         console.log(authData)

@@ -27,7 +27,7 @@ export const addPost = (uploadImage , description) => {
         uploadImage :uploadImage ,
         description:description
     }
-    let url='http://c0c58a590c5a.ngrok.io/story/image';
+    let url='http://357e99202818.ngrok.io/story/image';
     return dispatch => {
         let token=localStorage.getItem('token') // token fetch from localstorage
         dispatch(addPostStart());

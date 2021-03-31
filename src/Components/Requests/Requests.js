@@ -10,7 +10,7 @@ class Requests extends Component{
     componentDidMount(){
       // for showing user all request
         let token = localStorage.getItem('token')
-        axios.get('http://c0c58a590c5a.ngrok.io/my-request',{
+        axios.get('http://357e99202818.ngrok.io/my-request',{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -35,7 +35,7 @@ class Requests extends Component{
       console.log(friendData);
 
       let token = localStorage.getItem('token')
-      axios.post('http://c0c58a590c5a.ngrok.io/request-status',friendData,{
+      axios.post('http://357e99202818.ngrok.io/request-status',friendData,{
           
           headers: {
             'Authorization': `Bearer ${token}` 
@@ -58,7 +58,7 @@ class Requests extends Component{
           }
           
       let token = localStorage.getItem('token')
-      axios.post('http://c0c58a590c5a.ngrok.io/request-status',friendData,{
+      axios.post('http://357e99202818.ngrok.io/request-status',friendData,{
           
           headers: {
             'Authorization': `Bearer ${token}` 
