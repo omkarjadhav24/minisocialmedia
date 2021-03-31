@@ -22,6 +22,23 @@ class Profiles extends Component{
     componentDidMount(){
          // showing profie info like  name , dob,gender
          this.props.showProfileInfo();
+        //  let token = localStorage.getItem('token')
+
+        //  axios.get('http://c0c58a590c5a.ngrok.io/readcomment',{
+        //     params: {
+        //         story_id: this.props.id
+        //     }
+        //   },{
+        //      headers: {
+        //          'Authorization': `Bearer ${token}` 
+        //        }
+        //  })
+        //  .then(res=>{
+        //      console.log(res)
+        //  })
+        //  .catch(err=>{
+        //      console.log(err)
+        //  })
     }
     
     
