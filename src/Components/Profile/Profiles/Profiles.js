@@ -7,6 +7,7 @@ import {showProfile} from '../../../Actions/ShowProfile'
 class Profiles extends Component{
     state={
         name:'',
+        comment: false,
         dateOfBirth:'',
         gender:'',
         username:'',
@@ -31,6 +32,11 @@ class Profiles extends Component{
             comment:!prevComment
         })
        
+    }
+    cancelHandler=()=>{
+        this.setState({
+            comment:false
+        })
     }
     // post like handler
     likeHandler=()=>{
@@ -62,8 +68,8 @@ class Profiles extends Component{
     dislikeHandler=()=>{
         this.setState({like:true})
         let    likeData={
-            story_id:this.props.id,
-            like:0
+            story_id:this.props.id
+            
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
@@ -158,7 +164,7 @@ class Profiles extends Component{
         </div>
         <div className="mt-2 text-right">
             <button onClick={this.commentHandler} className="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
-            <button className="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+            <button onClick={this.cancelHandler} className="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
         </div>
     </div>
     : null}

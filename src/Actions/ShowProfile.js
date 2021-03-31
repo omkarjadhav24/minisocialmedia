@@ -39,7 +39,7 @@ export const showProfile = () => {
             }
           })
         .then(res=>{
-            console.log(res)
+            // console.log(res)
         dispatch(showProfileSuccess(res.data.name,res.data.gender,res.data.dob,res.data._id,res.data.email,res.data.age));
 
         })
