@@ -36,6 +36,11 @@ class Homes extends Component{
             comment: !prevComment
         })
     }
+    cancelHandler=()=>{
+        this.setState({
+            comment:false
+        })
+    }
 
     render(){
         // for displaying comments
@@ -87,7 +92,7 @@ class Homes extends Component{
                                                 </div>
                                                 <div className="mt-2 text-right">
                                                     <button className="btn btn-primary btn-sm shadow-none" type="button">Post comment</button>
-                                                    <button className="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                                                    <button onClick={this.cancelHandler} className="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
                                                 </div>
                                             </div>
                                             : null}
