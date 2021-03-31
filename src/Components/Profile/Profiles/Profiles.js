@@ -3,6 +3,8 @@ import { Component } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {showProfile} from '../../../Actions/ShowProfile'
+import CommentDiv from '../../Home/Homes/Comments/Comments';
+
 
 class Profiles extends Component{
     state={
@@ -12,6 +14,7 @@ class Profiles extends Component{
         gender:'',
         username:'',
         userPosts:[],
+        allComments:[],
         like:true,
         owner:this.props.owner,
         story_id:this.props.id,
@@ -20,14 +23,15 @@ class Profiles extends Component{
     }
 
     componentDidMount(){
+
          // showing profie info like  name , dob,gender
-         this.props.showProfileInfo();
-        //  let token = localStorage.getItem('token')
-        axios.get('http://357e99202818.ngrok.io/story/readcomment',{
-            params: {
-                story_id: this.props.id
-            }
-          },{
+
+        this.props.showProfileInfo();
+
+        let commentData={
+            story_id: this.props.id
+        }
+        axios.post('http://a090e8615105.ngrok.io/story/readcomment',commentData,{
              headers: {
                 //  'Authorization': `Bearer ${token}` 
                 'Accept': 'application/json',
@@ -35,11 +39,15 @@ class Profiles extends Component{
                }
          })
          .then(res=>{
-             console.log(res.data)
+            // console.log(res.data)
+            this.setState({
+                allComments:[res.data]
+            })
          })
          .catch(err=>{
              console.log(err)
-         })      
+         })    
+         
     }
     
     
@@ -65,7 +73,7 @@ class Profiles extends Component{
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://c0c58a590c5a.ngrok.io/story/like',likeData,{
+          axios.post('http://a090e8615105.ngrok.io/story/like',likeData,{
               
               headers: {
                 'Authorization': `Bearer ${token}` 
@@ -91,7 +99,7 @@ class Profiles extends Component{
               }
           console.log(likeData);
           let token = localStorage.getItem('token')
-          axios.post('http://c0c58a590c5a.ngrok.io/story/unlike',likeData,{
+          axios.post('http://a090e8615105.ngrok.io/story/unlike',likeData,{
               headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -115,7 +123,7 @@ class Profiles extends Component{
             story_id:this.props.id
         }
         let token = localStorage.getItem('token')
-        axios.post('http://c0c58a590c5a.ngrok.io/story/comment',data,{
+        axios.post('http://a090e8615105.ngrok.io/story/comment',data,{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -131,8 +139,16 @@ class Profiles extends Component{
 
     
     render(){
+       
         let dob =null
         dob=new Date(this.props.dob);
+       let cmtPost=null;
+        cmtPost=this.state.allComments.map((data)=>{
+            return data.map((cdata)=>{
+                return <CommentDiv key={cdata._id}  comment={cdata.comment}/>
+
+            })
+        })
         return(
             <>
 <div className="box mt-3 bg-white">
@@ -140,7 +156,6 @@ class Profiles extends Component{
 <div className="d-flex flex-column comment-section">
 <div className="bg-white ">
 <div className="d-flex flex-row user-info">
-    {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
     <div className="d-flex flex-column justify-content-start ml-2">
         <span className="d-block font-weight-bold name">{this.props.name}</span>
     </div>
@@ -162,22 +177,13 @@ class Profiles extends Component{
 </div>
 <hr />
 <div className="comments">
-<div className="d-flex flex-row mb-2">
-    <div className="d-flex flex-column ml-2"><small className="comment-text">Hello This is just Demo</small>
-    </div>
-</div>
-<div className="d-flex flex-row mb-2"> 
-    <div className="d-flex flex-column ml-2"><small className="comment-text">Thanks for sharing!</small>
-    </div>
-</div>
-
+{cmtPost}
 </div>
 
 <div className="bg-light ">
 {this.state.comment ?
     <div>
         <div className="d-flex flex-row align-items-start">
-            {/* <img className="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40" /> */}
             <textarea onChange={( event ) => this.setState( { commentInput: event.target.value } )} className="form-control ml-1 shadow-none textarea"></textarea>
         </div>
         <div className="mt-2 text-right">

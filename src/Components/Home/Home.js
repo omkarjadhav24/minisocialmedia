@@ -12,9 +12,9 @@ class Home extends Component {
         posts: []
     }
     componentDidMount(){
-        this.props.homeCompodata()
+        // this.props.homeCompodata()
          // showing profie info like  name , dob,gender
-        //  this.props.showProfileInfo();
+         this.props.showProfileInfo();
     }
     // clearing token
     logout=()=>{
@@ -73,8 +73,8 @@ const mapStatetoProps=(state)=>{
    const mapDispatchtoProps=(dispatch)=>{
     return{
         // call function which is in homedata action for executing axios
-       homeCompodata:()=>{dispatch(HomeData())}
-    //    showProfileInfo:()=>{dispatch(showProfile())} 
+       homeCompodata:()=>{dispatch(HomeData())},
+       showProfileInfo:()=>{dispatch(showProfile())} 
 
     }
 }

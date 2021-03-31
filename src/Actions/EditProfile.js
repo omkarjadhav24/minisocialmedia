@@ -37,7 +37,7 @@ export const editProfile = (name,date,gender,email,password) => {
         dispatch(editProfileStart());
         let token = localStorage.getItem('token')
         console.log(token)
-        axios.patch('http://357e99202818.ngrok.io/user/update',editData,{
+        axios.patch('http://a090e8615105.ngrok.io/user/update',editData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 

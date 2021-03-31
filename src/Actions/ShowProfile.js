@@ -31,14 +31,14 @@ export const showProfile = () => {
    let token = localStorage.getItem('token')
     return dispatch => {
         dispatch(showProfileStart());
-        axios.get('http://357e99202818.ngrok.io/user/me',{
+        axios.get('http://a090e8615105.ngrok.io/user/me',{
             
             headers: {
               'Authorization': `Bearer ${token}` 
             }
           })
         .then(res=>{
-            // console.log(res)
+            console.log(res)
         dispatch(showProfileSuccess(res.data.name,res.data.gender,res.data.dob,res.data._id,res.data.email,res.data.age));
 
         })
