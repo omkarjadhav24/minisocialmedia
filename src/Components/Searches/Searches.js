@@ -17,7 +17,7 @@ const Searches =(props)=>{
           })
         .then(res=>{
             console.log(res.data._id)
-            setUsers([res.data]),
+            setUsers([res.data])
             setAddFriendId(res.data._id)
         })
         .catch(err=>{
@@ -66,7 +66,7 @@ const addFriendHandler=()=>{
             return <Search key={data._id } cancelfriend={()=>cancelFriendhandler()} addfriend={()=>addFriendHandler()} name={data.name} id={data._id}/>
         })
        
-        return(
+        return (
             <div class="row">
                 <div class="sidebar col-sm bg-secondary">
                 </div>

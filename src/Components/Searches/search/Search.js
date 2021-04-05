@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import './Search.css'
 const Search =(props)=>{
-    state={
-        addfriend:false
-    }
 
     const [addfriend,setAddfriend]=useState(false)
    
-    friendRequestHandler=()=>{
+   const  friendRequestHandler=()=>{
         let prevState=null;
         prevState=addfriend
         setAddfriend(!prevState)
     }
-        return(
-
+        return (
         <div className="mt-2 box bg-white">
             <div className="Search" >
                <p id="name">{this.props.name}</p>
