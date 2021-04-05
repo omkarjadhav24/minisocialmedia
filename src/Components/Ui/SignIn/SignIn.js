@@ -6,11 +6,31 @@ import {signInPage,signUpPage} from '../../../Actions/SignIn'
 import {auth} from '../../../Actions/Auth'
 import {connect} from 'react-redux'
 import loginImage from '../../../assets/log3.jpg'
+import * as  actionType from '../../../Actions/ActionType'
 import axios from 'axios'
 const initialstate={
-    
+    token:'',
+    error:'',
+}
+const reducer =(state,action)=>{
+switch(action.type)
+{
+    case actionType.AUTH_SUCCESS:
+        return{
+            ...state,
+            token:action.token
+        }
+    case actionType.AUTH_FAIL:
+        return{
+            ...state,
+            error:action.error
+        }
+    default:
+        return true;
+}
 }
 const SignIn=(props)=>{
+    const [state,dispatch]=useReducer(reducer,initialstate)
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [passworError,setPassworError]=useState('')
@@ -36,7 +56,21 @@ const SignIn=(props)=>{
         
         if(checkValidity())
         {
-            props.loginauth(email,password)
+            // props.loginauth(email,password)
+            const authData={
+                email:email,
+                password:password
+            }
+            let url='user/login';
+            axios.post(url,authData)
+            .then(res=>{
+                console.log(res);
+                localStorage.setItem('token',res.data.token ) // token stored in locastorage
+                dispatch({type:actionType.AUTH_SUCCESS,token:res.data.token});
+            }).catch(err=>{
+                dispatch({type:actionType.AUTH_FAIL,error:err.response.data.error});
+    
+            })
         }
     }
  
@@ -71,10 +105,8 @@ const mapStatetoProps=(state)=>{
    const mapDispatchtoProps=(dispatch)=>{
     return{
        signIn:()=>{dispatch(signInPage())} ,
-       signUp:()=>{dispatch(signUpPage())} ,
-       loginauth:(email,password)=>{dispatch(auth(email,password))} 
-
-
+       signUp:()=>{dispatch(signUpPage())} 
+    //    loginauth:(email,password)=>{dispatch(auth(email,password))} 
     }
 }
 export default connect(mapStatetoProps,mapDispatchtoProps)(SignIn);
