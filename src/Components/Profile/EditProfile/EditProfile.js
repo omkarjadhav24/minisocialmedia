@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Component } from 'react';
 import classes from './EditProfile.module.css'
 import  Button from '../../Ui/Button/Button'
@@ -9,63 +9,46 @@ import axios from 'axios';
 import moment from 'moment'
 import {Redirect } from 'react-router-dom';
 
-class EditProfile extends Component{
-  
-    componentDidMount(){
-        console.log(this.props);
-    }
-    state={
-        name:this.props.name,
-        nameError:'',
-        age:this.props.age,
-        ageError:'',
-        date:this.props.dob,
-        dateError:'',
-        gender:this.props.gender,
-        genderError:'',
-        email:this.props.email,
-        emailError:'',
-        password:'',
-        passworError:'',
-        login:false,
-        redirect:false
-    }
-    checkValidity(){
-        if( !isNaN(this.state.name))
+const EditProfile =(props)=>{
+
+    const [name,setName]=useState(props.name);
+    const [nameError,setNameError]=useState('');
+    const [age,setAge]=useState(props.age);
+    const [ageError,setAgeError]=useState('')
+    const [date,setDate]=useState(props.dob)
+    const [dateError,setDateError]=useState('');
+    const [gender,setGender]=useState(props.gender);
+    const [genderError,setGenderError]=useState('')
+    const [email,setEmail]=useState(props.email);
+    const [emailError,setEmailError]=useState('');
+    const [password,setPassword]=useState('');
+    const [passworError,setPassworError]=useState('');
+    const [login,setLogin]=useState(false);
+    const [redirect,setRedirect]=useState(false);
+    const checkValidity=()=>{
+        if( !isNaN(name))
         {
-            this.setState({
-                nameError:'Name contains only chars '
-            });
+            setNameError('Name contains only chars')
         }
-        else if(isNaN(this.state.age))
+        else if(isNaN(age))
         {
-            this.setState({
-                ageError:'Age in Number'
-            });
+            setAgeError('Age in Number')
         }
-        else if(this.state.date=="")
+        else if(date=="")
         {
-            this.setState({
-                dateError:'Date Is Empty'
-            });
+            setDateError('Date Is Empty')
         }
-        else if(this.state.gender=="")
+        else if(gender=="")
         {
-            this.setState({
-                genderError:'Gender Is Empty'
-            });
+            setGenderError('Gender Is Empty')
         }
-        else if(this.state.email=="")
+        else if(email=="")
         {
-            this.setState({
-                emailError:'Email Is Empty'
-            });
+            setEmailError('Email Is Empty')
         }
-        else if(!(this.state.password.length>=5))
+        else if(!(password.length>=5))
         {
-            this.setState({
-                passworError:'Enter Password More than 5 char.'
-            })
+            setPassworError('Enter Password More than 5 char.')
         }
         else{
             return true;
@@ -73,15 +56,15 @@ class EditProfile extends Component{
        
     }
    
-    submitHandler = (event) => {
+   const  submitHandler = (event) => {
         event.preventDefault();
         const editData={
-            name :this.state.name ,
-            dob:this.state.date,
-            gender:this.state.gender,
-            email:this.state.email,
-            password:this.state.password,
-            age:this.state.age
+            name :name ,
+            dob:date,
+            gender:gender,
+            email:email,
+            password:password,
+            age:age
         }
         let token = localStorage.getItem('token')
         console.log(editData)
@@ -92,13 +75,13 @@ class EditProfile extends Component{
           })
         .then(res=>{
             console.log(res)
-            this.setState({redirect:true})
+            setRedirect(true)
         })
         .catch(err=>{
             console.log(err);
         })
 
-        // if(this.checkValidity())
+        // if(checkValidity())
         // {
         //     this.props.editdataProfile(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password)
         //     console.log(this.state)
@@ -106,53 +89,51 @@ class EditProfile extends Component{
       
     }
     
-    render(){
-        if(this.state.redirect){
+        if(redirect){
             return <Redirect to="/profile" />
         }
         return(
             <div className={classes.SignUp} style={{ backgroundImage: `url(${background})` }} >
-                <form onSubmit={this.submitHandler}>
+                <form onSubmit={(event)=>submitHandler(event)}>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Name</label>
-                    <input className="form-control-sm" type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control"  placeholder="Enter your Name"/>
-                    <span className=" font-weight-bold text-danger font-italic">{this.state.nameError}</span>
+                    <input className="form-control-sm" type="text" value={name}  onChange={( event ) => setName(event.target.value)} className="form-control"  placeholder="Enter your Name"/>
+                    <span className=" font-weight-bold text-danger font-italic">{nameError}</span>
                     </div>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Age</label>
-                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm"   placeholder="Enter your Age"/>
-                    <span className="font-weight-bold text-danger font-italic">{this.state.ageError}</span>
+                    <input type="text" value={age}  onChange={( event ) => setAge(event.target.value)} className="form-control form-control-sm"   placeholder="Enter your Age"/>
+                    <span className="font-weight-bold text-danger font-italic">{ageError}</span>
                     </div>
                     <div className="form-group ">
                     <label className="font-weight-bold">Date of Birth</label>
-                    <input className="form-control" value={moment.utc(this.state.date).format('DD/MM/YYYY')}  onChange={( event ) => this.setState( { date: event.target.value } )} type="date"  />
-                    <span className=" font-weight-bold text-danger font-italic" >{this.state.dateError}</span>
+                    <input className="form-control" value={moment.utc(date).format('DD/MM/YYYY')}  onChange={( event ) => setDate(event.target.value)} type="date"  />
+                    <span className=" font-weight-bold text-danger font-italic" >{dateError}</span>
                     </div>
                     <label className="font-weight-bold">Gender</label><br/>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio"   value="Male" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
+                    <input className="form-check-input" type="radio"   value="Male" name="inlineRadioOptions"    onChange={( event ) => setGender(event.target.value)}/>
                     <label className="form-check-label" >Male</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio"   value="FeMale" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
+                    <input className="form-check-input" type="radio"   value="FeMale" name="inlineRadioOptions"    onChange={( event ) => setGender(event.target.value)}/>
                     <label className="form-check-label" >FeMale</label><br/><br/>
                     </div>
-                    <p className="font-weight-bold text-danger font-italic"> {this.state.genderError}</p>
+                    <p className="font-weight-bold text-danger font-italic"> {genderError}</p>
                     <div className="form-group" >
                     <label  className="font-weight-bold" >Email address</label>
-                    <input type="email" value={this.state.email} onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control"   placeholder="Enter email"/>
-                    <span className="font-weight-bold text-danger font-italic"> {this.state.emailError}</span>
+                    <input type="email" value={email} onChange={( event ) => setEmail(event.target.value)} className="form-control"   placeholder="Enter email"/>
+                    <span className="font-weight-bold text-danger font-italic"> {emailError}</span>
                     </div>
                     <div className="form-group">
                     <label className="font-weight-bold" >Password</label>
-                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control"  placeholder="Password"/>
-                    <span className=" font-weight-bold text-danger font-italic">{ this.state.passworError}</span>
+                    <input type="password" value={password}  onChange={( event ) => setPassword(event.target.value)} className="form-control"  placeholder="Password"/>
+                    <span className=" font-weight-bold text-danger font-italic">{ passworError}</span>
                     <button className="btn btn-primary">SAVE</button>
                     </div>
                 </form>
             </div>
         );
-    };
 }
 const mapStatetoProps=(state)=>{
     return{
