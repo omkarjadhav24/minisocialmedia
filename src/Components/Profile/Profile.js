@@ -17,8 +17,7 @@ class Profile extends Component{
 
     componentDidMount(){
         let token=localStorage.getItem('token')
-          // for showing all user posts
-          axios.get('http://a090e8615105.ngrok.io/my-story',{
+          axios.get('http://885039200eb0.ngrok.io/my-story',{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -33,7 +32,7 @@ class Profile extends Component{
             console.log(err);
         })
 
-        axios.get('http://a090e8615105.ngrok.io/my-frinds',{
+        axios.get('http://885039200eb0.ngrok.io/my-frinds',{
             
             headers: {
               'Authorization': `Bearer ${token}` 
@@ -52,18 +51,17 @@ class Profile extends Component{
     }
 
     render(){
-// displaying all user post
+
         let profileData=null;
-        profileData=this.state.userPosts.map((data)=>{
+        profileData=this.state.userPosts.map((data,i)=>{
        return data.map((sdata)=>{
-        return <Profiles key={sdata._id} owner={sdata.owner}  commentsCount={sdata.comments.length} likesCount={sdata.likes.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
+        return <Profiles key={sdata._id} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })
         }) 
         return(
             <div 
             class="row">
             <div class="sidebar col-sm bg-secondary">
-                   {/* <SideBar/>     */}
             </div>
             <div class="col-sm bg-secondary">
                 <div className="mt-1 box bg-white" >

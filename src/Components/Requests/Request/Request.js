@@ -5,7 +5,14 @@ class Request extends Component{
     state={
         addfriend:false
     }
-
+   
+    // friendRequestHandler=()=>{
+    //     let prevState=null;
+    //     prevState=this.state.addfriend
+    //     this.setState({
+    //         addfriend:!prevState
+    //     })
+    // }
     render()
     {
         return(

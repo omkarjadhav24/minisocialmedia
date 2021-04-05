@@ -14,7 +14,6 @@ class NewPost extends Component {
         contentError:''
         
     }
-    //image file
     imageFileHandler=(e)=>
     {
         this.setState({image:e.target.files})
@@ -56,21 +55,24 @@ class NewPost extends Component {
         {
             console.log(data)
 
-            // for image 
-
-            // let imgData = new FormData();
-            // let imagedata = document.querySelector('input[type="file"]').files[0];
-            // imgData.append("inputname", imagedata);
-            // let poData=imgData.get('inputname')
+            var imgData = new FormData();
+            var imagedata = document.querySelector('input[type="file"]').files[0];
+            imgData.append("inputname", imagedata);
+            let poData=imgData.get('inputname')
 
             this.props.addPost(this.state.image,this.state.description)
         }
        
     }
     render () {
+        // let redirect = null;
+        // if (this.state.submitted) {
+        //     redirect = <Redirect to="/posts" />;
+        // }
        
         return (
             <div className={classes.NewPost} style={{ backgroundImage: `url(${log2})` }} >
+                {/* {redirect} */}
                 <form encType="multipart/form-data" action="">
                 <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">

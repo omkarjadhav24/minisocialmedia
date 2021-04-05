@@ -1,12 +1,10 @@
 import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
-//  edit start
 export const editProfileStart = () => {
     return {
         type: actionTypes.EDIT_PROFILE_START
     };
 };
-// when edit success
 export const editProfileSuccess = (name,dob,gender,email,password) => {
     return {
         type: actionTypes.EDIT_PROFILE_SUCCESS,
@@ -17,14 +15,12 @@ export const editProfileSuccess = (name,dob,gender,email,password) => {
         password:password
     };
 };
-// edit api fail
 export const editProfileFail = (error) => {
     return {
         type: actionTypes.SHOW_PROFILE_FAIL,
         error: error
     };
 };
-// edit profile api call
 export const editProfile = (name,date,gender,email,password) => {
     const editData={
         name :name ,
@@ -37,7 +33,7 @@ export const editProfile = (name,date,gender,email,password) => {
         dispatch(editProfileStart());
         let token = localStorage.getItem('token')
         console.log(token)
-        axios.patch('http://a090e8615105.ngrok.io/user/update',editData,{
+        axios.patch('http://885039200eb0.ngrok.io/user/update',editData,{
             
             headers: {
               'Authorization': `Bearer ${token}` 

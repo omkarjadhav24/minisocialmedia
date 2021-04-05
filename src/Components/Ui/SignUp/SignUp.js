@@ -1,134 +1,112 @@
-import React,{Component} from 'react'
-import Input from '../Input/Input'
-import Button from '../Button/Button'
+import React,{useState} from 'react'
 import classes from '../SignUp/SignUp.module.css';
 import 'font-awesome/css/font-awesome.min.css';
-import { withRouter } from 'react-router';
 import SignUpImage from '../../../assets/log3.jpg'
 import {connect} from 'react-redux'
 import {registration} from '../../../Actions/Registration'
 import {Redirect } from 'react-router-dom';
 
 
-class SignUp extends Component{
+const SignUp=(props)=>{
  
-    componentDidMount(){
-    console.log(this.props);
-    }
-    state={
-        name:'',
-        nameError:'',
-        age:'',
-        ageError:'',
-        date:'',
-        dateError:'',
-        gender:'',
-        genderError:'',
-        email:'',
-        emailError:'',
-        password:'',
-        passworError:'',
-        login:false
-    }
-    checkValidity(){
-        if( !isNaN(this.state.name))
+    const [name,setName]=useState('')
+    const [nameError,setNameError]=useState('')
+    const [age,setAge]=useState('')
+    const [ageError,setAgeError]=useState('')
+    const [date,setDate]=useState('')
+    const [dateError,setDateError]=useState('')
+    const [gender,setGender]=useState('')
+    const [genderError,setGenderError]=useState('')
+    const [email,setEmail]=useState('')
+    const [emailError,setEmailError]=useState('')
+    const [password,setPassword]=useState('')
+    const [passworError,setPassworError]=useState('')
+
+    const checkValidity=()=>{
+        if( !isNaN(name))
         {
-            this.setState({
-                nameError:'Name contains only chars '
-            });
+            setNameError('Name contains only chars')
         }
-        else if(isNaN(this.state.age))
+        else if(isNaN(age))
         {
-            this.setState({
-                ageError:'Age in Number'
-            });
+            setAgeError('Age in Number')
         }
-        else if(this.state.date=="")
+        else if(date=="")
         {
-            this.setState({
-                dateError:'Date Is Empty'
-            });
+            setDateError('Date Is Empty')
         }
-        else if(this.state.gender=="")
+        else if(gender=="")
         {
-            this.setState({
-                genderError:'Gender Is Empty'
-            });
+            setGenderError('Gender Is Empty')
         }
-        else if(this.state.email=="")
+        else if(email=="")
         {
-            this.setState({
-                emailError:'Email Is Empty'
-            });
+            setEmailError('Email Is Empty')
         }
-        else if(!(this.state.password.length>=5))
+        else if(!(password.length>=5))
         {
-            this.setState({
-                passworError:'Enter Password More than 5 char.'
-            })
+            setPassworError('Enter Password More than 5 char')
         }
         else{
             return true;
         }
        
     }
-    submitHandler = (event) => {
+   const submitHandler = (event) => {
         event.preventDefault();
-        if(this.checkValidity())
+        if(checkValidity())
         {
             // calling the function as a props from Actions/Registration.js-registration()
             // all inputs are from thisa component states
-            this.props.registrationsave(this.state.name,this.state.date,this.state.gender,this.state.email,this.state.password,this.state.age)
+            props.registrationsave(name,date,gender,email,password,age)
         }
     }
-    render(){
         let token = localStorage.getItem('token')
         if(token){
             return <Redirect to="/home" />
         }
         return(
             <div className={classes.SignUp} style={{ backgroundImage: `url(${SignUpImage})` }} >
-                <form onSubmit={this.submitHandler}>
+                <form onSubmit={(event)=>submitHandler(event)}>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Name</label>
-                    <input type="text" value={this.state.name}  onChange={( event ) => this.setState( { name: event.target.value } )} className="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your Name"/>
-                    <span className="font-weight-bold text-danger font-italic">{this.state.nameError}</span>
+                    <input type="text" value={name}  onChange={( event ) => setName(event.target.value)} className="form-control form-control-sm"   placeholder="Enter your Name"/>
+                    <span className="font-weight-bold text-danger font-italic">{nameError}</span>
                     </div>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Age</label>
-                    <input type="text" value={this.state.age}  onChange={( event ) => this.setState( { age: event.target.value } )} className="form-control form-control-sm"   placeholder="Enter your Age"/>
-                    <span className="font-weight-bold text-danger font-italic">{this.state.ageError}</span>
+                    <input type="text" value={age}  onChange={( event ) =>setAge(event.target.value)} className="form-control form-control-sm"   placeholder="Enter your Age"/>
+                    <span className="font-weight-bold text-danger font-italic">{ageError}</span>
                     </div>
                     <div className="form-group ">
                     <label className="font-weight-bold">Date of Birth</label>
-                    <input className="form-control form-control-sm" value={this.state.date}  onChange={( event ) => this.setState( { date: event.target.value } )} type="date"  />
-                    <span className="font-weight-bold text-danger font-italic" >{this.state.dateError}</span>
+                    <input className="form-control form-control-sm" value={date}  onChange={( event ) => setDate(event.target.value)} type="date"  />
+                    <span className="font-weight-bold text-danger font-italic" >{dateError}</span>
                     </div>
                     <label className="font-weight-bold">Gender</label><br/>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="Male" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
+                    <input className="form-check-input" type="radio" value="Male" name="inlineRadioOptions"    onChange={( event ) => setGender(event.target.value)}/>
                     <label className="form-check-label" >Male</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="FeMale" name="inlineRadioOptions"    onChange={( event ) => this.setState( { gender: event.target.value } )}/>
+                    <input className="form-check-input" type="radio" value="FeMale" name="inlineRadioOptions"    onChange={( event ) => setGender(event.target.value)}/>
                     <label className="form-check-label" >FeMale</label><br/><br/>
                     </div>
-                    <p className="font-weight-bold text-danger font-italic"> {this.state.genderError}</p>
+                    <p className="font-weight-bold text-danger font-italic"> {genderError}</p>
                     <div className="form-group" >
                     <label className="font-weight-bold">Email address</label>
-                    <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control form-control-sm"  placeholder="Enter email"/>
-                    <span className="font-weight-bold text-danger font-italic" >{this.state.emailError}</span>
+                    <input type="email" value={email}  onChange={( event ) => setEmail(event.target.value) } className="form-control form-control-sm"  placeholder="Enter email"/>
+                    <span className="font-weight-bold text-danger font-italic" >{emailError}</span>
                     </div>
                     <div className="form-group">
                     <label className="font-weight-bold">Password</label>
-                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control form-control-sm"  placeholder="Password"/>
-                    <span>{this.state.passworError}</span>
+                    <input type="password" value={password}  onChange={( event ) => setPassword(event.target.value)} className="form-control form-control-sm"  placeholder="Password"/>
+                    <span>{passworError}</span>
                     <button  className="btn btn-outline-primary" >REGISTER</button>
                     </div>
                 </form>
             </div>
         );
-    };
 }
 const mapStatetoProps=(state)=>{
     return{

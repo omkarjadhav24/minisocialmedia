@@ -1,6 +1,4 @@
-import React ,{Component} from 'react'
-import Input from '../Input/Input'
-import Button from '../Button/Button'
+import React ,{ useState} from 'react'
 import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
@@ -9,63 +7,57 @@ import {auth} from '../../../Actions/Auth'
 import {connect} from 'react-redux'
 import loginImage from '../../../assets/log3.jpg'
 
-class SignIn extends Component{
+const SignIn=(props)=>{
+    const [email,setEmail]=useState('')
+    const [password,setPassword]=useState('')
+    const [passworError,setPassworError]=useState('')
+    const [login,setLogin]=useState(false)
+    const [signUp,setSignUp]=useState(false)
 
-    state={
-        email:'',
-        password:'',
-        passworError:'',
-        login:false,
-        signUp:false
-    }
-    checkValidity(){
-        if(!(this.state.password.length>=5))
+   const checkValidity=()=>{
+        if(!(password.length>=5))
         {
-            this.setState({
-                passworError:'Enter Password More than 5 char.'
-            })
+            setPassword('Enter Password More than 5 char.')
         }
         else{
             return true;
         }
        
     }
-    submitHandler = (event) => {
+    const signUpPageHandle=()=>{
+        props.signUp()
+    }
+  
+   const submitHandler = (event) => {
         event.preventDefault();
         
-        if(this.checkValidity())
+        if(checkValidity())
         {
-            // this.props.signIn()
-            this.props.loginauth(this.state.email,this.state.password)
+            props.loginauth(email,password)
         }
     }
-    signUp=()=>{
-        this.props.signUp()
-    }
-    
-    render(){
+ 
         if(localStorage.getItem('token')){
             return <Redirect to="/home" />
         }
         return(
             <div className={classes.SignIn} style={{ backgroundImage: `url(${loginImage})` }} >
-                <form onSubmit={this.submitHandler}>
+                <form onSubmit={(event)=>submitHandler(event)}>
                      <div className="form-group" >
                      <label className="font-weight-bold" >Email address</label>
-                     <input type="email" value={this.state.email}  onChange={( event ) => this.setState( { email: event.target.value } )} className="form-control"   placeholder="Enter email"/>
+                     <input type="email" value={email}  onChange={( event ) => setEmail(event.target.value)} className="form-control"   placeholder="Enter email"/>
                      </div>
                      <div className="form-group">
                     <label className="font-weight-bold"  >Password</label>
-                    <input type="password" value={this.state.password}  onChange={( event ) => this.setState( { password: event.target.value } )} className="form-control"  placeholder="Password"/>
-                    <span className="font-weight-bold text-danger font-italic">{this.state.passworError}</span>
+                    <input type="password" value={password}  onChange={( event ) => setPassword( event.target.value)} className="form-control"  placeholder="Password"/>
+                    <span className="font-weight-bold text-danger font-italic">{passworError}</span>
                     </div>
                     <button className="btn btn-success" >LOGIN</button>
-                    <button onClick={this.signUp} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
+                    <button onClick={()=>signUpPageHandle()} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
                 </form>
               
             </div>
         );
-    };
 }
 const mapStatetoProps=(state)=>{
     return{

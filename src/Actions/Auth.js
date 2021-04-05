@@ -28,14 +28,14 @@ export const auth = (email, password) => {
         email:email,
         password:password
     }
-    let url='http://a090e8615105.ngrok.io/user/login';
+    let url='http://885039200eb0.ngrok.io/user/login';
     return dispatch => {
         dispatch(authStart());
         console.log(authData)
         axios.post(url,authData)
         .then(res=>{
             console.log(res);
-            localStorage.setItem('token',res.data.token ) 
+            localStorage.setItem('token',res.data.token ) // token stored in locastorage
             dispatch(authSuccess(res.data.user.email,res.data.user.password,res.data.token));
         }).catch(err=>{
             dispatch(authFail(err.response.data.error));

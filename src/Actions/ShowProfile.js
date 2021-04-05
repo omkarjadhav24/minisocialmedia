@@ -18,20 +18,19 @@ export const showProfileSuccess = (name,gender,dob,profileId,email,age) => {
         age:age
     };
 };
-// code if show profile
 export const showProfileFail = (error) => {
     return {
         type: actionTypes.SHOW_PROFILE_FAIL,
         error: error
     };
 };
-// code for performing api functionality
 export const showProfile = () => {
     
    let token = localStorage.getItem('token')
     return dispatch => {
         dispatch(showProfileStart());
-        axios.get('http://a090e8615105.ngrok.io/user/me',{
+       console.log(token)
+        axios.get('http://885039200eb0.ngrok.io/user/me',{
             
             headers: {
               'Authorization': `Bearer ${token}` 

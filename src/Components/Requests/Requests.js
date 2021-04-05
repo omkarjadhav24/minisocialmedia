@@ -8,9 +8,8 @@ class Requests extends Component{
       senderId:''
   }
     componentDidMount(){
-      // for showing user all request
         let token = localStorage.getItem('token')
-        axios.get('http://a090e8615105.ngrok.io/my-request',{
+        axios.get('http://885039200eb0.ngrok.io/my-request',{
             headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -18,15 +17,12 @@ class Requests extends Component{
         .then(res=>{
            console.log(res)
             this.setState({myRequest:[res.data]})
-            // console.log(this.state.myRequest)
         })
         .catch(err=>{
             console.log(err)
         })
     }
-    // accept frined
     acceptFriendHandler=(id)=>{
-      // alert(id)
       
       let   friendData={
         id:id,
@@ -35,7 +31,7 @@ class Requests extends Component{
       console.log(friendData);
 
       let token = localStorage.getItem('token')
-      axios.post('http://a090e8615105.ngrok.io/request-status',friendData,{
+      axios.post('http://885039200eb0.ngrok.io/request-status',friendData,{
           
           headers: {
             'Authorization': `Bearer ${token}` 
@@ -49,16 +45,14 @@ class Requests extends Component{
           console.log(err)
       })
     }
-    // reject friend
     rejectFriendHandler=(id)=>{
-      // alert(id)
       let   friendData={
         id:id,
         status:"2"
           }
           
       let token = localStorage.getItem('token')
-      axios.post('http://a090e8615105.ngrok.io/request-status',friendData,{
+      axios.post('http://885039200eb0.ngrok.io/request-status',friendData,{
           
           headers: {
             'Authorization': `Bearer ${token}` 
@@ -73,22 +67,21 @@ class Requests extends Component{
     }
     render()
     {
-      // for displaying user request
       let requestData=null;
         requestData=this.state.myRequest.map((data,i)=>{
        return data.map((sdata)=>{
         return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata.sender_id)}} reject={()=>{this.rejectFriendHandler(sdata.sender_id)}} name={sdata.sender_id.name} id={sdata._id}/>
       })
         }) 
+
+
         return(
        
         <div class="row">
         <div class="sidebar col-sm bg-secondary">
-        {/* <SideBar clicked={this.logout} /> */}
         </div>
         <div class="col-sm bg-secondary ">
         <h3 id="people">People</h3>
-        {/* <Request/> */}
         {requestData}
         </div>
         <div class="col-sm bg-secondary"></div>
