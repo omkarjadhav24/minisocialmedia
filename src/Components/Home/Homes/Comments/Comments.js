@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-class Comment extends Component{
-    render(){
+const Comment =()=>{
         return(
             <>
 <div className="d-flex flex-row mb-2">
@@ -14,6 +13,5 @@ class Comment extends Component{
 </div>
             </>
         );
-    };
 }
 export default Comment;
