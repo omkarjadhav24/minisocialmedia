@@ -1,14 +1,35 @@
-import React,{useState} from 'react'
+import React,{useState,useReducer} from 'react'
 import classes from '../SignUp/SignUp.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import SignUpImage from '../../../assets/log3.jpg'
 import {connect} from 'react-redux'
 import {registration} from '../../../Actions/Registration'
 import {Redirect } from 'react-router-dom';
-
-
+import * as actionType from '../../../Actions/ActionType'
+import axios from 'axios'
+const initialstate={
+    token:null,
+    error:null
+}
+const reducer =(state,action)=>{
+    switch(action.type)
+    {
+        case actionType.REGISTRATION_SUCCESS :
+            return{
+                ...state,
+                token:action.token
+            }
+        case actionType.REGISTRATION_FAIL:
+            return{
+                ...state,
+                error:action.error
+            }
+        default:
+            return true;
+    }
+    }
 const SignUp=(props)=>{
- 
+    const [state,dispatch]=useReducer(reducer,initialstate)
     const [name,setName]=useState('')
     const [nameError,setNameError]=useState('')
     const [age,setAge]=useState('')
@@ -58,7 +79,25 @@ const SignUp=(props)=>{
         {
             // calling the function as a props from Actions/Registration.js-registration()
             // all inputs are from thisa component states
-            props.registrationsave(name,date,gender,email,password,age)
+            // props.registrationsave(name,date,gender,email,password,age)
+            const authData={
+                name:name,
+                date:date,
+                gender:gender,
+                email:email,
+                password:password,
+                age:age
+            }
+            let url='http://885039200eb0.ngrok.io/user';
+            axios.post(url,authData)
+            .then(res=>{
+                console.log(res);
+                localStorage.setItem('token',res.data.token ) // token stored in locastorage
+                dispatch({type:actionType.REGISTRATION_SUCCESS,token:res.data.token});
+            }).catch(err=>{
+                dispatch({type:actionType.REGISTRATION_FAIL,error:err.response.data.error});
+    
+            })
         }
     }
         let token = localStorage.getItem('token')
@@ -108,16 +147,16 @@ const SignUp=(props)=>{
             </div>
         );
 }
-const mapStatetoProps=(state)=>{
-    return{
-        // saving token from registration reducer for routing redirect to home 
-        token:state.registrationauth.token,
-    }
-   }
+// const mapStatetoProps=(state)=>{
+//     return{
+//         // saving token from registration reducer for routing redirect to home 
+//         token:state.registrationauth.token,
+//     }
+//    }
    // calling the funtion from Actions/Registration.js- registration()
-   const mapDispatchtoProps=(dispatch)=>{
-    return{
-        registrationsave:(name,dob,gender,email,password,age)=>{dispatch(registration(name,dob,gender,email,password,age))} 
-    }
-}
-export default connect(mapStatetoProps,mapDispatchtoProps) (SignUp);
+//    const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//         registrationsave:(name,dob,gender,email,password,age)=>{dispatch(registration(name,dob,gender,email,password,age))} 
+//     }
+// }
+export default  SignUp;
