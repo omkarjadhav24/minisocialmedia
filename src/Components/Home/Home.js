@@ -1,51 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
-import SideBar from '../Ui/Sidebar/Sidebar'
 import Homes from '../Home/Homes/Homes'
 import {connect} from 'react-redux'
 import {HomeData} from '../../Actions/HomeData'
-import {showProfile} from '../../Actions/ShowProfile'
-
 import './Home.css'
-import axios from 'axios';
-import { post } from 'jquery';
-class Home extends Component {
-    state = {
-        posts: []
-    }
-    componentDidMount(){
-        this.props.homeCompodata()
-        //  this.props.showProfileInfo();
-    }
-    logout=()=>{
-        alert("hi")
-        localStorage.removeItem('token');
-    }
-    // componentDidMount(){
-    //     // this.props.homeData(); //fetching all friend  users post
-        
-    //     axios.get('https://jsonplaceholder.typicode.com/photos')
-    //     .then(res=>{
-    //         // console.log(res.data);
-    //         const posts = res.data.slice( 0, 4 );
-    //         console.log(res.data.id);
-    //         // permittedValues = posts.map(value => value.id);
-    //         const updatedPosts = posts.map( post => {
-    //                 return {
-    //                     ...post
-    //                 }
-    //             } );
-    //             this.setState( { posts: updatedPosts } );
-    //     }).catch(err=>{
-    //         console.log(err);
-    //     }) 
-    // }
+const Home=(props)=> {
 
-    render() {
-        const dataOfHome =this.props.homePosts.slice( 0, 4 );
-        let posts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
+    const [posts,setPosts]=useState([])
+    useEffect(()=>{
+        props.homeCompodata()
+             
+        // axios.get('https://jsonplaceholder.typicode.com/photos')
+        // .then(res=>{
+        //     // console.log(res.data);
+        //     const posts = res.data.slice( 0, 4 );
+        //     console.log(res.data.id);
+        //     // permittedValues = posts.map(value => value.id);
+        //     const updatedPosts = posts.map( post => {
+        //             return {
+        //                 ...post
+        //             }
+        //         } );
+        //         setPosts(updatedPosts)
+        // }).catch(err=>{
+        //     console.log(err);
+        // }) 
+    })
+  
+        const dataOfHome =posts.slice( 0, 4 );
+        let homeDataPosts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
         
-        posts =dataOfHome.map( post => {
+        homeDataPosts =dataOfHome.map( post => {
             return (
                 <Homes
                     key={post.id}
@@ -69,14 +54,13 @@ class Home extends Component {
                                 </NavLink>
                             </div>
                         </div>
-                       {posts}
+                       {homeDataPosts}
                     </div>
                     <div className="rightsidebar col-sm bg-secondary">                        
                     </div>
                 </div>
             </div>
         );
-    };
 }
 const mapStatetoProps=(state)=>{
     return{
