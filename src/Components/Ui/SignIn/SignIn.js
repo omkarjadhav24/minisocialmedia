@@ -1,4 +1,4 @@
-import React ,{ useState} from 'react'
+import React ,{ useEffect,useReducer,useState} from 'react'
 import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
@@ -6,7 +6,10 @@ import {signInPage,signUpPage} from '../../../Actions/SignIn'
 import {auth} from '../../../Actions/Auth'
 import {connect} from 'react-redux'
 import loginImage from '../../../assets/log3.jpg'
-
+import axios from 'axios'
+const initialstate={
+    
+}
 const SignIn=(props)=>{
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
