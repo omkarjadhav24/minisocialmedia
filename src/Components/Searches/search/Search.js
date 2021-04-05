@@ -1,34 +1,33 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './Search.css'
-class Search extends Component{
+const Search =(props)=>{
     state={
         addfriend:false
     }
+
+    const [addfriend,setAddfriend]=useState(false)
    
     friendRequestHandler=()=>{
         let prevState=null;
-        prevState=this.state.addfriend
-        this.setState({
-            addfriend:!prevState
-        })
+        prevState=addfriend
+        setAddfriend(!prevState)
     }
-    render(){
         return(
 
         <div className="mt-2 box bg-white">
             <div className="Search" >
                <p id="name">{this.props.name}</p>
-               <button onClick={this.friendRequestHandler} type="button" class="btn btn-primary">
-                   {this.state.addfriend ? 
+               <button onClick={()=>friendRequestHandler()} type="button" class="btn btn-primary">
+                   {addfriend ? 
 
-                   <div onClick={this.props.cancelfriend}>
+                   <div onClick={props.cancelfriend}>
                     <i class="fa fa-user-times" aria-hidden="true"></i>
                     <span className="Follow">Cancel Request</span>
                    </div>
 
                    : 
 
-                    <div onClick={this.props.addfriend} >
+                    <div onClick={props.addfriend} >
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span  className="Follow">Add Friend</span>  
                     </div>
@@ -39,6 +38,5 @@ class Search extends Component{
         </div>
  
         );
-    };
 }
 export default Search
