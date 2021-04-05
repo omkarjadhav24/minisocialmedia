@@ -28,13 +28,11 @@ const Homes=(props)=>{
 
    const coomentHandler = () => {
         //  toggling comment button
-        let prevComment = this.state.comment;
+        let prevComment = comment;
         setComment(!prevComment)
     }
    const  cancelHandler=()=>{
-        this.setState({
-            comment:false
-        })
+    
         setComment(false)
     }
 
