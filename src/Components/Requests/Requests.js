@@ -1,28 +1,29 @@
 import axios from 'axios';
-import React ,{Component} from 'react'
+import React ,{Component, useEffect, useState} from 'react'
 import Request from '../Requests/Request/Request'
 import SideBar from '../Ui/Sidebar/Sidebar'
-class Requests extends Component{
-  state={
-      myRequest:[],
-      senderId:''
-  }
-    componentDidMount(){
-        let token = localStorage.getItem('token')
-        axios.get('http://885039200eb0.ngrok.io/my-request',{
-            headers: {
-              'Authorization': `Bearer ${token}` 
-            }
-          })
-        .then(res=>{
-           console.log(res)
-            this.setState({myRequest:[res.data]})
+const Requests =(props)=>{
+ 
+  const [myRequest,setMyRequest]=useState([]);
+  const [senderId,setSenderId]=useState('')
+    
+    useEffect(()=>{
+      let token = localStorage.getItem('token')
+      axios.get('http://885039200eb0.ngrok.io/my-request',{
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
         })
-        .catch(err=>{
-            console.log(err)
-        })
-    }
-    acceptFriendHandler=(id)=>{
+      .then(res=>{
+         console.log(res)
+          setMyRequest([res.data])
+      })
+      .catch(err=>{
+          console.log(err)
+      })
+    })
+
+    const acceptFriendHandler=(id)=>{
       
       let   friendData={
         id:id,
@@ -45,7 +46,7 @@ class Requests extends Component{
           console.log(err)
       })
     }
-    rejectFriendHandler=(id)=>{
+   const rejectFriendHandler=(id)=>{
       let   friendData={
         id:id,
         status:"2"
@@ -65,16 +66,13 @@ class Requests extends Component{
           console.log(err)
       })
     }
-    render()
-    {
+
       let requestData=null;
-        requestData=this.state.myRequest.map((data,i)=>{
+        requestData=myRequest.map((data,i)=>{
        return data.map((sdata)=>{
-        return <Request key={sdata._id} accept={()=>{this.acceptFriendHandler(sdata.sender_id)}} reject={()=>{this.rejectFriendHandler(sdata.sender_id)}} name={sdata.sender_id.name} id={sdata._id}/>
+        return <Request key={sdata._id} accept={()=>{acceptFriendHandler(sdata.sender_id)}} reject={()=>{rejectFriendHandler(sdata.sender_id)}} name={sdata.sender_id.name} id={sdata._id}/>
       })
         }) 
-
-
         return(
        
         <div class="row">
@@ -87,6 +85,5 @@ class Requests extends Component{
         <div class="col-sm bg-secondary"></div>
         </div>
         );
-    };
 }
 export default Requests;
