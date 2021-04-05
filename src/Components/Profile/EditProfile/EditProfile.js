@@ -66,6 +66,8 @@ const EditProfile =(props)=>{
             password:password,
             age:age
         }
+       if(checkValidity())
+       {
         let token = localStorage.getItem('token')
         console.log(editData)
         axios.patch(`http://885039200eb0.ngrok.io/user/update`,editData,{
@@ -80,6 +82,7 @@ const EditProfile =(props)=>{
         .catch(err=>{
             console.log(err);
         })
+       }
 
         // if(checkValidity())
         // {
