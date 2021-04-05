@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import './Profile.css'
 import profileImage from '../../../src/assets/profile.png';
 import {NavLink} from 'react-router-dom'
@@ -8,52 +8,45 @@ import axios from 'axios'
 import moment from 'moment'
 import {connect} from 'react-redux'
 
-class Profile extends Component{
+const Profile =(props)=>{
+
+    const [userPosts,setUserPosts]=useState([]);
+    const [tFriends,setTFriends]=useState(null)
+
     
-    state={
-        userPosts:[],
-        tFriends:null
-    }
-
-    componentDidMount(){
+    useEffect(()=>{
         let token=localStorage.getItem('token')
-          axios.get('http://885039200eb0.ngrok.io/my-story',{
-            headers: {
-              'Authorization': `Bearer ${token}` 
-            }
-          })
-        .then(res=>{
-            this.setState({
-                userPosts:[res.data]
-            })
-            console.log(res.data)
+        axios.get('http://885039200eb0.ngrok.io/my-story',{
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
         })
-        .catch(err=>{
-            console.log(err);
-        })
+      .then(res=>{
+          setUserPosts([res.data])
+          console.log(res.data)
+      })
+      .catch(err=>{
+          console.log(err);
+      })
 
-        axios.get('http://885039200eb0.ngrok.io/my-frinds',{
-            
-            headers: {
-              'Authorization': `Bearer ${token}` 
-            }
-          })
-        .then(res=>{
-            this.setState({
-                tFriends:res.data.length
-            })
-            console.log(res)
+      axios.get('http://885039200eb0.ngrok.io/my-frinds',{
+          
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
         })
-        .catch(err=>{
-            console.log(err);
-        })
+      .then(res=>{
+          setTFriends(res.data.length)
+          console.log(res)
+      })
+      .catch(err=>{
+          console.log(err);
+      })
+    })
 
-    }
-
-    render(){
 
         let profileData=null;
-        profileData=this.state.userPosts.map((data,i)=>{
+        profileData=userPosts.map((data,i)=>{
        return data.map((sdata)=>{
         return <Profiles key={sdata._id} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })
@@ -67,12 +60,12 @@ class Profile extends Component{
                 <div className="mt-1 box bg-white" >
                     <div  className="profile">
                         <img  src={profileImage} width="40"/>
-                        <p>UserName: {this.props.email}</p>
-                        <p>Name :  {this.props.name}</p>
-                        <p>Age : {this.props.age}</p>
-                        <p>Date Of Birth : {moment.utc(this.props.dob).format('MM/DD/YYYY')}</p>
-                        <p>Gender : {this.props.gender} </p>
-                        <button type="button" class="btn btn-outline-primary">Total Friends : {this.state.tFriends}</button>
+                        <p>UserName: {props.email}</p>
+                        <p>Name :  {props.name}</p>
+                        <p>Age : {props.age}</p>
+                        <p>Date Of Birth : {moment.utc(props.dob).format('MM/DD/YYYY')}</p>
+                        <p>Gender : {props.gender} </p>
+                        <button type="button" class="btn btn-outline-primary">Total Friends : {tFriends}</button>
                         <button className="btn btn-outline-warning"><NavLink to="/edit-profile" > Edit Profile </NavLink>  </button> 
                     </div>
                 </div>
@@ -91,7 +84,6 @@ class Profile extends Component{
             </div>
           </div>
         );
-    };
 }
 const mapStatetoProps=(state)=>{
     return{
