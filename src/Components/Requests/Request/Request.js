@@ -1,10 +1,8 @@
-import React from 'react'
-import { Component } from 'react';
+import React, { useState } from 'react'
 import './Request.css'
-class Request extends Component{
-    state={
-        addfriend:false
-    }
+const Request =(props)=>{
+   
+    const [addfriend,setAddfriend]=useState(false);
    
     // friendRequestHandler=()=>{
     //     let prevState=null;
@@ -13,22 +11,21 @@ class Request extends Component{
     //         addfriend:!prevState
     //     })
     // }
-    render()
-    {
+   
         return(
 <div className="mt-2 box bg-white">
         <div >
             {/* <img className="rounded-circle image" src="https://i.imgur.com/RpzrMR2.jpg" width="40"/> */}
-               <p id="name">{this.props.name}</p>
+               <p id="name">{props.name}</p>
                <button  type="button" class="btn btn-primary">
-                    <div onClick={this.props.accept} >
+                    <div onClick={props.accept} >
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span>Accept</span> 
                     </div>
                 </button>
                <button  type="button" class="btn btn-primary">
                 
-                    <div onClick={this.props.reject} >
+                    <div onClick={props.reject} >
                     <i class="fa fa-user-times" aria-hidden="true"></i>
                     <span>Reject</span>
                    </div>
@@ -36,6 +33,5 @@ class Request extends Component{
         </div>
 </div>
         );
-    };
 }
 export default Request;
