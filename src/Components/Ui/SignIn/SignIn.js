@@ -38,11 +38,8 @@ const SignIn=(props)=>{
         else return true;
     }
     // for displaying SignUp page when signUp state sets to true
-    const signUpPageHandle=()=>{
-        // props.signUp()
-        dispatch({type:actionType.SIGN_UP});
-
-    }
+    const signUpPageHandle=()=>dispatch({type:actionType.SIGN_UP});
+    // props.signUp() = in signUpHandler
   // when user clicks to log in then execute
    const submitHandler = (event) => {
         event.preventDefault();
@@ -63,11 +60,7 @@ const SignIn=(props)=>{
                 localStorage.setItem('token',res.data.token ) // token stored in locastorage
                 // if api get res then execute 
                 dispatch({type:actionType.AUTH_SUCCESS,token:res.data.token});
-            }).catch(err=>{
-                // if api get failed then 
-                dispatch({type:actionType.AUTH_FAIL,error:err.response.data.error});
-    
-            })
+            }).catch(err=>dispatch({type:actionType.AUTH_FAIL,error:err.response.data.error}))// if api get failed then 
         }
     }
             // if token set then redirect to home page
