@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { Component } from 'react';
 import classes from './EditProfile.module.css'
-import  Button from '../../Ui/Button/Button'
 import background from '../../../assets/log3.jpg'
-import {connect} from 'react-redux'
-import {editProfile} from '../../../Actions/EditProfile'
 import axios from 'axios';
 import moment from 'moment'
 import {Redirect } from 'react-router-dom';
 
 const EditProfile =(props)=>{
-
+    // state
     const [name,setName]=useState(props.name);
     const [nameError,setNameError]=useState('');
     const [age,setAge]=useState(props.age);
@@ -25,39 +21,20 @@ const EditProfile =(props)=>{
     const [passworError,setPassworError]=useState('');
     const [login,setLogin]=useState(false);
     const [redirect,setRedirect]=useState(false);
+    // validating edit profile fields
     const checkValidity=()=>{
-        if( !isNaN(name))
-        {
-            setNameError('Name contains only chars')
-        }
-        else if(isNaN(age))
-        {
-            setAgeError('Age in Number')
-        }
-        else if(date=="")
-        {
-            setDateError('Date Is Empty')
-        }
-        else if(gender=="")
-        {
-            setGenderError('Gender Is Empty')
-        }
-        else if(email=="")
-        {
-            setEmailError('Email Is Empty')
-        }
-        else if(!(password.length>=5))
-        {
-            setPassworError('Enter Password More than 5 char.')
-        }
-        else{
-            return true;
-        }
-       
+        if( !isNaN(name)) setNameError('Name contains only chars')
+        else if(isNaN(age)) setAgeError('Age in Number')
+        else if(date=="") setDateError('Date Is Empty')
+        else if(gender=="") setGenderError('Gender Is Empty')
+        else if(email=="") setEmailError('Email Is Empty')
+        else if(!(password.length>=5)) setPassworError('Enter Password More than 5 char.')
+        else return true;
     }
-   
+   // when click save button then update user profile
    const  submitHandler = (event) => {
         event.preventDefault();
+        // sending data patch method
         const editData={
             name :name ,
             dob:date,
@@ -66,9 +43,10 @@ const EditProfile =(props)=>{
             password:password,
             age:age
         }
+        // if validation checkValidity() function returns true then 
        if(checkValidity())
        {
-        let token = localStorage.getItem('token')
+        let token = localStorage.getItem('token')// token get
         console.log(editData)
         axios.patch(`http://885039200eb0.ngrok.io/user/update`,editData,{
             headers: {
@@ -77,6 +55,7 @@ const EditProfile =(props)=>{
           })
         .then(res=>{
             console.log(res)
+            // update state redirect to true
             setRedirect(true)
         })
         .catch(err=>{
@@ -91,10 +70,8 @@ const EditProfile =(props)=>{
         // }
       
     }
-    
-        if(redirect){
-            return <Redirect to="/profile" />
-        }
+    // if redirect state is true then redirect to profile page
+        if(redirect) <Redirect to="/profile" />
         return(
             <div className={classes.SignUp} style={{ backgroundImage: `url(${background})` }} >
                 <form onSubmit={(event)=>submitHandler(event)}>
@@ -138,16 +115,16 @@ const EditProfile =(props)=>{
             </div>
         );
 }
-const mapStatetoProps=(state)=>{
-    return{
-       name:state.showprofile.name,
-       gender:state.showprofile.gender,
-       dob:state.showprofile.dob, 
-       email:state.showprofile.email,
-       age:state.showprofile.age,
-       token:state.loginauth.token
-    }
-   }
+// const mapStatetoProps=(state)=>{
+//     return{
+//        name:state.showprofile.name,
+//        gender:state.showprofile.gender,
+//        dob:state.showprofile.dob, 
+//        email:state.showprofile.email,
+//        age:state.showprofile.age,
+//        token:state.loginauth.token
+//     }
+//    }
 // const mapDispatchtoProps=(dispatch)=>{
 //     return{
 //        editdataProfile:(name,date,gender,email,password)=>{dispatch(editProfile(name,date,gender,email,password))} 
@@ -155,4 +132,4 @@ const mapStatetoProps=(state)=>{
 
 //     }
 // }
-export default connect(mapStatetoProps,null)(EditProfile);
+export default EditProfile;
