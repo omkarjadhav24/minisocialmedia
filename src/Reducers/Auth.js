@@ -1,6 +1,5 @@
 import * as actionTypes from '../Actions/ActionType';
-// import { updateObject } from '../Shared/utility';
-
+// initial stae
 const initialState = {
     token: null,
     email:'',
@@ -8,30 +7,13 @@ const initialState = {
     returnSecureToken:false,
     loading: false
 };
-
-
+// reducer
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.AUTH_START: return{
-            ...state,
-            loading:true
-
-        }
-        case actionTypes.AUTH_SUCCESS: return{
-            ...state,
-            email:action.email,
-            password:action.password,
-            token:action.token
-
-        }
-        case actionTypes.AUTH_FAIL: return{
-            ...state,
-            error:action.error
-        }
-        // case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-        // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);
-        default:
-            return state;
+        case actionTypes.AUTH_START: return{...state,loading:true}// auth start
+        case actionTypes.AUTH_SUCCESS: return{...state,email:action.email,password:action.password,token:action.token}// if auth api success
+        case actionTypes.AUTH_FAIL: return{...state,error:action.error}// if auth api failed
+        default:return state;
     }
 };
 
