@@ -1,7 +1,4 @@
 import * as actionTypes from '../Actions/ActionType';
-// import { updateObject } from '../Shared/utility';
-
-
 // initial state of registartion
 const initialState = {
     token: null,
@@ -14,16 +11,12 @@ const initialState = {
     returnSecureToken:false,
     loading: false,
 };
-
-
+// reducer
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         // case execute when registartion start
         // and loading updates and becomes true
-        case actionTypes.REGISTRATION_START: return{
-            ...state,
-            loading:true
-        }
+        case actionTypes.REGISTRATION_START: return{...state,loading:true}
         // case execute when registration registrationSuccess() execute and 
         // updates payload send by registrationSuccess() 
         case actionTypes.REGISTRATION_SUCCESS: return{
@@ -40,14 +33,10 @@ const reducer = ( state = initialState, action ) => {
         }
         // case execute when registration fails means action registrationFail() execute and store 
         // error message in error state
-        case actionTypes.REGISTRATION_FAIL: return{
-            ...state,
-            error:action.error
-        }
+        case actionTypes.REGISTRATION_FAIL: return{...state,error:action.error}
         // case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);
-        default:
-            return state;
+        default:return state;
     }
 };
 
