@@ -53,14 +53,8 @@ const EditProfile =(props)=>{
               'Authorization': `Bearer ${token}` 
             }
           })
-        .then(res=>{
-            console.log(res)
-            // update state redirect to true
-            setRedirect(true)
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+        .then(res=>setRedirect(true))// update state redirect to true
+        .catch(err=>console.log(err))
        }
 
         // if(checkValidity())
