@@ -26,17 +26,7 @@ const Home=(props)=> {
         }).catch(err=>console.log(err)) 
     })   
     // for displaying posts , loop Homes component with map and sending data with props to that component 
-       let homeDataPosts =posts.map( post => {
-            return (
-                <Homes
-                    key={post.id}
-                    id={post.id}
-                    title={post.title}
-                    thumbnailUrl={post.thumbnailUrl}
-                     />
-                //
-            );
-        } );
+       let homeDataPosts =posts.map( post =><Homes key={post.id} id={post.id} title={post.title} thumbnailUrl={post.thumbnailUrl}/>);
         return (
             <div >
                 <div className="row">
