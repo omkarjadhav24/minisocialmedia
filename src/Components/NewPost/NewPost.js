@@ -2,8 +2,6 @@ import React, {  useState } from 'react';
 // import { Redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
 import log2 from '../../assets/log2.jpg'
-// import {connect} from 'react-redux'
-// import {addPost} from '../../Actions/AddPost'
 import axios from 'axios'
 const NewPost =(props)=> {
     // state
@@ -12,25 +10,12 @@ const NewPost =(props)=> {
     const [descriptionError,setDescriptionError]=useState('')
     const [imageError,setImageError]=useState(false);
     // for getting image name 
-   const imageFileHandler=(event)=>
-    {
-        setImage(event.target.files[0].name)
-    }
+   const imageFileHandler=(event)=>setImage(event.target.files[0].name)
     // for validating filds
     const checkValidity=()=>{ 
-        // if(!(image!=""))
-        // {
-        //    setImageError('Please Select Image')
-        // }
-        // else 
-        if(!(description.length>=5))
-        {
-            setDescriptionError('Content is more than 5 char and less than 20')
-        }
-        else{
-            return true;
-        }
-       
+        // if(!(image!="")) setImageError('Please Select Image')
+        if(!(description.length>=5)) setDescriptionError('Content is more than 5 char and less than 20')
+        else return true;
     }
    // on click add post then send with post method 
    const  postDataHandler = (event) => {
