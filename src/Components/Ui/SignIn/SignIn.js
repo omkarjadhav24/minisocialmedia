@@ -24,8 +24,9 @@ switch(action.type){
 }
 }
 const SignIn=(props)=>{
-    // states
+    // created useReducer
     const [state,dispatch]=useReducer(reducer,initialState)
+    // states
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [passworError,setPassworError]=useState('')
