@@ -71,9 +71,7 @@ const SignIn=(props)=>{
         }
     }
             // if token set then redirect to home page
-        if(localStorage.getItem('token')){
-            return <Redirect to="/home" />
-        }
+        if(localStorage.getItem('token')) ( <Redirect to="/home" />)
         return(
             <div className={classes.SignIn} style={{ backgroundImage: `url(${loginImage})` }} >
                 <form onSubmit={(event)=>submitHandler(event)}>
