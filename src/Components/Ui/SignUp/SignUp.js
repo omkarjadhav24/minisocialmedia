@@ -5,7 +5,7 @@ import signUpImage from '../../../assets/log3.jpg'
 import {Redirect } from 'react-router-dom';
 import * as actionType from '../../../Actions/ActionType'
 import axios from 'axios'
-// initila state for reducer
+// initilal state for reducer
 const initialState={
     token:null,
     error:null
