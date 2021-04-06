@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import {NavLink} from "react-router-dom"
 import CommentDiv from '../../Home/Homes/Comments/Comments';
 import axios from 'axios'
 const Homes=(props)=>{
@@ -31,7 +30,6 @@ const Homes=(props)=>{
     }
     // on cancel button hide comment div
    const  cancelHandler=()=>{
-    
         setComment(false)
     }
 
