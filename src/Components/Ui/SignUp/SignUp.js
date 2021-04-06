@@ -19,8 +19,9 @@ const reducer =(state,action)=>{
     }
     }
 const SignUp=(props)=>{
-    // state
+    // created useReducer
     const [state,dispatch]=useReducer(reducer,initialState)
+    // states
     const [name,setName]=useState('')
     const [nameError,setNameError]=useState('')
     const [age,setAge]=useState('')
