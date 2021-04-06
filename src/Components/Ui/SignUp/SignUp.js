@@ -71,11 +71,7 @@ const SignUp=(props)=>{
                 localStorage.setItem('token',res.data.token ) // token stored in locastorage
                 // if api success then execute
                 dispatch({type:actionType.REGISTRATION_SUCCESS,token:res.data.token});
-            }).catch(err=>{
-                // if api fails then execute
-                dispatch({type:actionType.REGISTRATION_FAIL,error:err.response.data.error});
-    
-            })
+            }).catch(err=>dispatch({type:actionType.REGISTRATION_FAIL,error:err.response.data.error})) // if api fails then execute
         }
     }
         // user register and then set token and if token set redirect to home page 
