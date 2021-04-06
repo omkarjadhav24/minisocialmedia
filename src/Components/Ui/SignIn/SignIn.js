@@ -5,7 +5,6 @@ import {NavLink, Redirect } from 'react-router-dom';
 import loginImage from '../../../assets/log3.jpg'
 import * as  actionType from '../../../Actions/ActionType'
 import axios from 'axios'
-// creating context api
 // initial state for reducer
 const initialState={
     token:'',
