@@ -10,7 +10,6 @@ const initialState={
     token:'',
     error:'',
     signUp:false
-
 }
 // reducer 
 const reducer =(state,action)=>{
