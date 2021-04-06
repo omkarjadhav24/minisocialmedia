@@ -27,7 +27,7 @@ const reducer =(state,action)=>{
             return true;
     }
     }
-const signUp=(props)=>{
+const SignUp=(props)=>{
     // state
     const [state,dispatch]=useReducer(reducer,initialState)
     const [name,setName]=useState('')
@@ -168,4 +168,4 @@ const signUp=(props)=>{
 //         registrationsave:(name,dob,gender,email,password,age)=>{dispatch(registration(name,dob,gender,email,password,age))} 
 //     }
 // }
-export default  signUp;
+export default  SignUp;
