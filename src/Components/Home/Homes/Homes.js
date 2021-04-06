@@ -18,9 +18,7 @@ const Homes=(props)=>{
         //                 }
         //             } );
         //             this.setState( { posts: updatedPosts } );
-        //     }).catch(err=>{
-        //         console.log(err);
-        //     }) 
+        //     }).catch(err=>console.log(err)) 
     // })
     // toggling comment div
    const coomentHandler = () => {
