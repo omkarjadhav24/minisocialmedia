@@ -1,19 +1,18 @@
 import React,{useState,useReducer} from 'react'
 import classes from '../SignUp/SignUp.module.css';
 import 'font-awesome/css/font-awesome.min.css';
-import SignUpImage from '../../../assets/log3.jpg'
-import {connect} from 'react-redux'
-import {registration} from '../../../Actions/Registration'
+import signUpImage from '../../../assets/log3.jpg'
 import {Redirect } from 'react-router-dom';
 import * as actionType from '../../../Actions/ActionType'
 import axios from 'axios'
-const initialstate={
+// initila state for reducer
+const initialState={
     token:null,
     error:null
 }
+// reducer for registration
 const reducer =(state,action)=>{
-    switch(action.type)
-    {
+    switch(action.type){
         case actionType.REGISTRATION_SUCCESS :
             return{
                 ...state,
@@ -28,8 +27,9 @@ const reducer =(state,action)=>{
             return true;
     }
     }
-const SignUp=(props)=>{
-    const [state,dispatch]=useReducer(reducer,initialstate)
+const signUp=(props)=>{
+    // state
+    const [state,dispatch]=useReducer(reducer,initialState)
     const [name,setName]=useState('')
     const [nameError,setNameError]=useState('')
     const [age,setAge]=useState('')
@@ -43,6 +43,7 @@ const SignUp=(props)=>{
     const [password,setPassword]=useState('')
     const [passworError,setPassworError]=useState('')
 
+    // validation code for registration fields
     const checkValidity=()=>{
         if( !isNaN(name))
         {
@@ -73,13 +74,17 @@ const SignUp=(props)=>{
         }
        
     }
+    // on submit registration page
    const submitHandler = (event) => {
         event.preventDefault();
+        // if checkValidity returns true then execute
         if(checkValidity())
         {
             // calling the function as a props from Actions/Registration.js-registration()
             // all inputs are from thisa component states
             // props.registrationsave(name,date,gender,email,password,age)
+
+            // for sending data through post 
             const authData={
                 name:name,
                 date:date,
@@ -88,24 +93,28 @@ const SignUp=(props)=>{
                 password:password,
                 age:age
             }
+            // url link
             let url='http://885039200eb0.ngrok.io/user';
             axios.post(url,authData)
             .then(res=>{
                 console.log(res);
                 localStorage.setItem('token',res.data.token ) // token stored in locastorage
+                // if api success then execute
                 dispatch({type:actionType.REGISTRATION_SUCCESS,token:res.data.token});
             }).catch(err=>{
+                // if api fails then execute
                 dispatch({type:actionType.REGISTRATION_FAIL,error:err.response.data.error});
     
             })
         }
     }
+        // user register and then set token and if token set redirect to home page 
         let token = localStorage.getItem('token')
         if(token){
             return <Redirect to="/home" />
         }
         return(
-            <div className={classes.SignUp} style={{ backgroundImage: `url(${SignUpImage})` }} >
+            <div className={classes.SignUp} style={{ backgroundImage: `url(${signUpImage})` }} >
                 <form onSubmit={(event)=>submitHandler(event)}>
                     <div className="form-group" >
                     <label className="font-weight-bold" >Name</label>
@@ -159,4 +168,4 @@ const SignUp=(props)=>{
 //         registrationsave:(name,dob,gender,email,password,age)=>{dispatch(registration(name,dob,gender,email,password,age))} 
 //     }
 // }
-export default  SignUp;
+export default  signUp;

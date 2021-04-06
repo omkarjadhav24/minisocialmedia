@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-const Comment =()=>{
+const comment =()=>{
         return(
             <>
 <div className="d-flex flex-row mb-2">
@@ -14,4 +14,4 @@ const Comment =()=>{
             </>
         );
 }
-export default Comment;
+export default comment;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Component } from 'react';
+import React, { Component,useEffect, useState } from 'react'
 import {NavLink} from "react-router-dom"
 import CommentDiv from '../../Home/Homes/Comments/Comments';
 import {connect} from 'react-redux'
 import axios from 'axios'
-const Homes=(props)=>{
+const homes=(props)=>{
 
+    // state
     const [comment,setComment]=useState(false)
 
     // const [posts,setPosts]=useState([])
@@ -31,8 +31,8 @@ const Homes=(props)=>{
         let prevComment = comment;
         setComment(!prevComment)
     }
+    // for hiding comment div
    const  cancelHandler=()=>{
-    
         setComment(false)
     }
 
@@ -104,4 +104,4 @@ const Homes=(props)=>{
 //        homedataid:state.homeCompData.homedataid
 //     }
 //    }
-export default Homes;
+export default homes;
