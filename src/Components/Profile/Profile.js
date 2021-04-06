@@ -1,15 +1,13 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Profile.css'
 import profileImage from '../../../src/assets/profile.png';
 import {NavLink} from 'react-router-dom'
-import SideBar from '../Ui/Sidebar/Sidebar'
 import Profiles from '../Profile/Profiles/Profiles'
 import axios from 'axios'
 import moment from 'moment'
-import {connect} from 'react-redux'
 
 const Profile =(props)=>{
-
+    //state
     const [userPosts,setUserPosts]=useState([]);
     const [tFriends,setTFriends]=useState(null)
     const [name,setName]=useState(null);
@@ -18,22 +16,23 @@ const Profile =(props)=>{
     const [id,setId]=useState(null);
     const [email,setEmail]=useState(null);
     const [age,setAge]=useState(null);
-    
+    // for fetching user posts
     useEffect(()=>{
-        let token=localStorage.getItem('token')
+        let token=localStorage.getItem('token')// token get
         axios.get('http://885039200eb0.ngrok.io/my-story',{
           headers: {
             'Authorization': `Bearer ${token}` 
           }
         })
       .then(res=>{
+        // update posts for displaying user post by map function
           setUserPosts([res.data])
           console.log(res.data)
       })
       .catch(err=>{
           console.log(err);
       })
-
+      // for  getting total friends of user
       axios.get('http://885039200eb0.ngrok.io/my-frinds',{
           
           headers: {
@@ -41,6 +40,7 @@ const Profile =(props)=>{
           }
         })
       .then(res=>{
+        // updating tFriends for displaying Total friends of user
           setTFriends(res.data.length)
           console.log(res)
       })
@@ -48,8 +48,9 @@ const Profile =(props)=>{
           console.log(err);
       })
     })
+    // profile displaying user info in profile page
     useEffect(()=>{
-      let token = localStorage.getItem('token')
+      let token = localStorage.getItem('token') // token get
       axios.get('http://885039200eb0.ngrok.io/user/me',{  
           headers: {
             'Authorization': `Bearer ${token}` 
@@ -57,6 +58,7 @@ const Profile =(props)=>{
         })
       .then(res=>{
           console.log(res)
+          // getting values from res and stored in state
           setName(res.data.name);
           setGender(res.data.gender);
           setDob(res.data.dob);
@@ -69,13 +71,14 @@ const Profile =(props)=>{
       })
     })
 
-
+    // for displaying user post and sending data with props to Profiles Component
         let profileData=null;
-        profileData=userPosts.map((data,i)=>{
-       return data.map((sdata)=>{
-        return <Profiles key={sdata._id}  name={name} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
-      })
-        }) 
+        profileData=userPosts.map((data,i)=>data.map((sdata)=><Profiles key={sdata._id}  name={name} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>)) 
+        // profileData=userPosts.map((data,i)=>{
+        //   return data.map((sdata)=>{
+        //    return <Profiles key={sdata._id}  name={name} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
+        //  })
+        //    }) 
         return(
             <div 
             class="row">
