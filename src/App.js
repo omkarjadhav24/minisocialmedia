@@ -8,8 +8,10 @@ import {Route} from 'react-router'
 function App(props) {
   return (
     <div className="App">
+      {/*  if token set then only show navigation bar */}
       {localStorage.getItem('token')  ?<Navigation/>:<div>
         {props.signup ?
+        // if sign up button clicked then show sign up page otherwise show sign in page
        <Route to='/signup' exact  component={SignUp} />
         :<Route to='/' exact component={SignIn}/>
       }
