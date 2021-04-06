@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Component } from 'react';
-import {connect} from 'react-redux'
 import axios from 'axios'
-import {showProfile} from '../../../Actions/ShowProfile'
 import CommentDiv from '../../Home/Homes/Comments/Comments'
 
 const Profiles =(props)=>{
+    // state
     const [name,setName]=useState('')
     const [dateOfBirth,setDateOfBirth]=useState('');
     const [gender,setGender]=useState('');
@@ -15,19 +13,16 @@ const Profiles =(props)=>{
     const [commentInput,setCommentInput]=useState('');
     const [comment,setComment]=useState(false)
 
-
     // useEffect(()=>{
     //     props.showProfileInfo()
     // })
-    
+    // for toggling comment div on comment button clickssss
     const coomentHandler=()=>{
        let prevComment=comment;
-        setComment(!prevComment)
-       
+        setComment(!prevComment)       
     }
-    const cancelHandler=()=>{
-        setComment(false)
-    }
+    // hiding comment div
+    const cancelHandler=()=>setComment(false)
 
 //    const readCommenthandler=()=>{
 //         let token = localStorage.getItem('token')
@@ -40,34 +35,35 @@ const Profiles =(props)=>{
 //             console.log(err)
 //         })
 //     }
+
+    // for like api 
    const likeHandler=()=>{
         setLike(false)
-        let   likeData={
+        let likeData={
             story_id:props.id,
-            like:1
-              }
+            like:1  } // for sending param through api
           console.log(likeData);
-          let token = localStorage.getItem('token')
+          let token = localStorage.getItem('token')// token get 
           axios.post('http://885039200eb0.ngrok.io/story/like',likeData,{
-              
               headers: {
                 'Authorization': `Bearer ${token}` 
               }
             })
           .then(res=>{
               console.log(res)
+              //updating totalLikes in state increasing  by one 
               setTotalLikes(totalLikes + 1)
           })
           .catch(err=>{
               console.log(err)
           })
     }
+    // for dislike Api
   const  dislikeHandler=()=>{
         setLike(true)
         let    likeData={
             story_id:props.id,
-            like:0
-              }
+            like:0 } // for sending param through api
           console.log(likeData);
           let token = localStorage.getItem('token')
           axios.post('http://885039200eb0.ngrok.io/story/unlike',likeData,{
@@ -75,9 +71,9 @@ const Profiles =(props)=>{
                 'Authorization': `Bearer ${token}` 
               }
             })
-          .then(res=>{
-          
+          .then(res=>{          
               console.log(res)
+              //updating totalLikes in state decreasing  by one 
               setTotalLikes(totalLikes - 1)
           })
           .catch(err=>{
@@ -85,11 +81,11 @@ const Profiles =(props)=>{
           })
 
     }
+    // for comment Post Api
     const commentHandler=()=>{
         let data={
             comment:commentInput,
-            story_id:props.id
-        }
+            story_id:props.id } // for sending param through api
         let token = localStorage.getItem('token')
         axios.post('http://885039200eb0.ngrok.io/story/comment',data,{
             
@@ -104,10 +100,7 @@ const Profiles =(props)=>{
             console.log(err)
         })
     }
-
-    
-        let dob =null
-        dob=new Date(props.dob);
+      
         return(
             <>
            
@@ -140,7 +133,6 @@ const Profiles =(props)=>{
                                     </div>
                                     <hr />
                                     <div className="comments">
-                                     
                                             <CommentDiv/>
                                     </div>
 
