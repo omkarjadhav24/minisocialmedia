@@ -15,41 +15,33 @@ import Requests from '../../Requests/Requests'
 
 
 class Navigation extends Component{
+    //state
     state={
         search:'',
         redirect:false
     }
-
+    // for sending serach name param to path /search
     searchUser=(event)=>{
         event.preventDefault();
         console.log(this.state)
-        let search=this.state.search;
+        let search=this.state.search; // store the serched name
         if(this.state.search!="")
         {
             this.props.history.push({pathname:'/search/' + search})
             this.setState({search:''})
         }
-        else
-        {
-            alert('Serach Is Empty')
-        }
+        else alert('Serach Is Empty')
     }
+    // for logout it clear the token
     logout(){
         localStorage.clear();
-      let token = localStorage.clear();
-        if(!token){
-            return <Redirect to="/" />
-        }
+      let token = localStorage.clear(); // clear token
+        if(!token) (<Redirect to="/" />)
         // this.setState({redirect:true})
     }
    
     render(){
-        // if(this.state.redirect)
-        // {
-        //    return(
-        //     <Redirect to='/'/>
-        //    )
-        // }
+        // if(this.state.redirect) (<Redirect to='/'/>
         return(
             
             <div>
@@ -79,6 +71,7 @@ class Navigation extends Component{
             </ul>
             </div>
             </nav>
+            {/* for All Route */}
             <Switch>
             <Route path="/signup" exact component={SignUp} />
             <Route path="/newpost" component={NewPost} />
