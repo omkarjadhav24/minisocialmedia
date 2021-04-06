@@ -13,18 +13,9 @@ const initialState={
 // reducer for registration
 const reducer =(state,action)=>{
     switch(action.type){
-        case actionType.REGISTRATION_SUCCESS :
-            return{
-                ...state,
-                token:action.token
-            }
-        case actionType.REGISTRATION_FAIL:
-            return{
-                ...state,
-                error:action.error
-            }
-        default:
-            return true;
+        case actionType.REGISTRATION_SUCCESS :return {...state, token:action.token} 
+        case actionType.REGISTRATION_FAIL:return{...state,error:action.error}
+        default:return true;
     }
     }
 const SignUp=(props)=>{
@@ -45,34 +36,13 @@ const SignUp=(props)=>{
 
     // validation code for registration fields
     const checkValidity=()=>{
-        if( !isNaN(name))
-        {
-            setNameError('Name contains only chars')
-        }
-        else if(isNaN(age))
-        {
-            setAgeError('Age in Number')
-        }
-        else if(date=="")
-        {
-            setDateError('Date Is Empty')
-        }
-        else if(gender=="")
-        {
-            setGenderError('Gender Is Empty')
-        }
-        else if(email=="")
-        {
-            setEmailError('Email Is Empty')
-        }
-        else if(!(password.length>=5))
-        {
-            setPassworError('Enter Password More than 5 char')
-        }
-        else{
-            return true;
-        }
-       
+        if( !isNaN(name)) setNameError('Name contains only chars')
+        else if(isNaN(age)) setAgeError('Age in Number')
+        else if(date=="") setDateError('Date Is Empty')
+        else if(gender=="") setGenderError('Gender Is Empty')
+        else if(email=="") setEmailError('Email Is Empty')
+        else if(!(password.length>=5)) setPassworError('Enter Password More than 5 char')
+        else return true;
     }
     // on submit registration page
    const submitHandler = (event) => {
