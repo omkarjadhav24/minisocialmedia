@@ -2,9 +2,7 @@ import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
 // when sign in start
 export const authStart = () => {
-    return {
-        type: actionTypes.AUTH_START
-    };
+    return {type: actionTypes.AUTH_START};
 };
 // when sign in success then execute
 export const authSuccess = (email,password,token) => {
@@ -27,20 +25,17 @@ export const auth = (email, password) => {
     const authData={
         email:email,
         password:password
-    }
+    }// param send through api
     let url='user/login';
     return dispatch => {
-        dispatch(authStart());
+        dispatch(authStart());// when api start
         console.log(authData)
         axios.post(url,authData)
         .then(res=>{
             console.log(res);
             localStorage.setItem('token',res.data.token ) // token stored in locastorage
-            dispatch(authSuccess(res.data.user.email,res.data.user.password,res.data.token));
-        }).catch(err=>{
-            dispatch(authFail(err.response.data.error));
-
-        })
+            dispatch(authSuccess(res.data.user.email,res.data.user.password,res.data.token))// if api get success
+        }).catch(err=>dispatch(authFail(err.response.data.error)))// if gets failed
 
     };
 };
