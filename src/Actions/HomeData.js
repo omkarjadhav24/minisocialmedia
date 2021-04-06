@@ -2,17 +2,15 @@ import * as actionTypes from '../Actions/ActionType';
 import axios from 'axios';
 // execute when render home 
 export const homeStart = () => {
-    return {
-        type: actionTypes.HOME_START
-    };
+    return {type: actionTypes.HOME_START};
 };
 
 // execute when suucessfully fetch data fro api for displaying posts on home
 export const homeSuccess = (data, id) => {
     return {
         type: actionTypes.HOME_SUCCESS,
-        homedata:data,
-        homedataid:id
+        homeData:data,
+        homeDataid:id
         // idToken: token,
         // userId: userId
     };
@@ -30,16 +28,11 @@ export const homeFail = (error) => {
 export const HomeData = () => {
     let url='https://jsonplaceholder.typicode.com/photos';
     return dispatch => {
-        dispatch(homeStart());
+        dispatch(homeStart());// api start
         // console.log(authData)
         axios.get(url)
-        .then(res=>{
-            // console.log(res.data);
-            dispatch(homeSuccess(res.data,res.data.id));
-        }).catch(err=>{
-            dispatch(homeFail(err.response.data.error));
-
-        })
+        .then(res=>dispatch(homeSuccess(res.data,res.data.id)))// if api get success
+        .catch(err=>dispatch(homeFail(err.response.data.error)))// if api get failed
 
     };
 };
