@@ -18,23 +18,10 @@ const initialState={
 const reducer =(state,action)=>{
 switch(action.type)
 {
-    case actionType.AUTH_SUCCESS:
-        return{
-            ...state,
-            token:action.token
-        }
-    case actionType.AUTH_FAIL:
-        return{
-            ...state,
-            error:action.error
-        }
-    case actionType.SIGN_UP:
-        return{
-            ...state,
-            signup:true
-        }
-    default:
-        return true;
+    case actionType.AUTH_SUCCESS:return{...state,token:action.token}
+    case actionType.AUTH_FAIL:return{...state,error:action.error}
+    case actionType.SIGN_UP:return{...state,signup:true}
+    default:return true;
 }
 }
 const SignIn=(props)=>{
@@ -48,14 +35,8 @@ const SignIn=(props)=>{
 
     // validation on fields
    const checkValidity=()=>{
-        if(!(password.length>=5))
-        {
-            setPassword('Enter Password More than 5 char.')
-        }
-        else{
-            return true;
-        }
-       
+        if(!(password.length>=5)) setPassword('Enter Password More than 5 char.')
+        else return true;
     }
     // for displaying SignUp page when signUp state sets to true
     const signUpPageHandle=()=>{
