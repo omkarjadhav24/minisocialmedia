@@ -1,17 +1,18 @@
 import React, {  useState } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import classes from './NewPost.module.css';
 import log2 from '../../assets/log2.jpg'
-import {connect} from 'react-redux'
-import {addPost} from '../../Actions/AddPost'
+// import {connect} from 'react-redux'
+// import {addPost} from '../../Actions/AddPost'
+import axios from 'axios'
 const NewPost =(props)=> {
     const [image,setImage]=useState('')
     const [description,setDescription]=useState('')
     const [descriptionError,setDescriptionError]=useState('')
     const [imageError,setImageError]=useState(false);
-   const imageFileHandler=(e)=>
+   const imageFileHandler=(event)=>
     {
-        setImage(e.target.files[0].name)
+        setImage(event.target.files[0].name)
     }
     const checkValidity=()=>{ 
         // if(!(image!=""))
@@ -32,20 +33,40 @@ const NewPost =(props)=> {
    const  postDataHandler = (event) => {
         event.preventDefault();
 
-        const data = {
-            image: image,
-            description: description
-        };
+        // const data = {
+        //     image: image,
+        //     description: description
+        // };
         if(checkValidity())
         {
-            console.log(data)
+            // console.log(data)
 
-            var imgData = new FormData();
-            var imagedata = document.querySelector('input[type="file"]').files[0];
-            imgData.append("inputname", imagedata);
-            let poData=imgData.get('inputname')
+            // let imgData = new FormData();
+            // let imagedata = document.querySelector('input[type="file"]').files[0];
+            // imgData.append("inputname", imagedata);
+            // let poData=imgData.get('inputname')
+            const postData={
+                uploadImage :image ,
+                description:description
+            }
+            let url='http://885039200eb0.ngrok.io/story/image';
+            let token=localStorage.getItem('token') 
+            console.log(token)
+            console.log(postData);
+            axios.post(url,postData, {
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  "Accept": "application/json",
+                  "type": "formData"
+                }
+              })
+            .then(res=>{
+                console.log(res);
+            }).catch(err=>{
+                console.log(err)
+            })
 
-            props.addPost(image,description)
+            // props.addPost(image,description)
         }
        
     }
@@ -61,7 +82,7 @@ const NewPost =(props)=> {
                 <h1 className="text-light" >Add a Post</h1>
                 <div className="form-group">
                 <label className="text-light">Image</label>
-                <input className="form-control" type="file"  onChange={()=>imageFileHandler()} />
+                <input className="form-control" type="file"  onChange={(event)=>imageFileHandler(event)} />
                 <span className="font-weight-bold text-danger font-italic">{imageError}</span>
                 </div>
                 <div className="form-group">
@@ -75,9 +96,9 @@ const NewPost =(props)=> {
         );
 }
 
-   const mapDispatchtoProps=(dispatch)=>{
-    return{
-       addPost:(uploadImage ,description)=>{dispatch(addPost(uploadImage,description))}
-    }
-}
-export default connect(null,mapDispatchtoProps)(NewPost);
+//    const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//        addPost:(uploadImage ,description)=>{dispatch(addPost(uploadImage,description))}
+//     }
+// }
+export default NewPost;
