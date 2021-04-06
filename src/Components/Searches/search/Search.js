@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import './Search.css'
 const Search =(props)=>{
-
+    // states
     const [addfriend,setAddfriend]=useState(false)
-   
+    // toggle button add friend to cancel request
    const  friendRequestHandler=()=>{
         let prevState=null;
         prevState=addfriend

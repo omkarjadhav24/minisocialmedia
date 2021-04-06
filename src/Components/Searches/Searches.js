@@ -56,9 +56,9 @@ const addFriendHandler=()=>{
         .catch(err=>console.log(err))
     }
         // showing all  users of serached name 
-        let searchdata=null;
-        searchdata=users.map(data=><Search key={data._id } cancelfriend={()=>cancelFriendhandler()} addfriend={()=>addFriendHandler()} name={data.name} id={data._id}/>)
-        // searchdata=users.map(data=>{
+        let searchData=null;
+        searchData=users.map(data=><Search key={data._id } cancelfriend={()=>cancelFriendhandler()} addfriend={()=>addFriendHandler()} name={data.name} id={data._id}/>)
+        // searchData=users.map(data=>{
         //     return <Search key={data._id } cancelfriend={()=>cancelFriendhandler()} addfriend={()=>addFriendHandler()} name={data.name} id={data._id}/>
         // })
        
@@ -68,7 +68,7 @@ const addFriendHandler=()=>{
                 </div>
                 <div class="col-sm bg-secondary">
                 <h3 id="people">People</h3>
-                    {searchdata}
+                    {searchData}
                 </div>
                 <div class="col-sm bg-secondary"></div>
             </div>
