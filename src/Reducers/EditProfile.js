@@ -1,7 +1,4 @@
 import * as actionTypes from '../Actions/ActionType';
-// import { updateObject } from '../Shared/utility';
-
-
 // initial state of registartion
 const initialState = {
     token: null,
@@ -9,17 +6,12 @@ const initialState = {
     description:'',
     loading: false,
 };
-
-
+//reducer
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-      
-        case actionTypes.EDIT_PROFILE_START: return{
-            ...state,
-            loading:true
-           
-        }
-      
+        // when edit profile start
+        case actionTypes.EDIT_PROFILE_START: return{...state,loading:true}
+        // when edit profile api success
         case actionTypes.EDIT_PROFILE_SUCCESS: return{
             ...state,       
                 token:action.token,
@@ -29,15 +21,9 @@ const reducer = ( state = initialState, action ) => {
                 email:action.email,
                 password:action.password
         }
-       
-        case actionTypes.EDIT_PROFILE_FAIL: return{
-            ...state,
-            error:action.error
-        }
-        // case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-        // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);
-        default:
-            return state;
+        // if edit profile api failed
+        case actionTypes.EDIT_PROFILE_FAIL: return{...state,error:action.error}
+        default: return state;
     }
 };
 
