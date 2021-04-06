@@ -23,9 +23,7 @@ const Home=(props)=> {
                 } );
                 // stored 4 post in state
                 setPosts(updatedPosts)
-        }).catch(err=>{
-            console.log(err);
-        }) 
+        }).catch(err=>console.log(err)) 
     })   
     // for displaying posts , loop Homes component with map and sending data with props to that component 
        let homeDataPosts =posts.map( post => {
