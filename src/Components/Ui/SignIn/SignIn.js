@@ -1,4 +1,4 @@
-import React ,{ createContext,useEffect,useReducer,useState} from 'react'
+import React ,{ useReducer,useState} from 'react'
 import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
@@ -6,12 +6,11 @@ import loginImage from '../../../assets/log3.jpg'
 import * as  actionType from '../../../Actions/ActionType'
 import axios from 'axios'
 // creating context api
-const DisplayingSignUpPage=createContext();
 // initial state for reducer
 const initialState={
     token:'',
     error:'',
-    signup:false
+    signUp:false
 
 }
 // reducer 
@@ -19,7 +18,7 @@ const reducer =(state,action)=>{
 switch(action.type){
     case actionType.AUTH_SUCCESS:return{...state,token:action.token}
     case actionType.AUTH_FAIL:return{...state,error:action.error}
-    case actionType.SIGN_UP:return{...state,signup:true}
+    case actionType.SIGN_UP:return{...state,signUp:true}
     default:return true;
 }
 }
@@ -80,9 +79,7 @@ const SignIn=(props)=>{
                     </div>
                     <button className="btn btn-success" >LOGIN</button>
                     <button onClick={()=>signUpPageHandle()} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
-                    <DisplayingSignUpPage.Provider value={signUp} >
-                        {props.children}
-                    </DisplayingSignUpPage.Provider>
+
                 </form>
               
             </div>
@@ -102,4 +99,3 @@ const SignIn=(props)=>{
 //     }
 // }
 export default SignIn;
-export{DisplayingSignUpPage}
