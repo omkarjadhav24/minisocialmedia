@@ -6,14 +6,17 @@ import log2 from '../../assets/log2.jpg'
 // import {addPost} from '../../Actions/AddPost'
 import axios from 'axios'
 const NewPost =(props)=> {
+    // state
     const [image,setImage]=useState('')
     const [description,setDescription]=useState('')
     const [descriptionError,setDescriptionError]=useState('')
     const [imageError,setImageError]=useState(false);
+    // for getting image name 
    const imageFileHandler=(event)=>
     {
         setImage(event.target.files[0].name)
     }
+    // for validating filds
     const checkValidity=()=>{ 
         // if(!(image!=""))
         // {
@@ -29,14 +32,11 @@ const NewPost =(props)=> {
         }
        
     }
-   
+   // on click add post then send with post method 
    const  postDataHandler = (event) => {
         event.preventDefault();
 
-        // const data = {
-        //     image: image,
-        //     description: description
-        // };
+        // if checkValidity() returns true
         if(checkValidity())
         {
             // console.log(data)
@@ -45,12 +45,15 @@ const NewPost =(props)=> {
             // let imagedata = document.querySelector('input[type="file"]').files[0];
             // imgData.append("inputname", imagedata);
             // let poData=imgData.get('inputname')
+
+            // for sending data through post method
             const postData={
                 uploadImage :image ,
                 description:description
             }
+            // url link
             let url='http://885039200eb0.ngrok.io/story/image';
-            let token=localStorage.getItem('token') 
+            let token=localStorage.getItem('token') // token get
             console.log(token)
             console.log(postData);
             axios.post(url,postData, {
