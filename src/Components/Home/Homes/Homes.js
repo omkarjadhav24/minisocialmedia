@@ -29,9 +29,7 @@ const Homes=(props)=>{
         setComment(!prevComment)
     }
     // on cancel button hide comment div
-   const  cancelHandler=()=>{
-        setComment(false)
-    }
+   const  cancelHandler=()=>setComment(false)
 
         // let allComments = <p style={{ textAlign: 'center' }}>Something went wrong!</p>; 
         // //  fetching comments and send to Comment as CommentDiv component in props
