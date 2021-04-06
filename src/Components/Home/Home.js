@@ -1,36 +1,34 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import Homes from '../Home/Homes/Homes'
-import {connect} from 'react-redux'
-import {HomeData} from '../../Actions/HomeData'
+import axios from 'axios'
 import './Home.css'
 const Home=(props)=> {
-
+    // for storing posts 
     const [posts,setPosts]=useState([])
     useEffect(()=>{
-        props.homeCompodata()
+        // props.homeCompodata()
              
-        // axios.get('https://jsonplaceholder.typicode.com/photos')
-        // .then(res=>{
-        //     // console.log(res.data);
-        //     const posts = res.data.slice( 0, 4 );
-        //     console.log(res.data.id);
-        //     // permittedValues = posts.map(value => value.id);
-        //     const updatedPosts = posts.map( post => {
-        //             return {
-        //                 ...post
-        //             }
-        //         } );
-        //         setPosts(updatedPosts)
-        // }).catch(err=>{
-        //     console.log(err);
-        // }) 
-    })
-  
-        const dataOfHome =posts.slice( 0, 4 );
-        let homeDataPosts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
-        
-        homeDataPosts =dataOfHome.map( post => {
+        axios.get('https://jsonplaceholder.typicode.com/photos')
+        .then(res=>{
+            // console.log(res.data);
+            // for getting only first 4 post
+            const posts = res.data.slice( 0, 4 );
+            console.log(res.data.id);
+            // for storing fetched post
+            const updatedPosts = posts.map( post => {
+                    return {
+                        ...post
+                    }
+                } );
+                // stored 4 post in state
+                setPosts(updatedPosts)
+        }).catch(err=>{
+            console.log(err);
+        }) 
+    })   
+    // for displaying posts , loop Homes component with map and sending data with props to that component 
+       let homeDataPosts =posts.map( post => {
             return (
                 <Homes
                     key={post.id}
@@ -62,18 +60,18 @@ const Home=(props)=> {
             </div>
         );
 }
-const mapStatetoProps=(state)=>{
-    return{
-       homePosts:state.homeCompData.home,
-       homedataid:state.homeCompData.homedataid
-    }
-   }
+// const mapStatetoProps=(state)=>{
+//     return{
+//        homePosts:state.homeCompData.home,
+//        homedataid:state.homeCompData.homedataid
+//     }
+//    }
    
-   const mapDispatchtoProps=(dispatch)=>{
-    return{
-       homeCompodata:()=>{dispatch(HomeData())}
-    //    showProfileInfo:()=>{dispatch(showProfile())} 
+//    const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//        homeCompodata:()=>{dispatch(HomeData())}
+//     //    showProfileInfo:()=>{dispatch(showProfile())} 
 
-    }
-}
-export default connect(mapStatetoProps,mapDispatchtoProps)(Home);
+//     }
+// }
+export default Home;

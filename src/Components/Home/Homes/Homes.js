@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Component } from 'react';
 import {NavLink} from "react-router-dom"
 import CommentDiv from '../../Home/Homes/Comments/Comments';
-import {connect} from 'react-redux'
 import axios from 'axios'
 const Homes=(props)=>{
-
+    // for comment div toggling state
     const [comment,setComment]=useState(false)
 
     // const [posts,setPosts]=useState([])
@@ -25,12 +23,13 @@ const Homes=(props)=>{
         //         console.log(err);
         //     }) 
     // })
-
+    // toggling comment div
    const coomentHandler = () => {
         //  toggling comment button
         let prevComment = comment;
         setComment(!prevComment)
     }
+    // on cancel button hide comment div
    const  cancelHandler=()=>{
     
         setComment(false)
