@@ -56,8 +56,8 @@ const SignIn=(props)=>{
             axios.post(url,authData)
             .then(res=>{
                 console.log(res);
-                localStorage.setItem('token',res.data.token ) // token stored in locastorage
-                // if api get res then execute 
+                localStorage.setItem('token',res.data.token ) // token stored in localtorage
+                // if api get success res then execute 
                 dispatch({type:actionType.AUTH_SUCCESS,token:res.data.token});
             }).catch(err=>dispatch({type:actionType.AUTH_FAIL,error:err.response.data.error}))// if api get failed then 
         }
