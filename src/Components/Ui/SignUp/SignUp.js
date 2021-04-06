@@ -80,9 +80,7 @@ const SignUp=(props)=>{
     }
         // user register and then set token and if token set redirect to home page 
         let token = localStorage.getItem('token')
-        if(token){
-            return <Redirect to="/home" />
-        }
+        if(token) (<Redirect to="/home" />)
         return(
             <div className={classes.SignUp} style={{ backgroundImage: `url(${signUpImage})` }} >
                 <form onSubmit={(event)=>submitHandler(event)}>
