@@ -49,14 +49,8 @@ const Profiles =(props)=>{
                 'Authorization': `Bearer ${token}` 
               }
             })
-          .then(res=>{
-              console.log(res)
-              //updating totalLikes in state increasing  by one 
-              setTotalLikes(totalLikes + 1)
-          })
-          .catch(err=>{
-              console.log(err)
-          })
+          .then(res=>setTotalLikes(totalLikes + 1))//updating totalLikes in state increasing  by one 
+          .catch(err=>console.log(err))
     }
     // for dislike Api
   const  dislikeHandler=()=>{
@@ -71,14 +65,8 @@ const Profiles =(props)=>{
                 'Authorization': `Bearer ${token}` 
               }
             })
-          .then(res=>{          
-              console.log(res)
-              //updating totalLikes in state decreasing  by one 
-              setTotalLikes(totalLikes - 1)
-          })
-          .catch(err=>{
-              console.log(err)
-          })
+          .then(res=>setTotalLikes(totalLikes - 1))//updating totalLikes in state decreasing  by one 
+          .catch(err=>console.log(err))
 
     }
     // for comment Post Api
@@ -93,12 +81,8 @@ const Profiles =(props)=>{
               'Authorization': `Bearer ${token}` 
             }
           })
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
     }
       
         return(
