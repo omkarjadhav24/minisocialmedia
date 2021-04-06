@@ -1,49 +1,52 @@
-import React ,{ createContext,useReducer,useState} from 'react'
+import React ,{ createContext,useEffect,useReducer,useState} from 'react'
 import classes from '../SignIn/Sign.module.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {NavLink, Redirect } from 'react-router-dom';
 import loginImage from '../../../assets/log3.jpg'
 import * as  actionType from '../../../Actions/ActionType'
 import axios from 'axios'
-//creating context api
-const DisplaySignUpPage=createContext();
-// creating initialState
+// creating context api
+const DisplayingSignUpPage=createContext();
+// initial state for reducer
 const initialState={
     token:'',
     error:'',
     signup:false
+
 }
-// reducer for authentication and for signUp page displaying
-    const reducer =(state,action)=>{
-    switch(action.type){
-        case actionType.AUTH_SUCCESS:
-            return{
-                ...state,
-                token:action.token
-            }
-        case actionType.AUTH_FAIL:
-            return{
-                ...state,
-                error:action.error
-            }
-        case actionType.SIGN_UP:
-            return{
-                ...state,
-                signup:true
-            }
-        default:
-            return true;
+// reducer 
+const reducer =(state,action)=>{
+switch(action.type)
+{
+    case actionType.AUTH_SUCCESS:
+        return{
+            ...state,
+            token:action.token
         }
-    }
-const signIn=(props)=>{
-    // state
+    case actionType.AUTH_FAIL:
+        return{
+            ...state,
+            error:action.error
+        }
+    case actionType.SIGN_UP:
+        return{
+            ...state,
+            signup:true
+        }
+    default:
+        return true;
+}
+}
+const SignIn=(props)=>{
+    // states
     const [state,dispatch]=useReducer(reducer,initialState)
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [passworError,setPassworError]=useState('')
     const [login,setLogin]=useState(false)
     const [signUp,setSignUp]=useState(false)
-    // code for validating signIn page 
+
+    // validation on fields
    const checkValidity=()=>{
         if(!(password.length>=5))
         {
@@ -54,41 +57,40 @@ const signIn=(props)=>{
         }
        
     }
-    // for signUp page when signUp button clicks then show signUp page 
+    // for displaying SignUp page when signUp state sets to true
     const signUpPageHandle=()=>{
         // props.signUp()
-        // for setting signUp state true
         dispatch({type:actionType.SIGN_UP});
 
     }
-  // login button clicks
+  // when user clicks to log in then execute
    const submitHandler = (event) => {
         event.preventDefault();
-        // if all validation function  return true then enter 
+        // if checkvalidity returns true then execute
         if(checkValidity())
         {
             // props.loginauth(email,password)
-            // for sending data email,password
+            // for sending data with post method
             const authData={
                 email:email,
                 password:password
             }
-            // url link
+            //url link
             let url='user/login';
             axios.post(url,authData)
             .then(res=>{
                 console.log(res);
                 localStorage.setItem('token',res.data.token ) // token stored in locastorage
-                // if request get res then 
+                // if api get res then execute 
                 dispatch({type:actionType.AUTH_SUCCESS,token:res.data.token});
             }).catch(err=>{
-                // when req failed
+                // if api get failed then 
                 dispatch({type:actionType.AUTH_FAIL,error:err.response.data.error});
     
             })
         }
     }
-        // redirecting page to home page if token is set
+            // if token set then redirect to home page
         if(localStorage.getItem('token')){
             return <Redirect to="/home" />
         }
@@ -106,10 +108,9 @@ const signIn=(props)=>{
                     </div>
                     <button className="btn btn-success" >LOGIN</button>
                     <button onClick={()=>signUpPageHandle()} className="btn btn-warning" ><NavLink to="/signup">SIGN UP</NavLink></button>
-                    {/* for sending  DisplaySignUpPage to childrean  */}
-                    <DisplaySignUpPage.Provider value={signUp} >
+                    <DisplayingSignUpPage.Provider value={signUp} >
                         {props.children}
-                    </DisplaySignUpPage.Provider>
+                    </DisplayingSignUpPage.Provider>
                 </form>
               
             </div>
@@ -128,6 +129,5 @@ const signIn=(props)=>{
 //     //    loginauth:(email,password)=>{dispatch(auth(email,password))} 
 //     }
 // }
-export default signIn;
-// exporting context
-export {DisplaySignUpPage}
+export default SignIn;
+export{DisplayingSignUpPage}
