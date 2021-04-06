@@ -16,9 +16,9 @@ const Profiles =(props)=>{
     const [comment,setComment]=useState(false)
 
 
-    useEffect(()=>{
-        props.showProfileInfo()
-    })
+    // useEffect(()=>{
+    //     props.showProfileInfo()
+    // })
     
     const coomentHandler=()=>{
        let prevComment=comment;
@@ -164,15 +164,15 @@ const Profiles =(props)=>{
             </>
         );
 }
-const mapStatetoProps=(state)=>{
-    return{
-            name:state.showprofile.name
-    }
-   }
+// const mapStatetoProps=(state)=>{
+//     return{
+//             name:state.showprofile.name
+//     }
+//    }
 
-const mapDispatchtoProps=(dispatch)=>{
-    return{
-       showProfileInfo:()=>{dispatch(showProfile())} 
-    }
-}
-export default connect(mapStatetoProps,mapDispatchtoProps)(Profiles)
+// const mapDispatchtoProps=(dispatch)=>{
+//     return{
+//        showProfileInfo:()=>{dispatch(showProfile())} 
+//     }
+// }
+export default Profiles

@@ -12,7 +12,12 @@ const Profile =(props)=>{
 
     const [userPosts,setUserPosts]=useState([]);
     const [tFriends,setTFriends]=useState(null)
-
+    const [name,setName]=useState(null);
+    const [gender,setGender]=useState(null);
+    const [dob,setDob]=useState(null);
+    const [id,setId]=useState(null);
+    const [email,setEmail]=useState(null);
+    const [age,setAge]=useState(null);
     
     useEffect(()=>{
         let token=localStorage.getItem('token')
@@ -43,12 +48,32 @@ const Profile =(props)=>{
           console.log(err);
       })
     })
+    useEffect(()=>{
+      let token = localStorage.getItem('token')
+      axios.get('http://885039200eb0.ngrok.io/user/me',{  
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
+        })
+      .then(res=>{
+          console.log(res)
+          setName(res.data.name);
+          setGender(res.data.gender);
+          setDob(res.data.dob);
+          setId(res.data._id);
+          setEmail(res.data.email);
+          setAge(res.data.age);
+      })
+      .catch(err=>{
+          console.log(err);
+      })
+    })
 
 
         let profileData=null;
         profileData=userPosts.map((data,i)=>{
        return data.map((sdata)=>{
-        return <Profiles key={sdata._id} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
+        return <Profiles key={sdata._id}  name={name} owner={sdata.owner} likesCount={sdata.likes.length} comments={sdata.comments.length} uploadImage={sdata.uploadImage} description={sdata.description} id={sdata._id}/>
       })
         }) 
         return(
@@ -60,11 +85,11 @@ const Profile =(props)=>{
                 <div className="mt-1 box bg-white" >
                     <div  className="profile">
                         <img  src={profileImage} width="40"/>
-                        <p>UserName: {props.email}</p>
-                        <p>Name :  {props.name}</p>
-                        <p>Age : {props.age}</p>
-                        <p>Date Of Birth : {moment.utc(props.dob).format('MM/DD/YYYY')}</p>
-                        <p>Gender : {props.gender} </p>
+                        <p>UserName: {email}</p>
+                        <p>Name :  {name}</p>
+                        <p>Age : {age}</p>
+                        <p>Date Of Birth : {moment.utc(dob).format('MM/DD/YYYY')}</p>
+                        <p>Gender : {gender} </p>
                         <button type="button" class="btn btn-outline-primary">Total Friends : {tFriends}</button>
                         <button className="btn btn-outline-warning"><NavLink to="/edit-profile" > Edit Profile </NavLink>  </button> 
                     </div>
@@ -85,13 +110,13 @@ const Profile =(props)=>{
           </div>
         );
 }
-const mapStatetoProps=(state)=>{
-    return{
-            name:state.showprofile.name,
-            gender:state.showprofile.gender,
-            dob:state.showprofile.dob, 
-            email:state.showprofile.email,
-            age:state.showprofile.age
-    }
-   }
-export default connect(mapStatetoProps,null)(Profile);
+// const mapStatetoProps=(state)=>{
+//     return{
+//             name:state.showprofile.name,
+//             gender:state.showprofile.gender,
+//             dob:state.showprofile.dob, 
+//             email:state.showprofile.email,
+//             age:state.showprofile.age
+//     }
+//    }
+export default Profile;
