@@ -1,7 +1,6 @@
 import React, { Component,useEffect, useState } from 'react'
-import {NavLink} from "react-router-dom"
+// import {NavLink} from "react-router-dom"
 import CommentDiv from '../../Home/Homes/Comments/Comments';
-import {connect} from 'react-redux'
 import axios from 'axios'
 const homes=(props)=>{
 
