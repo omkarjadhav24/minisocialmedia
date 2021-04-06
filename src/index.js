@@ -19,7 +19,7 @@ import AddPost from '../src/Reducers/AddPost'
 import ShowProfile from '../src/Reducers/ShowProfile'
 import EditProfile from '../src/Reducers/EditProfile'
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
-
+// added all reducer here
 const rootReducer = combineReducers({
   authsignin: SignInReducer,
   loginauth:Auth,
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
   showprofile:ShowProfile,
   editprofile:EditProfile
 });
-
+// crrated store and added middleware
 const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
