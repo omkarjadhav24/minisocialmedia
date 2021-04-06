@@ -1,6 +1,5 @@
 import * as actionTypes from '../Actions/ActionType';
-// import { updateObject } from '../Shared/utility';
-
+// initial state
 const initialState = {
     token: null,
     loading: false,
@@ -11,15 +10,12 @@ const initialState = {
     email:null,
     age:null
 };
-
-
+// reducer
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.SHOW_PROFILE_START: return{
-            ...state,
-            loading:true
-
-        }
+        // when it start
+        case actionTypes.SHOW_PROFILE_START: return{...state,loading:true}
+        // when api get success
         case actionTypes.SHOW_PROFILE_SUCCESS: return{
             ...state,
             name:action.name,
@@ -28,14 +24,9 @@ const reducer = ( state = initialState, action ) => {
             profileId:action.profileId,
             email:action.email,
             age:action.age
-
         }
-        case actionTypes.SHOW_PROFILE_FAIL: return{
-            ...state,
-            error:action.error
-        }
-        // case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-        // case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);
+        // when api get failed
+        case actionTypes.SHOW_PROFILE_FAIL: return{...state,error:action.error}
         default:
             return state;
     }
