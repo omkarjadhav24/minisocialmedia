@@ -16,8 +16,7 @@ const initialState={
 }
 // reducer 
 const reducer =(state,action)=>{
-switch(action.type)
-{
+switch(action.type){
     case actionType.AUTH_SUCCESS:return{...state,token:action.token}
     case actionType.AUTH_FAIL:return{...state,error:action.error}
     case actionType.SIGN_UP:return{...state,signup:true}
