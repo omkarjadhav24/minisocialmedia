@@ -1,24 +1,10 @@
 import * as action from '../Actions/ActionType';
 
-export const signIn=()=>{
-    return{
-        type:action.SIGN_IN
-    }
-}
-export const signUp=()=>{
-    return{
-        type:action.SIGN_UP
-    }
-}
-export const signInPage=()=>{
-    return dispatch=>{
-        dispatch(signIn());
-    }
-
-}
+// for sign up
+export const signUp=()=>{return{type:action.SIGN_UP}}
+// clicked on sign up button  then go to sign up page
 export const signUpPage=()=>{
     return dispatch=>{
         dispatch(signUp());
     }
-
 }
