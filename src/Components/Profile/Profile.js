@@ -24,14 +24,8 @@ const Profile =(props)=>{
             'Authorization': `Bearer ${token}` 
           }
         })
-      .then(res=>{
-        // update posts for displaying user post by map function
-          setUserPosts([res.data])
-          console.log(res.data)
-      })
-      .catch(err=>{
-          console.log(err);
-      })
+      .then(res=>setUserPosts([res.data]))// update posts for displaying user post by map function
+      .catch(err=>console.log(err))
       // for  getting total friends of user
       axios.get('http://885039200eb0.ngrok.io/my-frinds',{
           
@@ -39,14 +33,8 @@ const Profile =(props)=>{
             'Authorization': `Bearer ${token}` 
           }
         })
-      .then(res=>{
-        // updating tFriends for displaying Total friends of user
-          setTFriends(res.data.length)
-          console.log(res)
-      })
-      .catch(err=>{
-          console.log(err);
-      })
+      .then(res=>setTFriends(res.data.length))// updating tFriends for displaying Total friends of user
+      .catch(err=>console.log(err))
     })
     // profile displaying user info in profile page
     useEffect(()=>{
@@ -66,9 +54,7 @@ const Profile =(props)=>{
           setEmail(res.data.email);
           setAge(res.data.age);
       })
-      .catch(err=>{
-          console.log(err);
-      })
+      .catch(err=>console.log(err))
     })
 
     // for displaying user post and sending data with props to Profiles Component
